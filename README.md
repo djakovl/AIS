@@ -2,10 +2,10 @@
 
 ## Структура:
 AIS/
-    README.md
-    docs/
-    infra/
-    backend/
-    frontend/
-    android/
-    desktop/
+  README.md
+  docs/
+  infra/
+  backend/
+  frontend/
+  android/
+  desktop/
