@@ -6,7 +6,6 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"net/http"
 	"strconv"
 	"strings"
 	"time"
@@ -108,17 +107,4 @@ func generateToken(length int) string {
 	b := make([]byte, length)
 	rand.Read(b)
 	return hex.EncodeToString(b)
-}
-
-func extractSessionID(r *http.Request) string {
-	// Приоритет 1: заголовок от Gateway (основной путь через Docker)
-	if id := r.Header.Get("X-Session-Id"); id != "" {
-		return id
-	}
-	// Приоритет 2: кука (прямой запрос, без Gateway)
-	if cookie, err := r.Cookie("session_id"); err == nil {
-		return cookie.Value
-	}
-	// Приоритет 3: заголовок для mobile
-	return r.Header.Get("X-Session-Token")
 }

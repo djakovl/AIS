@@ -117,8 +117,14 @@ func (h *AuthHandler) Profile(w http.ResponseWriter, r *http.Request) {
 }
 
 func extractSessionID(r *http.Request) string {
+	// 1. Заголовок от Gateway (основной путь через Docker/nginx)
+	if id := r.Header.Get("X-Session-Id"); id != "" {
+		return id
+	}
+	// 2. Кука (прямой запрос к auth-service без Gateway)
 	if cookie, err := r.Cookie("session_id"); err == nil {
 		return cookie.Value
 	}
+	// 3. Заголовок для mobile/desktop клиентов
 	return r.Header.Get("X-Session-Token")
 }
