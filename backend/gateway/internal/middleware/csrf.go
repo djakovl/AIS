@@ -6,7 +6,6 @@ import (
 	"gateway/internal/response"
 )
 
-// csrfMethods — методы, требующие CSRF-проверки
 var csrfMethods = map[string]bool{
 	http.MethodPost:   true,
 	http.MethodPut:    true,
@@ -17,7 +16,6 @@ var csrfMethods = map[string]bool{
 func CSRF() func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			// Пропускаем публичные маршруты и безопасные методы
 			if publicRoutes[r.URL.Path] || !csrfMethods[r.Method] {
 				next.ServeHTTP(w, r)
 				return

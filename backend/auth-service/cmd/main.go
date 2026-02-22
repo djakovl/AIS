@@ -22,7 +22,6 @@ import (
 func main() {
 	cfg := config.Load()
 
-	// PostgreSQL
 	db, err := sql.Open("postgres", cfg.DSN())
 	if err != nil {
 		log.Fatalf("Не удалось подключиться к PostgreSQL: %v", err)
@@ -34,7 +33,6 @@ func main() {
 	}
 	log.Println("PostgreSQL: подключение успешно")
 
-	// Redis
 	rdb := redis.NewClient(&redis.Options{
 		Addr: cfg.RedisAddr,
 		DB:   cfg.RedisDB,
@@ -47,12 +45,10 @@ func main() {
 	}
 	log.Println("Redis: подключение успешно")
 
-	// Инициализация сервисов
 	userRepo := repository.NewUserRepository(db)
 	authService := service.NewAuthService(userRepo, rdb, cfg.SessionTTL)
 	authHandler := handlers.NewAuthHandler(authService)
 
-	// Маршрутизация
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
@@ -64,7 +60,6 @@ func main() {
 	mux.HandleFunc("/auth/logout", authHandler.Logout)
 	mux.HandleFunc("/auth/profile", authHandler.Profile)
 
-	// HTTP сервер
 	server := &http.Server{
 		Addr:         ":" + cfg.Port,
 		Handler:      mux,
@@ -73,7 +68,6 @@ func main() {
 		IdleTimeout:  60 * time.Second,
 	}
 
-	// Graceful shutdown
 	go func() {
 		log.Printf("Auth Service запущен на порту %s", cfg.Port)
 		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {

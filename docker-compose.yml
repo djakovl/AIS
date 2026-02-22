@@ -1,11 +1,7 @@
 version: '3.9'
 
 services:
-
-  # ───────────────────────────────────────────────────────
   #  INFRASTRUCTURE
-  # ───────────────────────────────────────────────────────
-
   redis:
     image: redis:7.2-alpine
     container_name: redis
@@ -42,10 +38,7 @@ services:
     networks:
       - network
 
-  # ───────────────────────────────────────────────────────
   #  BACKEND SERVICES
-  # ───────────────────────────────────────────────────────
-
   gateway:
     build:
       context: ./backend/gateway
@@ -140,11 +133,8 @@ services:
   #   networks:
   #     - network
 
-  # ───────────────────────────────────────────────────────
-  #  FRONTENDS (у каждого сервиса свой фронт)
-  # ───────────────────────────────────────────────────────
+  #  FRONTENDS 
 
-  # Vanilla JS — сборка не нужна, просто static nginx
   auth-frontend:
     image: nginx:1.25-alpine
     container_name: auth-frontend
@@ -172,9 +162,7 @@ services:
   #   networks:
   #     - network
 
-  # ───────────────────────────────────────────────────────
   #  NGINX — единая точка входа
-  # ───────────────────────────────────────────────────────
 
   nginx:
     image: nginx:1.25-alpine
@@ -195,7 +183,7 @@ services:
 volumes:
   redis-data:
   postgres-data:
-  storage-data:       # для s3-service (локальное хранилище, без MinIO)
+  storage-data:
 
 networks:
   network:
