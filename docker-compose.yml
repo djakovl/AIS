@@ -1,28 +1,29 @@
 version: '3.9'
 
 services:
-  # Redis — хранилище сессий
+
+  # ───────────────────────────────────────────────────────
+  #  INFRASTRUCTURE
+  # ───────────────────────────────────────────────────────
+
   redis:
     image: redis:7.2-alpine
-    container_name: cloud-redis
+    container_name: redis
     restart: unless-stopped
-    ports:
-      - "6379:6379"
+    command: redis-server --appendonly yes
     volumes:
       - redis-data:/data
-    command: redis-server --appendonly yes
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 3s
       retries: 3
     networks:
-      - cloud-network
+      - network
 
-  # PostgreSQL — общая БД для всех сервисов
   postgres:
     image: postgres:16-alpine
-    container_name: cloud-postgres
+    container_name: postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: cloud_user
@@ -39,36 +40,17 @@ services:
       timeout: 3s
       retries: 5
     networks:
-      - cloud-network
+      - network
 
-  # MinIO — S3-совместимое хранилище файлов
-  minio:
-    image: minio/minio:latest
-    container_name: cloud-minio
-    restart: unless-stopped
-    environment:
-      MINIO_ROOT_USER: minioadmin
-      MINIO_ROOT_PASSWORD: minioadmin123
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    volumes:
-      - minio-data:/data
-    command: server /data --console-address ":9001"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 10s
-      timeout: 3s
-      retries: 3
-    networks:
-      - cloud-network
+  # ───────────────────────────────────────────────────────
+  #  BACKEND SERVICES
+  # ───────────────────────────────────────────────────────
 
-  # Gateway
   gateway:
     build:
       context: ./backend/gateway
       dockerfile: Dockerfile
-    container_name: cloud-gateway
+    container_name: gateway
     restart: unless-stopped
     environment:
       PORT: 8080
@@ -79,20 +61,22 @@ services:
       TASK_SERVICE_URL: http://task-service:3003
       S3_SERVICE_URL: http://s3-service:3002
       SESSION_TTL: 1800
-    ports:
-      - "8080:8080"
     depends_on:
       redis:
         condition: service_healthy
     networks:
-      - cloud-network
+      - network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
 
-  # Auth Service
   auth-service:
     build:
       context: ./backend/auth-service
       dockerfile: Dockerfile
-    container_name: cloud-auth
+    container_name: auth
     restart: unless-stopped
     environment:
       PORT: 3000
@@ -105,64 +89,96 @@ services:
       REDIS_PASSWORD: ""
       REDIS_DB: 0
       JWT_SECRET: your-super-secret-jwt-key-2026
+      SESSION_TTL: 1800
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
     networks:
-      - cloud-network
+      - network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
 
-  # Task Service
-  task-service:
-    build:
-      context: ./backend/task-service
-      dockerfile: Dockerfile
-    container_name: cloud-tasks
+  # task-service:
+  #   build:
+  #     context: ./backend/task-service
+  #     dockerfile: Dockerfile
+  #   container_name: tasks
+  #   restart: unless-stopped
+  #   environment:
+  #     PORT: 3003
+  #     DB_HOST: postgres
+  #     DB_PORT: 5432
+  #     DB_USER: cloud_user
+  #     DB_PASSWORD: cloud_pass_2026
+  #     DB_NAME: cloud_db
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #   networks:
+  #     - network
+
+  # s3-service:
+  #   build:
+  #     context: ./backend/s3-service
+  #     dockerfile: Dockerfile
+  #   container_name: s3
+  #   restart: unless-stopped
+  #   environment:
+  #     PORT: 3002
+  #     DB_HOST: postgres
+  #     STORAGE_PATH: /opt/storage    # локально, без MinIO
+  #   volumes:
+  #     - storage-data:/opt/storage
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #   networks:
+  #     - network
+
+  # ───────────────────────────────────────────────────────
+  #  FRONTENDS (у каждого сервиса свой фронт)
+  # ───────────────────────────────────────────────────────
+
+  # Vanilla JS — сборка не нужна, просто static nginx
+  auth-frontend:
+    image: nginx:1.25-alpine
+    container_name: auth-frontend
     restart: unless-stopped
-    environment:
-      PORT: 3003
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USER: cloud_user
-      DB_PASSWORD: cloud_pass_2026
-      DB_NAME: cloud_db
-    depends_on:
-      postgres:
-        condition: service_healthy
+    volumes:
+      - ./frontend/auth-service:/usr/share/nginx/html:ro
     networks:
-      - cloud-network
+      - network
 
-  # S3 Service
-  s3-service:
-    build:
-      context: ./backend/s3-service
-      dockerfile: Dockerfile
-    container_name: cloud-s3
-    restart: unless-stopped
-    environment:
-      PORT: 3002
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USER: cloud_user
-      DB_PASSWORD: cloud_pass_2026
-      DB_NAME: cloud_db
-      S3_ENDPOINT: minio:9000
-      S3_ACCESS_KEY: minioadmin
-      S3_SECRET_KEY: minioadmin123
-      S3_USE_SSL: "false"
-    depends_on:
-      postgres:
-        condition: service_healthy
-      minio:
-        condition: service_healthy
-    networks:
-      - cloud-network
+  # task-frontend:                          # Vue 3 + TypeScript
+  #   build:
+  #     context: ./frontend/task-service
+  #     dockerfile: Dockerfile              # multi-stage: node → nginx
+  #   container_name: task-frontend
+  #   restart: unless-stopped
+  #   networks:
+  #     - network
 
-  # Nginx — точка входа для клиентов
+  # s3-frontend:                            # React + TypeScript
+  #   build:
+  #     context: ./frontend/s3-service
+  #     dockerfile: Dockerfile              # multi-stage: node → nginx
+  #   container_name: s3-frontend
+  #   restart: unless-stopped
+  #   networks:
+  #     - network
+
+  # ───────────────────────────────────────────────────────
+  #  NGINX — единая точка входа
+  # ───────────────────────────────────────────────────────
+
   nginx:
     image: nginx:1.25-alpine
-    container_name: cloud-nginx
+    container_name: nginx
     restart: unless-stopped
     ports:
       - "80:80"
@@ -172,14 +188,15 @@ services:
       - ./infra/ssl:/etc/nginx/ssl:ro
     depends_on:
       - gateway
+      - auth-frontend
     networks:
-      - cloud-network
+      - network
 
 volumes:
   redis-data:
   postgres-data:
-  minio-data:
+  storage-data:       # для s3-service (локальное хранилище, без MinIO)
 
 networks:
-  cloud-network:
+  network:
     driver: bridge
