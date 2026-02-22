@@ -43,6 +43,10 @@ func New(targetURL string) http.Handler {
 			req.Header.Set("X-User-Roles", middleware.CtxGet(ctx, middleware.CtxRoles))
 		}
 
+		if sessionID := middleware.CtxGet(ctx, middleware.CtxSessionID); sessionID != "" {
+			req.Header.Set("X-Session-Id", sessionID)
+		}
+
 		// Убираем внутренние заголовки сессии — бэкенд их не должен видеть
 		req.Header.Del("Cookie")
 		req.Header.Del("X-Session-Token")
