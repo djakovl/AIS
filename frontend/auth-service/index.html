@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud App - Аутентификация</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="auth-wrapper" id="authWrapper">
+            <!-- Форма входа -->
+            <div class="auth-form" id="loginForm">
+                <h2>Вход в систему</h2>
+                <form id="loginFormElement">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Пароль</label>
+                        <input type="password" id="loginPassword" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <p class="switch-form">
+                        Нет аккаунта? <a href="#" id="showRegister">Зарегистрироваться</a>
+                    </p>
+                </form>
+            </div>
+
+            <!-- Форма регистрации -->
+            <div class="auth-form hidden" id="registerForm">
+                <h2>Регистрация</h2>
+                <form id="registerFormElement">
+                    <div class="form-group">
+                        <label for="regEmail">Email</label>
+                        <input type="email" id="regEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regUsername">Имя пользователя</label>
+                        <input type="text" id="regUsername" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regFirstName">Имя</label>
+                        <input type="text" id="regFirstName" name="first_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="regLastName">Фамилия</label>
+                        <input type="text" id="regLastName" name="last_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword">Пароль</label>
+                        <input type="password" id="regPassword" name="password" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="regPasswordConfirm">Подтвердите пароль</label>
+                        <input type="password" id="regPasswordConfirm" name="password_confirm" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                    <p class="switch-form">
+                        Уже есть аккаунт? <a href="#" id="showLogin">Войти</a>
+                    </p>
+                </form>
+            </div>
+
+            <!-- Профиль пользователя -->
+            <div class="profile hidden" id="profileSection">
+                <h2>Профиль</h2>
+                <div class="profile-info">
+                    <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+                    <p><strong>Имя пользователя:</strong> <span id="profileUsername"></span></p>
+                    <p><strong>Имя:</strong> <span id="profileFirstName"></span></p>
+                    <p><strong>Фамилия:</strong> <span id="profileLastName"></span></p>
+                    <p><strong>Роли:</strong> <span id="profileRoles"></span></p>
+                    <p><strong>Дата регистрации:</strong> <span id="profileCreated"></span></p>
+                </div>
+                <button id="logoutBtn" class="btn btn-danger">Выйти</button>
+            </div>
+        </div>
+
+        <!-- Уведомления -->
+        <div id="notification" class="notification hidden"></div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
