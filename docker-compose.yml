@@ -169,8 +169,8 @@ services:
     container_name: nginx
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - "8036:80"
+      - "8037:443"
     volumes:
       - ./infra/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./infra/ssl:/etc/nginx/ssl:ro
