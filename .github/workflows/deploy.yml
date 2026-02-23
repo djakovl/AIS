@@ -17,10 +17,10 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /opt/ais
+            cd ~/ais
 
             echo "=== git pull ==="
-            git pull origin prod
+            git pull
 
             echo "=== auth-service ==="
             docker compose up -d --build --no-deps auth-service
