@@ -30,7 +30,7 @@ jobs:
             export COMPOSE_DOCKER_CLI_BUILD=1
             export DOCKER_BUILDKIT=1
 
-            docker-compose up -d --build
+            docker compose up -d --build
 
             echo "Waiting for services to be healthy..."
             sleep 15
@@ -38,7 +38,7 @@ jobs:
             if ! curl -sf http://localhost:8036/health > /dev/null; then
               echo "Health check failed! Rolling back to $PREV_COMMIT..."
               git reset --hard $PREV_COMMIT
-              docker-compose up -d --build
+              docker compose up -d --build
               echo "Rollback complete."
               exit 1
             fi
