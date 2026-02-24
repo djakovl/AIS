@@ -40,10 +40,11 @@ func Session(rdb *redis.Client, ttl int) func(http.Handler) http.Handler {
 				return
 			}
 
+			// Обновляем last_activity — ошибка некритична, продолжаем работу в любом случае
 			pipe := rdb.Pipeline()
 			pipe.HSet(ctx, key, "last_activity", strconv.FormatInt(time.Now().Unix(), 10))
 			pipe.Expire(ctx, key, time.Duration(ttl)*time.Second)
-			pipe.Exec(ctx)
+			_, _ = pipe.Exec(ctx)
 
 			ctx = ctxSet(ctx, CtxUserID, fields["user_id"])
 			ctx = ctxSet(ctx, CtxRoles, fields["roles"])

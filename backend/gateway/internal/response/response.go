@@ -23,13 +23,13 @@ type errorResponse struct {
 func JSON(w http.ResponseWriter, status int, data interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
-	json.NewEncoder(w).Encode(successResponse{Success: true, Data: data})
+	_ = json.NewEncoder(w).Encode(successResponse{Success: true, Data: data})
 }
 
 func Error(w http.ResponseWriter, status int, code, message string) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
-	json.NewEncoder(w).Encode(errorResponse{
+	_ = json.NewEncoder(w).Encode(errorResponse{
 		Success: false,
 		Error:   ErrorBody{Code: code, Message: message},
 	})

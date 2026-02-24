@@ -30,7 +30,7 @@ func NewAuthService(repo *repository.UserRepository, rdb *redis.Client, sessionT
 
 func (s *AuthService) Register(req *models.RegisterRequest) (*models.User, error) {
 	if req.Email == "" || req.Password == "" || req.Username == "" {
-		return nil, errors.New("email, password и username обязательны")
+		return nil, errors.New("эмайл, password и username обязательны")
 	}
 	if len(req.Password) < 6 {
 		return nil, errors.New("пароль должен быть не менее 6 символов")
@@ -74,7 +74,10 @@ func (s *AuthService) Login(ctx context.Context, req *models.LoginRequest, ip, u
 	}
 
 	sessionID := uuid.New().String()
-	csrfToken := generateToken(32)
+	csrfToken, err := generateToken(32)
+	if err != nil {
+		return nil, fmt.Errorf("ошибка генерации токена: %w", err)
+	}
 	key := fmt.Sprintf("session:%s", sessionID)
 
 	pipe := s.rdb.Pipeline()
@@ -103,8 +106,10 @@ func (s *AuthService) GetProfile(userID string) (*models.User, error) {
 	return s.userRepo.FindByID(userID)
 }
 
-func generateToken(length int) string {
+func generateToken(length int) (string, error) {
 	b := make([]byte, length)
-	rand.Read(b)
-	return hex.EncodeToString(b)
+	if _, err := rand.Read(b); err != nil {
+		return "", fmt.Errorf("ошибка чтения случайных байт: %w", err)
+	}
+	return hex.EncodeToString(b), nil
 }
