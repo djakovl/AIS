@@ -27,9 +27,7 @@ jobs:
             git checkout prod
             git reset --hard origin/prod
 
-            export COMPOSE_DOCKER_CLI_BUILD=1
-            export DOCKER_BUILDKIT=1
-
+            docker compose down --remove-orphans || true
             docker compose up -d --build
 
             echo "Waiting for services to be healthy..."
@@ -38,6 +36,7 @@ jobs:
             if ! curl -sf http://localhost:8036/health > /dev/null; then
               echo "Health check failed! Rolling back to $PREV_COMMIT..."
               git reset --hard $PREV_COMMIT
+              docker compose down --remove-orphans || true
               docker compose up -d --build
               echo "Rollback complete."
               exit 1
