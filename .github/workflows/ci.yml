@@ -10,7 +10,7 @@ jobs:
 
   # ─── Auth Service (Go) ────────────────────────────────────────
   auth-service:
-    name: Auth Service — Build & Test
+    name: Auth Service — Lint, Build & Test
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -23,15 +23,33 @@ jobs:
           go-version: '1.22'
           cache-dependency-path: backend/auth-service/go.sum
 
+      - name: Lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: latest
+          working-directory: backend/auth-service
+
       - name: Build
         run: go build ./...
 
       - name: Test
-        run: go test ./... -v -count=1
+        run: go test ./... -v -count=1 -coverprofile=coverage.out
+
+      - name: Coverage report
+        run: go tool cover -func=coverage.out
+
+  # ─── Auth Service — Docker Build ──────────────────────────────
+  auth-service-docker:
+    name: Auth Service — Docker Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build ./backend/auth-service -t auth-service:ci
 
   # ─── Gateway (Go) ─────────────────────────────────────────────
   gateway:
-    name: Gateway — Build & Test
+    name: Gateway — Lint, Build & Test
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -44,8 +62,26 @@ jobs:
           go-version: '1.22'
           cache-dependency-path: backend/gateway/go.sum
 
+      - name: Lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: latest
+          working-directory: backend/gateway
+
       - name: Build
         run: go build ./...
 
       - name: Test
-        run: go test ./... -v -count=1
+        run: go test ./... -v -count=1 -coverprofile=coverage.out
+
+      - name: Coverage report
+        run: go tool cover -func=coverage.out
+
+  # ─── Gateway — Docker Build ───────────────────────────────────
+  gateway-docker:
+    name: Gateway — Docker Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build ./backend/gateway -t gateway:ci
