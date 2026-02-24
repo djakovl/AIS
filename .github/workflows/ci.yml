@@ -36,7 +36,12 @@ jobs:
         run: go test ./... -v -count=1 -coverprofile=coverage.out
 
       - name: Coverage report
-        run: go tool cover -func=coverage.out
+        run: |
+          if [ -f coverage.out ] && [ -s coverage.out ]; then
+            go tool cover -func=coverage.out
+          else
+            echo "No test coverage data (no tests yet)"
+          fi
 
   # ─── Auth Service — Docker Build ──────────────────────────────
   auth-service-docker:

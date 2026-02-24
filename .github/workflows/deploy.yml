@@ -20,11 +20,9 @@ jobs:
             set -e
             cd ~/ais
 
-            # Сохраняем текущий коммит для возможного отката
             PREV_COMMIT=$(git rev-parse HEAD)
             echo "Previous commit: $PREV_COMMIT"
 
-            # Обновляем строго из ветки prod
             git fetch origin prod
             git checkout prod
             git reset --hard origin/prod
@@ -32,18 +30,15 @@ jobs:
             export COMPOSE_DOCKER_CLI_BUILD=1
             export DOCKER_BUILDKIT=1
 
-            # Запускаем деплой
-            docker compose up -d --build
+            docker-compose up -d --build
 
-            # Ждём запуска сервисов
             echo "Waiting for services to be healthy..."
             sleep 15
 
-            # Health check
             if ! curl -sf http://localhost:8036/health > /dev/null; then
               echo "Health check failed! Rolling back to $PREV_COMMIT..."
               git reset --hard $PREV_COMMIT
-              docker compose up -d --build
+              docker-compose up -d --build
               echo "Rollback complete."
               exit 1
             fi
