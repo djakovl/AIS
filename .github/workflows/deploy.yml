@@ -18,21 +18,9 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd ~/ais
-
-            echo "=== git pull ==="
             git pull
-
-            echo "=== auth-service ==="
-            docker-compose up -d --build --no-deps auth-service
-
-            echo "=== gateway ==="
-            docker-compose up -d --build --no-deps gateway
-
-            echo "=== auth-frontend ==="
-            docker-compose up -d --build --no-deps auth-frontend
-
-            echo "=== nginx ==="
-            docker-compose up -d --no-deps nginx
-
-            echo "=== Done ==="
-            docker-compose ps
+            
+            export COMPOSE_DOCKER_CLI_BUILD=1
+            export DOCKER_BUILDKIT=1
+            
+            docker-compose up -d --build
