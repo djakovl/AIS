@@ -182,6 +182,35 @@ jobs:
       - name: Build Docker image
         run: docker build ./backend/s3-storage -t s3-service:ci
 
+  # Task Frontend (Node.js)
+  task-frontend:
+    name: Task Frontend — Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend/task-frontend
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build
+        run: npm run build
+
+  # Task Frontend — Docker Build
+  task-frontend-docker:
+    name: Task Frontend — Docker Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build ./frontend/task-frontend -t task-frontend:ci
+
   # S3 Frontend (Node.js)
   s3-frontend:
     name: S3 Frontend — Build
