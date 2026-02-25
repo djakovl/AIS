@@ -1,7 +1,8 @@
 -- =============================================================================
 -- Инициализация БД для всех сервисов
 -- Запускается автоматически postgres-контейнером из /docker-entrypoint-initdb.d/
--- Изменения применять вручную: docker exec -i postgres psql -U cloud_user -d cloud_db < infra/init-db.sql
+-- Применить вручную:
+--   docker exec -i postgres psql -U cloud_user -d cloud_db < infra/init-db.sql
 -- =============================================================================
 
 -- Расширения
@@ -9,9 +10,12 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 -- =============================================================================
--- Auth Service (public-схема, таблицы без префикса)
+-- Auth Service  (схема auth)
+-- Запросы в userRepository.go используют: FROM auth.users
 -- =============================================================================
-CREATE TABLE IF NOT EXISTS users (
+CREATE SCHEMA IF NOT EXISTS auth;
+
+CREATE TABLE IF NOT EXISTS auth.users (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
@@ -24,51 +28,54 @@ CREATE TABLE IF NOT EXISTS users (
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
-CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);
+CREATE INDEX IF NOT EXISTS idx_users_email ON auth.users(email);
+CREATE INDEX IF NOT EXISTS idx_users_username ON auth.users(username);
 
 -- =============================================================================
--- Task Service
+-- Task Service  (схема tasks)
 -- =============================================================================
-CREATE TABLE IF NOT EXISTS statuses (
+CREATE SCHEMA IF NOT EXISTS tasks;
+
+CREATE TABLE IF NOT EXISTS tasks.statuses (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) UNIQUE NOT NULL
 );
 
-INSERT INTO statuses (name) VALUES
+INSERT INTO tasks.statuses (name) VALUES
     ('pending'), ('in_progress'), ('completed'), ('cancelled')
 ON CONFLICT (name) DO NOTHING;
 
-CREATE TABLE IF NOT EXISTS priorities (
+CREATE TABLE IF NOT EXISTS tasks.priorities (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) UNIQUE NOT NULL,
     level INT UNIQUE NOT NULL
 );
 
-INSERT INTO priorities (name, level) VALUES
+INSERT INTO tasks.priorities (name, level) VALUES
     ('low', 1), ('medium', 2), ('high', 3), ('urgent', 4)
 ON CONFLICT (name) DO NOTHING;
 
-CREATE TABLE IF NOT EXISTS tasks (
+CREATE TABLE IF NOT EXISTS tasks.tasks (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID NOT NULL,
     title VARCHAR(255) NOT NULL,
     description TEXT,
-    status_id INT REFERENCES statuses(id) DEFAULT 1,
-    priority_id INT REFERENCES priorities(id) DEFAULT 2,
+    status_id INT REFERENCES tasks.statuses(id) DEFAULT 1,
+    priority_id INT REFERENCES tasks.priorities(id) DEFAULT 2,
     due_date TIMESTAMP,
     tags TEXT[],
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks(user_id);
-CREATE INDEX IF NOT EXISTS idx_tasks_status ON tasks(status_id);
-CREATE INDEX IF NOT EXISTS idx_tasks_priority ON tasks(priority_id);
-CREATE INDEX IF NOT EXISTS idx_tasks_due_date ON tasks(due_date);
+CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks.tasks(user_id);
+CREATE INDEX IF NOT EXISTS idx_tasks_status ON tasks.tasks(status_id);
+CREATE INDEX IF NOT EXISTS idx_tasks_priority ON tasks.tasks(priority_id);
+CREATE INDEX IF NOT EXISTS idx_tasks_due_date ON tasks.tasks(due_date);
 
 -- =============================================================================
--- S3 Storage Service
+-- S3 Storage Service  (public-схема, без префикса)
+-- Запросы в s3-storage используют: FROM buckets / FROM files
 -- PostgreSQL 15+, soft delete: WHERE deleted_at IS NULL
 -- =============================================================================
 CREATE TABLE IF NOT EXISTS buckets (
@@ -78,7 +85,7 @@ CREATE TABLE IF NOT EXISTS buckets (
     description TEXT,
     is_public BOOLEAN DEFAULT FALSE,
     storage_used BIGINT DEFAULT 0,
-    storage_limit BIGINT DEFAULT 10737418240,  -- 10GB
+    storage_limit BIGINT DEFAULT 10737418240,  -- 10 GB
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP NULL
