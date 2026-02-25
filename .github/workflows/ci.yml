@@ -139,7 +139,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: backend/s3-storage/frontend
+        working-directory: frontend/s3-storage
     steps:
       - uses: actions/checkout@v4
       
@@ -160,4 +160,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build Docker image
-        run: docker build ./backend/s3-storage/frontend -t s3-frontend:ci
+        run: docker build ./frontend/s3-storage -t s3-frontend:ci
