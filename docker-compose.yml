@@ -92,42 +92,32 @@ services:
       timeout: 5s
       retries: 3
 
-  # task-service:
-  #   build:
-  #     context: ./backend/task-service
-  #     dockerfile: Dockerfile
-  #   container_name: tasks
-  #   restart: unless-stopped
-  #   environment:
-  #     PORT: 3003
-  #     DB_HOST: postgres
-  #     DB_PORT: 5432
-  #     DB_USER: ${POSTGRES_USER}
-  #     DB_PASSWORD: ${POSTGRES_PASSWORD}
-  #     DB_NAME: ${POSTGRES_DB}
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy
-  #   networks:
-  #     - network
-
-  # s3-service:
-  #   build:
-  #     context: ./backend/s3-service
-  #     dockerfile: Dockerfile
-  #   container_name: s3
-  #   restart: unless-stopped
-  #   environment:
-  #     PORT: 3002
-  #     DB_HOST: postgres
-  #     STORAGE_PATH: /opt/storage
-  #   volumes:
-  #     - storage-data:/opt/storage
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy
-  #   networks:
-  #     - network
+  s3-service:
+    build:
+      context: ./backend/s3-storage
+      dockerfile: Dockerfile
+    container_name: s3
+    restart: unless-stopped
+    environment:
+      PORT: 3002
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+      STORAGE_PATH: /opt/storage
+    volumes:
+      - storage-data:/opt/storage
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3002/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
 
   #  FRONTENDS
 
@@ -140,23 +130,14 @@ services:
     networks:
       - network
 
-  # task-frontend:
-  #   build:
-  #     context: ./frontend/task-service
-  #     dockerfile: Dockerfile
-  #   container_name: task-frontend
-  #   restart: unless-stopped
-  #   networks:
-  #     - network
-
-  # s3-frontend:
-  #   build:
-  #     context: ./frontend/s3-service
-  #     dockerfile: Dockerfile
-  #   container_name: s3-frontend
-  #   restart: unless-stopped
-  #   networks:
-  #     - network
+  s3-frontend:
+    build:
+      context: ./frontend/s3-storage
+      dockerfile: Dockerfile
+    container_name: s3-frontend
+    restart: unless-stopped
+    networks:
+      - network
 
   #  NGINX — единая точка входа
 
@@ -173,13 +154,14 @@ services:
     depends_on:
       - gateway
       - auth-frontend
+      - s3-frontend
     networks:
       - network
 
 volumes:
   redis-data:
   postgres-data:
-  # storage-data:  # Раскомментировать когда s3-service будет готов
+  storage-data:
 
 networks:
   network:
