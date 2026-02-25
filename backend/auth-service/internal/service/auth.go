@@ -6,6 +6,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"log/slog"
 	"strconv"
 	"strings"
 	"time"
@@ -53,23 +54,29 @@ func (s *AuthService) Register(req *models.RegisterRequest) (*models.User, error
 
 	if err = s.userRepo.Create(user); err != nil {
 		if strings.Contains(err.Error(), "duplicate") || strings.Contains(err.Error(), "unique") {
+			slog.Warn("registration failed: duplicate user", "email", req.Email)
 			return nil, errors.New("пользователь с таким email уже существует")
 		}
+		slog.Error("registration failed", "email", req.Email, "error", err)
 		return nil, err
 	}
 
+	slog.Info("user registered", "user_id", user.ID, "email", user.Email)
 	return user, nil
 }
 
 func (s *AuthService) Login(ctx context.Context, req *models.LoginRequest, ip, userAgent string) (*models.LoginResponse, error) {
 	user, err := s.userRepo.FindByEmail(strings.ToLower(req.Email))
 	if err != nil {
+		slog.Warn("login failed: user not found", "email", req.Email, "ip", ip)
 		return nil, errors.New("неверный email или пароль")
 	}
 	if !user.IsActive {
+		slog.Warn("login failed: account inactive", "user_id", user.ID, "ip", ip)
 		return nil, errors.New("аккаунт деактивирован")
 	}
 	if err = bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(req.Password)); err != nil {
+		slog.Warn("login failed: wrong password", "user_id", user.ID, "ip", ip)
 		return nil, errors.New("неверный email или пароль")
 	}
 
@@ -92,14 +99,22 @@ func (s *AuthService) Login(ctx context.Context, req *models.LoginRequest, ip, u
 	})
 	pipe.Expire(ctx, key, time.Duration(s.sessionTTL)*time.Second)
 	if _, err = pipe.Exec(ctx); err != nil {
+		slog.Error("login failed: session creation", "user_id", user.ID, "error", err)
 		return nil, err
 	}
 
+	slog.Info("user logged in", "user_id", user.ID, "ip", ip, "session_id", sessionID)
 	return &models.LoginResponse{User: user, SessionID: sessionID, CSRFToken: csrfToken}, nil
 }
 
 func (s *AuthService) Logout(ctx context.Context, sessionID string) error {
-	return s.rdb.Del(ctx, fmt.Sprintf("session:%s", sessionID)).Err()
+	err := s.rdb.Del(ctx, fmt.Sprintf("session:%s", sessionID)).Err()
+	if err != nil {
+		slog.Error("logout failed", "session_id", sessionID, "error", err)
+		return err
+	}
+	slog.Info("user logged out", "session_id", sessionID)
+	return nil
 }
 
 func (s *AuthService) GetProfile(userID string) (*models.User, error) {
