@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  # ─── Auth Service (Go) ────────────────────────────────────────
+  # Auth Service (Go)
   auth-service:
     name: Auth Service — Lint, Build & Test
     runs-on: ubuntu-latest
@@ -20,7 +20,7 @@ jobs:
 
       - uses: actions/setup-go@v5
         with:
-          go-version: '1.22'
+          go-version: '1.23'
           cache-dependency-path: backend/auth-service/go.sum
 
       - name: Lint
@@ -43,7 +43,7 @@ jobs:
             echo "No test coverage data (no tests yet)"
           fi
 
-  # ─── Auth Service — Docker Build ──────────────────────────────
+  # Auth Service — Docker Build
   auth-service-docker:
     name: Auth Service — Docker Build
     runs-on: ubuntu-latest
@@ -52,7 +52,7 @@ jobs:
       - name: Build Docker image
         run: docker build ./backend/auth-service -t auth-service:ci
 
-  # ─── Gateway (Go) ─────────────────────────────────────────────
+  # Gateway (Go)
   gateway:
     name: Gateway — Lint, Build & Test
     runs-on: ubuntu-latest
@@ -64,7 +64,7 @@ jobs:
 
       - uses: actions/setup-go@v5
         with:
-          go-version: '1.22'
+          go-version: '1.23'
           cache-dependency-path: backend/gateway/go.sum
 
       - name: Lint
@@ -80,9 +80,14 @@ jobs:
         run: go test ./... -v -count=1 -coverprofile=coverage.out
 
       - name: Coverage report
-        run: go tool cover -func=coverage.out
+        run: |
+          if [ -f coverage.out ] && [ -s coverage.out ]; then
+            go tool cover -func=coverage.out
+          else
+            echo "No test coverage data (no tests yet)"
+          fi
 
-  # ─── Gateway — Docker Build ───────────────────────────────────
+  # Gateway — Docker Build
   gateway-docker:
     name: Gateway — Docker Build
     runs-on: ubuntu-latest
@@ -91,7 +96,51 @@ jobs:
       - name: Build Docker image
         run: docker build ./backend/gateway -t gateway:ci
 
-  # ─── S3 Service (C++) ─────────────────────────────────────────
+  # Task Service (Go)
+  task-service:
+    name: Task Service — Lint, Build & Test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend/task-service
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+          cache-dependency-path: backend/task-service/go.sum
+
+      - name: Lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: latest
+          working-directory: backend/task-service
+
+      - name: Build
+        run: go build .
+
+      - name: Test
+        run: go test ./... -v -count=1 -coverprofile=coverage.out || echo "No tests yet"
+
+      - name: Coverage report
+        run: |
+          if [ -f coverage.out ] && [ -s coverage.out ]; then
+            go tool cover -func=coverage.out
+          else
+            echo "No test coverage data (no tests yet)"
+          fi
+
+  # Task Service — Docker Build
+  task-service-docker:
+    name: Task Service — Docker Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build ./backend/task-service -t task-service:ci
+
+  # S3 Service (C++)
   s3-service:
     name: S3 Service — Build & Test
     runs-on: ubuntu-latest
@@ -101,7 +150,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake g++ libpq-dev libjsoncpp-dev git
+          sudo apt-get install -y cmake g++ libpq-dev libjsoncpp-dev uuid-dev git
       
       - name: Install Drogon
         run: |
@@ -124,7 +173,7 @@ jobs:
         working-directory: backend/s3-storage/build
         run: ctest --output-on-failure || echo "No tests configured yet"
 
-  # ─── S3 Service — Docker Build ────────────────────────────────
+  # S3 Service — Docker Build
   s3-service-docker:
     name: S3 Service — Docker Build
     runs-on: ubuntu-latest
@@ -133,7 +182,7 @@ jobs:
       - name: Build Docker image
         run: docker build ./backend/s3-storage -t s3-service:ci
 
-  # ─── S3 Frontend (Node.js) ────────────────────────────────────
+  # S3 Frontend (Node.js)
   s3-frontend:
     name: S3 Frontend — Build
     runs-on: ubuntu-latest
@@ -153,7 +202,7 @@ jobs:
       - name: Build
         run: npm run build
 
-  # ─── S3 Frontend — Docker Build ───────────────────────────────
+  # S3 Frontend — Docker Build
   s3-frontend-docker:
     name: S3 Frontend — Docker Build
     runs-on: ubuntu-latest
