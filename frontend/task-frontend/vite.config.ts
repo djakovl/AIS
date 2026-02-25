@@ -4,12 +4,12 @@ import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
+  base: '/tasks-app/',
   plugins: [vue()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
-    // 👇 Добавьте эту секцию:
     extensions: ['.js', '.json', '.vue']
   },
   server: {
