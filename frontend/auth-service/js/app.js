@@ -8,7 +8,7 @@ class AuthApp {
 
         this.loginSection = document.getElementById('loginForm');
         this.registerSection = document.getElementById('registerForm');
-        this.profileSection = document.getElementById('profileSection');
+        this.serviceSelector = document.getElementById('serviceSelector');
 
         this.showLoginBtn = document.getElementById('showLogin');
         this.showRegisterBtn = document.getElementById('showRegister');
@@ -51,19 +51,19 @@ class AuthApp {
     showLogin() {
         this.loginSection.classList.remove('hidden');
         this.registerSection.classList.add('hidden');
-        this.profileSection.classList.add('hidden');
+        this.serviceSelector.classList.add('hidden');
     }
 
     showRegister() {
         this.loginSection.classList.add('hidden');
         this.registerSection.classList.remove('hidden');
-        this.profileSection.classList.add('hidden');
+        this.serviceSelector.classList.add('hidden');
     }
 
-    showProfile() {
+    showServiceSelector() {
         this.loginSection.classList.add('hidden');
         this.registerSection.classList.add('hidden');
-        this.profileSection.classList.remove('hidden');
+        this.serviceSelector.classList.remove('hidden');
     }
 
     async handleRegister(e) {
@@ -119,7 +119,7 @@ class AuthApp {
         try {
             const user = await api.getProfile();
             this.displayProfile(user);
-            this.showProfile();
+            this.showServiceSelector();
         } catch (error) {
             throw error;
         }
@@ -128,10 +128,6 @@ class AuthApp {
     displayProfile(user) {
         document.getElementById('profileEmail').textContent = user.email;
         document.getElementById('profileUsername').textContent = user.username;
-        document.getElementById('profileFirstName').textContent = user.first_name || '—';
-        document.getElementById('profileLastName').textContent = user.last_name || '—';
-        document.getElementById('profileRoles').textContent = user.roles.join(', ');
-        document.getElementById('profileCreated').textContent = new Date(user.created_at).toLocaleDateString('ru-RU');
     }
 
     showNotification(message, type = 'success') {

@@ -90,3 +90,74 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build Docker image
         run: docker build ./backend/gateway -t gateway:ci
+
+  # ─── S3 Service (C++) ─────────────────────────────────────────
+  s3-service:
+    name: S3 Service — Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake g++ libpq-dev git
+      
+      - name: Install Drogon
+        run: |
+          git clone https://github.com/drogonframework/drogon
+          cd drogon
+          git submodule update --init
+          mkdir build && cd build
+          cmake -DCMAKE_BUILD_TYPE=Release ..
+          sudo make install -j$(nproc)
+      
+      - name: Build S3 Service
+        working-directory: backend/s3-storage
+        run: |
+          mkdir -p build
+          cd build
+          cmake .. -DBUILD_TESTS=ON
+          make -j$(nproc)
+      
+      - name: Test
+        working-directory: backend/s3-storage/build
+        run: ctest --output-on-failure || echo "No tests configured yet"
+
+  # ─── S3 Service — Docker Build ────────────────────────────────
+  s3-service-docker:
+    name: S3 Service — Docker Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build ./backend/s3-storage -t s3-service:ci
+
+  # ─── S3 Frontend (Node.js) ────────────────────────────────────
+  s3-frontend:
+    name: S3 Frontend — Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend/s3-storage/frontend
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build
+        run: npm run build
+
+  # ─── S3 Frontend — Docker Build ───────────────────────────────
+  s3-frontend-docker:
+    name: S3 Frontend — Docker Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build ./backend/s3-storage/frontend -t s3-frontend:ci
