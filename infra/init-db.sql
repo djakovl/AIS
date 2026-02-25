@@ -32,46 +32,64 @@ CREATE INDEX IF NOT EXISTS idx_users_email ON auth.users(email);
 CREATE INDEX IF NOT EXISTS idx_users_username ON auth.users(username);
 
 -- =============================================================================
--- Task Service  (схема tasks)
+-- Task Service  (public-схема, таблицы без префикса)
+-- Запросы в task_repository.go используют: FROM tasks / FROM statuses / FROM priorities
 -- =============================================================================
-CREATE SCHEMA IF NOT EXISTS tasks;
 
-CREATE TABLE IF NOT EXISTS tasks.statuses (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50) UNIQUE NOT NULL
-);
-
-INSERT INTO tasks.statuses (name) VALUES
-    ('pending'), ('in_progress'), ('completed'), ('cancelled')
-ON CONFLICT (name) DO NOTHING;
-
-CREATE TABLE IF NOT EXISTS tasks.priorities (
+-- Таблица статусов с дополнительными полями для UI
+CREATE TABLE IF NOT EXISTS statuses (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) UNIQUE NOT NULL,
-    level INT UNIQUE NOT NULL
+    color VARCHAR(7) DEFAULT '#6B7280',
+    order_index INT DEFAULT 0
 );
 
-INSERT INTO tasks.priorities (name, level) VALUES
-    ('low', 1), ('medium', 2), ('high', 3), ('urgent', 4)
+INSERT INTO statuses (name, color, order_index) VALUES
+    ('pending', '#9CA3AF', 1),
+    ('in_progress', '#3B82F6', 2),
+    ('completed', '#10B981', 3),
+    ('cancelled', '#EF4444', 4)
 ON CONFLICT (name) DO NOTHING;
 
-CREATE TABLE IF NOT EXISTS tasks.tasks (
+-- Таблица приоритетов с цветом и квадрантом Эйзенхауэра
+CREATE TABLE IF NOT EXISTS priorities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) UNIQUE NOT NULL,
+    level INT UNIQUE NOT NULL,
+    color VARCHAR(7) DEFAULT '#6B7280',
+    eisenhower_quad VARCHAR(50)
+);
+
+INSERT INTO priorities (name, level, color, eisenhower_quad) VALUES
+    ('low', 1, '#9CA3AF', 'neither'),
+    ('medium', 2, '#FBBF24', 'schedule'),
+    ('high', 3, '#F97316', 'delegate'),
+    ('urgent', 4, '#DC2626', 'do_first')
+ON CONFLICT (name) DO NOTHING;
+
+-- Таблица задач с полной структурой (parent_task_id, order_index, completed_at, tags)
+CREATE TABLE IF NOT EXISTS tasks (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID NOT NULL,
+    parent_task_id UUID REFERENCES tasks(id) ON DELETE CASCADE,
     title VARCHAR(255) NOT NULL,
     description TEXT,
-    status_id INT REFERENCES tasks.statuses(id) DEFAULT 1,
-    priority_id INT REFERENCES tasks.priorities(id) DEFAULT 2,
+    status_id INT REFERENCES statuses(id) DEFAULT 1,
+    priority_id INT REFERENCES priorities(id) DEFAULT 2,
     due_date TIMESTAMP,
+    completed_at TIMESTAMP,
+    is_completed BOOLEAN DEFAULT FALSE,
+    order_index INT DEFAULT 0,
     tags TEXT[],
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks.tasks(user_id);
-CREATE INDEX IF NOT EXISTS idx_tasks_status ON tasks.tasks(status_id);
-CREATE INDEX IF NOT EXISTS idx_tasks_priority ON tasks.tasks(priority_id);
-CREATE INDEX IF NOT EXISTS idx_tasks_due_date ON tasks.tasks(due_date);
+CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks(user_id);
+CREATE INDEX IF NOT EXISTS idx_tasks_status ON tasks(status_id);
+CREATE INDEX IF NOT EXISTS idx_tasks_priority ON tasks(priority_id);
+CREATE INDEX IF NOT EXISTS idx_tasks_due_date ON tasks(due_date);
+CREATE INDEX IF NOT EXISTS idx_tasks_parent_task_id ON tasks(parent_task_id);
 
 -- =============================================================================
 -- S3 Storage Service  (public-схема, без префикса)
