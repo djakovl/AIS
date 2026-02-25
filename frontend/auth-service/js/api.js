@@ -1,6 +1,7 @@
 // API клиент для работы с бэкендом
 
-const API_BASE_URL = 'http://localhost';
+// Пустой базовый URL — запросы идут на тот же хост и порт, что и сам сайт
+const API_BASE_URL = '';
 
 class ApiClient {
     constructor(baseUrl) {
@@ -23,7 +24,7 @@ class ApiClient {
         const config = {
             ...options,
             headers,
-            credentials: 'include', // Для отправки cookies
+            credentials: 'include',
         };
 
         try {
@@ -54,13 +55,11 @@ class ApiClient {
             body: JSON.stringify(credentials),
         });
 
-        // Сохраняем CSRF токен
         if (data.csrf_token) {
             this.csrfToken = data.csrf_token;
             localStorage.setItem('csrf_token', data.csrf_token);
         }
 
-        // Сохраняем session_id для mobile (на web он в cookie)
         if (data.session_id) {
             localStorage.setItem('session_id', data.session_id);
         }
@@ -73,7 +72,6 @@ class ApiClient {
             method: 'POST',
         });
 
-        // Очищаем токены
         this.csrfToken = '';
         localStorage.removeItem('csrf_token');
         localStorage.removeItem('session_id');

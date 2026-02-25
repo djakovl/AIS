@@ -34,8 +34,9 @@ func main() {
 	log.Println("PostgreSQL: подключение успешно")
 
 	rdb := redis.NewClient(&redis.Options{
-		Addr: cfg.RedisAddr,
-		DB:   cfg.RedisDB,
+		Addr:     cfg.RedisAddr,
+		Password: cfg.RedisPassword,
+		DB:       cfg.RedisDB,
 	})
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
