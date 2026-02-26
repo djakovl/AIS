@@ -58,11 +58,15 @@ ON CONFLICT (name) DO NOTHING;
 CREATE TABLE IF NOT EXISTS tasks.tasks (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID NOT NULL,
+    parent_task_id UUID NULL REFERENCES tasks.tasks(id) ON DELETE CASCADE,
     title VARCHAR(255) NOT NULL,
     description TEXT,
     status_id INT REFERENCES tasks.statuses(id) DEFAULT 1,
     priority_id INT REFERENCES tasks.priorities(id) DEFAULT 2,
     due_date TIMESTAMP,
+    completed_at TIMESTAMP,
+    is_completed BOOLEAN DEFAULT FALSE,
+    order_index INT DEFAULT 0,
     tags TEXT[],
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
@@ -72,6 +76,7 @@ CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks.tasks(user_id);
 CREATE INDEX IF NOT EXISTS idx_tasks_status ON tasks.tasks(status_id);
 CREATE INDEX IF NOT EXISTS idx_tasks_priority ON tasks.tasks(priority_id);
 CREATE INDEX IF NOT EXISTS idx_tasks_due_date ON tasks.tasks(due_date);
+CREATE INDEX IF NOT EXISTS idx_tasks_parent_task_id ON tasks.tasks(parent_task_id);
 
 -- =============================================================================
 -- S3 Storage Service  (public-схема, без префикса)
