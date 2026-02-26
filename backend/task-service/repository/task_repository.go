@@ -91,7 +91,7 @@ func (r *TaskRepository) GetByIDWithRelations(id string) (*dto.TaskResponse, err
 	query := `
 	SELECT 
 		t.id, t.user_id, t.parent_task_id, t.title, t.description,
-		t.status_id, t.priority_id, t.due_date, t.completed_at,
+		t.due_date, t.completed_at,
 		t.is_completed, t.order_index, t.created_at, t.updated_at,
 		s.id, s.name,
 		p.id, p.name, p.level
@@ -108,7 +108,7 @@ func (r *TaskRepository) FilterWithRelations(f dto.TaskFilter) ([]dto.TaskRespon
 	query := `
 	SELECT 
 		t.id, t.user_id, t.parent_task_id, t.title, t.description,
-		t.status_id, t.priority_id, t.due_date, t.completed_at,
+		t.due_date, t.completed_at,
 		t.is_completed, t.order_index, t.created_at, t.updated_at,
 		s.id, s.name,
 		p.id, p.name, p.level
@@ -177,7 +177,7 @@ func scanTaskFromRow(row *sql.Row) (*dto.TaskResponse, error) {
 
 	err := row.Scan(
 		&t.ID, &t.UserID, &parentTaskID, &t.Title, &description,
-		&t.StatusID, &t.PriorityID, &dueDate, &completedAt,
+		&dueDate, &completedAt,
 		&t.IsCompleted, &t.OrderIndex, &t.CreatedAt, &t.UpdatedAt,
 		&t.Status.ID, &t.Status.Name,
 		&t.Priority.ID, &t.Priority.Name, &t.Priority.Level,
@@ -200,7 +200,7 @@ func scanTaskFromRows(rows *sql.Rows) (*dto.TaskResponse, error) {
 
 	err := rows.Scan(
 		&t.ID, &t.UserID, &parentTaskID, &t.Title, &description,
-		&t.StatusID, &t.PriorityID, &dueDate, &completedAt,
+		&dueDate, &completedAt,
 		&t.IsCompleted, &t.OrderIndex, &t.CreatedAt, &t.UpdatedAt,
 		&t.Status.ID, &t.Status.Name,
 		&t.Priority.ID, &t.Priority.Name, &t.Priority.Level,
