@@ -3,6 +3,7 @@ package handlers
 
 import (
 	"database/sql"
+	"log"
 	"net/http"
 	"github.com/gin-gonic/gin"
 	"task-service/models"
@@ -18,8 +19,10 @@ func NewReferenceHandler(db *sql.DB) *ReferenceHandler {
 
 // GET /statuses
 func (h *ReferenceHandler) ListStatuses(c *gin.Context) {
+	log.Printf("DEBUG ListStatuses: Path='%s', Headers=%v", c.Request.URL.Path, c.Request.Header)
 	rows, err := h.DB.Query("SELECT id, name FROM tasks.statuses ORDER BY id")
 	if err != nil {
+		log.Printf("ERROR ListStatuses query: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -40,8 +43,10 @@ func (h *ReferenceHandler) ListStatuses(c *gin.Context) {
 
 // GET /priorities
 func (h *ReferenceHandler) ListPriorities(c *gin.Context) {
+	log.Printf("DEBUG ListPriorities: Path='%s', Headers=%v", c.Request.URL.Path, c.Request.Header)
 	rows, err := h.DB.Query("SELECT id, name, level FROM tasks.priorities ORDER BY level")
 	if err != nil {
+		log.Printf("ERROR ListPriorities query: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
