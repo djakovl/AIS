@@ -3,14 +3,16 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
-	
-	"github.com/gin-gonic/gin"
+
 	"github.com/gin-contrib/cors"
-	_ "github.com/lib/pq" // или другой драйвер БД
-	
+	"github.com/gin-gonic/gin"
+	_ "github.com/lib/pq"
+
 	"task-service/handlers"
 	"task-service/repository"
 	"task-service/services"
@@ -20,40 +22,57 @@ func main() {
 	// =====================
 	// 1. ПОДКЛЮЧЕНИЕ К БД
 	// =====================
-	dsn := "postgres://postgres:qwerty123@localhost:5432/task_db?sslmode=disable"
+	dbHost := getEnv("DB_HOST", "localhost")
+	dbPort := getEnv("DB_PORT", "5432")
+	dbUser := getEnv("DB_USER", "postgres")
+	dbPassword := getEnv("DB_PASSWORD", "qwerty123")
+	dbName := getEnv("DB_NAME", "task_db")
+	port := getEnv("PORT", "3003")
+
+	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable",
+		dbUser, dbPassword, dbHost, dbPort, dbName)
+
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {
 		log.Fatalf("❌ Failed to connect to DB: %v", err)
 	}
-	
-	if err := db.Ping(); err != nil {
-		log.Fatalf("❌ DB ping failed: %v", err)
+
+	// Retry connection with timeout
+	for i := 0; i < 30; i++ {
+		if err := db.Ping(); err == nil {
+			log.Println("✅ Database connected")
+			break
+		}
+		log.Printf("⏳ Waiting for database... (%d/30)", i+1)
+		time.Sleep(1 * time.Second)
+		if i == 29 {
+			log.Fatalf("❌ DB ping failed after 30 retries: %v", err)
+		}
 	}
 	defer db.Close()
-	
-	log.Println("✅ Database connected")
 
 	// =====================
 	// 2. СОЗДАНИЕ ЗАВИСИМОСТЕЙ (Dependency Injection)
 	// =====================
-	
+
 	// DB → Repository
 	taskRepo := repository.NewTaskRepository(db)
-	
+
 	// Repository → Service
 	taskService := services.NewTaskService(taskRepo)
-	
+
 	// Service → Handler
-	taskHandler := handlers.NewTaskHandler(taskService) // 👈 Теперь передаём service, а не db
+	taskHandler := handlers.NewTaskHandler(taskService)
 	refHandler := handlers.NewReferenceHandler(db)
+
 	// =====================
 	// 3. НАСТРОЙКА GIN
 	// =====================
 	r := gin.Default()
-	
+
 	// CORS middleware
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3001"},
+		AllowOrigins:     []string{"*"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Content-Type", "X-User-Id", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
@@ -66,17 +85,17 @@ func main() {
 	// =====================
 	tasks := r.Group("/tasks")
 	{
-		tasks.GET("", taskHandler.List)           // GET /tasks
-		tasks.GET("/:id", taskHandler.Get)        // GET /tasks/:id
-		tasks.POST("", taskHandler.Create)        // POST /tasks
-		tasks.PUT("/:id", taskHandler.Update)     // PUT /tasks/:id
-		tasks.DELETE("/:id", taskHandler.Delete)  // DELETE /tasks/:id
+		tasks.GET("", taskHandler.List)          // GET /tasks
+		tasks.GET("/:id", taskHandler.Get)       // GET /tasks/:id
+		tasks.POST("", taskHandler.Create)       // POST /tasks
+		tasks.PUT("/:id", taskHandler.Update)    // PUT /tasks/:id
+		tasks.DELETE("/:id", taskHandler.Delete) // DELETE /tasks/:id
 	}
 
-
-	// 👇 Роуты справочников
+	// Роуты справочников
 	r.GET("/statuses", refHandler.ListStatuses)
 	r.GET("/priorities", refHandler.ListPriorities)
+
 	// Health check
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "ok"})
@@ -85,8 +104,15 @@ func main() {
 	// =====================
 	// 5. ЗАПУСК СЕРВЕРА
 	// =====================
-	log.Println("🚀 Server starting on :3003")
-	if err := r.Run(":3003"); err != nil {
+	log.Printf("🚀 Server starting on :%s", port)
+	if err := r.Run(":" + port); err != nil {
 		log.Fatalf("❌ Failed to start server: %v", err)
 	}
+}
+
+func getEnv(key, defaultValue string) string {
+	if value := os.Getenv(key); value != "" {
+		return value
+	}
+	return defaultValue
 }
