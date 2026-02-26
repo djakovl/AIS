@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"strings"
 	"time"
 
 	"gateway/internal/middleware"
@@ -32,6 +33,15 @@ func New(targetURL string) http.Handler {
 	originalDirector := proxy.Director
 	proxy.Director = func(req *http.Request) {
 		originalDirector(req)
+
+		// Strip prefix /tasks, /auth, /files from path
+		if strings.HasPrefix(req.URL.Path, "/tasks/") {
+			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/tasks")
+		} else if strings.HasPrefix(req.URL.Path, "/auth/") {
+			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/auth")
+		} else if strings.HasPrefix(req.URL.Path, "/files/") {
+			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/files")
+		}
 
 		ctx := req.Context()
 		if userID := middleware.CtxGet(ctx, middleware.CtxUserID); userID != "" {
