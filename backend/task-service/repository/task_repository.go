@@ -93,8 +93,8 @@ func (r *TaskRepository) GetByIDWithRelations(id string) (*dto.TaskResponse, err
 		t.id, t.user_id, t.parent_task_id, t.title, t.description,
 		t.status_id, t.priority_id, t.due_date, t.completed_at,
 		t.is_completed, t.order_index, t.created_at, t.updated_at,
-		s.id, s.name, s.color, s.order_index,
-		p.id, p.name, p.color, p.eisenhower_quad
+		s.id, s.name,
+		p.id, p.name, p.level
 	FROM tasks.tasks t
 	LEFT JOIN tasks.statuses s ON t.status_id = s.id
 	LEFT JOIN tasks.priorities p ON t.priority_id = p.id
@@ -110,8 +110,8 @@ func (r *TaskRepository) FilterWithRelations(f dto.TaskFilter) ([]dto.TaskRespon
 		t.id, t.user_id, t.parent_task_id, t.title, t.description,
 		t.status_id, t.priority_id, t.due_date, t.completed_at,
 		t.is_completed, t.order_index, t.created_at, t.updated_at,
-		s.id, s.name, s.color, s.order_index,
-		p.id, p.name, p.color, p.eisenhower_quad
+		s.id, s.name,
+		p.id, p.name, p.level
 	FROM tasks.tasks t
 	LEFT JOIN tasks.statuses s ON t.status_id = s.id
 	LEFT JOIN tasks.priorities p ON t.priority_id = p.id
@@ -173,15 +173,14 @@ func (r *TaskRepository) FilterWithRelations(f dto.TaskFilter) ([]dto.TaskRespon
 
 func scanTaskFromRow(row *sql.Row) (*dto.TaskResponse, error) {
 	var t dto.TaskResponse
-	var statusID, priorityID string
 	var parentTaskID, description, dueDate, completedAt sql.NullString
 
 	err := row.Scan(
 		&t.ID, &t.UserID, &parentTaskID, &t.Title, &description,
-		&statusID, &priorityID, &dueDate, &completedAt,
+		&t.StatusID, &t.PriorityID, &dueDate, &completedAt,
 		&t.IsCompleted, &t.OrderIndex, &t.CreatedAt, &t.UpdatedAt,
-		&t.Status.ID, &t.Status.Name, &t.Status.Color, &t.Status.OrderIndex,
-		&t.Priority.ID, &t.Priority.Name, &t.Priority.Color, &t.Priority.EisenhowerQuad,
+		&t.Status.ID, &t.Status.Name,
+		&t.Priority.ID, &t.Priority.Name, &t.Priority.Level,
 	)
 	if err != nil {
 		return nil, err
@@ -191,24 +190,20 @@ func scanTaskFromRow(row *sql.Row) (*dto.TaskResponse, error) {
 	if description.Valid { t.Description = &description.String }
 	if dueDate.Valid { t.DueDate = &dueDate.String }
 	if completedAt.Valid { t.CompletedAt = &completedAt.String }
-
-	t.Status.ID = statusID
-	t.Priority.ID = priorityID
 
 	return &t, nil
 }
 
 func scanTaskFromRows(rows *sql.Rows) (*dto.TaskResponse, error) {
 	var t dto.TaskResponse
-	var statusID, priorityID string
 	var parentTaskID, description, dueDate, completedAt sql.NullString
 
 	err := rows.Scan(
 		&t.ID, &t.UserID, &parentTaskID, &t.Title, &description,
-		&statusID, &priorityID, &dueDate, &completedAt,
+		&t.StatusID, &t.PriorityID, &dueDate, &completedAt,
 		&t.IsCompleted, &t.OrderIndex, &t.CreatedAt, &t.UpdatedAt,
-		&t.Status.ID, &t.Status.Name, &t.Status.Color, &t.Status.OrderIndex,
-		&t.Priority.ID, &t.Priority.Name, &t.Priority.Color, &t.Priority.EisenhowerQuad,
+		&t.Status.ID, &t.Status.Name,
+		&t.Priority.ID, &t.Priority.Name, &t.Priority.Level,
 	)
 	if err != nil {
 		return nil, err
@@ -218,9 +213,6 @@ func scanTaskFromRows(rows *sql.Rows) (*dto.TaskResponse, error) {
 	if description.Valid { t.Description = &description.String }
 	if dueDate.Valid { t.DueDate = &dueDate.String }
 	if completedAt.Valid { t.CompletedAt = &completedAt.String }
-
-	t.Status.ID = statusID
-	t.Priority.ID = priorityID
 
 	return &t, nil
 }
