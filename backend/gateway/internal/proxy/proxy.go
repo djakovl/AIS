@@ -34,14 +34,13 @@ func New(targetURL string) http.Handler {
 	proxy.Director = func(req *http.Request) {
 		originalDirector(req)
 
-		// Strip prefix /tasks, /auth, /files from path
+		// Strip prefix /tasks and /files ONLY (auth-service handles /auth internally)
 		if strings.HasPrefix(req.URL.Path, "/tasks/") {
 			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/tasks")
-		} else if strings.HasPrefix(req.URL.Path, "/auth/") {
-			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/auth")
 		} else if strings.HasPrefix(req.URL.Path, "/files/") {
 			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/files")
 		}
+		// NOTE: /auth/* is NOT stripped - auth-service expects /auth/login, /auth/register
 
 		ctx := req.Context()
 		if userID := middleware.CtxGet(ctx, middleware.CtxUserID); userID != "" {
