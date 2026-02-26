@@ -12,8 +12,8 @@ type CreateTaskRequest struct {
 	ParentTaskID *string `json:"parent_task_id"`
 	Title        string  `json:"title" binding:"required"`
 	Description  *string `json:"description"`
-	StatusID     string  `json:"status_id" binding:"required"`
-	PriorityID   string  `json:"priority_id" binding:"required"`
+	StatusID     int     `json:"status_id" binding:"required"`
+	PriorityID   int     `json:"priority_id" binding:"required"`
 	DueDate      *string `json:"due_date"` // RFC3339 format: "2026-03-31T23:59:59Z"
 }
 
@@ -21,8 +21,8 @@ type CreateTaskRequest struct {
 type UpdateTaskRequest struct {
 	Title        *string `json:"title"`
 	Description  *string `json:"description"`
-	StatusID     *string `json:"status_id"`
-	PriorityID   *string `json:"priority_id"`
+	StatusID     *int    `json:"status_id"`
+	PriorityID   *int    `json:"priority_id"`
 	DueDate      *string `json:"due_date"`
 	IsCompleted  *bool   `json:"is_completed"`
 }
