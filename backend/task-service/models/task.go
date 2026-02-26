@@ -9,8 +9,8 @@ type Task struct {
 	ParentTaskID *string    `json:"parent_task_id"`
 	Title        string     `json:"title"`
 	Description  *string    `json:"description"`
-	StatusID     string     `json:"status_id"`
-	PriorityID   string     `json:"priority_id"`
+	StatusID     int        `json:"status_id"`
+	PriorityID   int        `json:"priority_id"`
 	DueDate      *time.Time `json:"due_date"`
 	CompletedAt  *time.Time `json:"completed_at"`
 	IsCompleted  bool       `json:"is_completed"`
