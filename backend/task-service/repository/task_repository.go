@@ -23,7 +23,7 @@ func NewTaskRepository(db *sql.DB) *TaskRepository {
 
 func (r *TaskRepository) Create(task *models.Task) error {
 	query := `
-	INSERT INTO tasks (user_id, parent_task_id, title, description, status_id, priority_id, due_date)
+	INSERT INTO tasks.tasks (user_id, parent_task_id, title, description, status_id, priority_id, due_date)
 	VALUES ($1, $2, $3, $4, $5, $6, $7)
 	RETURNING id, created_at, updated_at
 	`
@@ -38,7 +38,7 @@ func (r *TaskRepository) GetByID(id string) (*models.Task, error) {
 	query := `
 	SELECT id, user_id, parent_task_id, title, description, status_id, priority_id, 
            due_date, completed_at, is_completed, order_index, created_at, updated_at
-	FROM tasks WHERE id = $1
+	FROM tasks.tasks WHERE id = $1
 	`
 	row := r.DB.QueryRow(query, id)
 
@@ -65,7 +65,7 @@ func (r *TaskRepository) GetByID(id string) (*models.Task, error) {
 
 func (r *TaskRepository) Update(task *models.Task) error {
 	query := `
-	UPDATE tasks SET
+	UPDATE tasks.tasks SET
 	title = $1, description = $2, status_id = $3, priority_id = $4,
 	due_date = $5, is_completed = $6, completed_at = $7, updated_at = $8
 	WHERE id = $9
@@ -79,7 +79,7 @@ func (r *TaskRepository) Update(task *models.Task) error {
 }
 
 func (r *TaskRepository) Delete(id string) error {
-	_, err := r.DB.Exec("DELETE FROM tasks WHERE id = $1", id)
+	_, err := r.DB.Exec("DELETE FROM tasks.tasks WHERE id = $1", id)
 	return err
 }
 
@@ -95,9 +95,9 @@ func (r *TaskRepository) GetByIDWithRelations(id string) (*dto.TaskResponse, err
 		t.is_completed, t.order_index, t.created_at, t.updated_at,
 		s.id, s.name, s.color, s.order_index,
 		p.id, p.name, p.color, p.eisenhower_quad
-	FROM tasks t
-	LEFT JOIN statuses s ON t.status_id = s.id
-	LEFT JOIN priorities p ON t.priority_id = p.id
+	FROM tasks.tasks t
+	LEFT JOIN tasks.statuses s ON t.status_id = s.id
+	LEFT JOIN tasks.priorities p ON t.priority_id = p.id
 	WHERE t.id = $1
 	`
 	row := r.DB.QueryRow(query, id)
@@ -112,9 +112,9 @@ func (r *TaskRepository) FilterWithRelations(f dto.TaskFilter) ([]dto.TaskRespon
 		t.is_completed, t.order_index, t.created_at, t.updated_at,
 		s.id, s.name, s.color, s.order_index,
 		p.id, p.name, p.color, p.eisenhower_quad
-	FROM tasks t
-	LEFT JOIN statuses s ON t.status_id = s.id
-	LEFT JOIN priorities p ON t.priority_id = p.id
+	FROM tasks.tasks t
+	LEFT JOIN tasks.statuses s ON t.status_id = s.id
+	LEFT JOIN tasks.priorities p ON t.priority_id = p.id
 	WHERE t.user_id = $1
 	`
 
