@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"net/http"
+	"strings"
 
 	"gateway/internal/response"
 )
@@ -16,7 +17,14 @@ var csrfMethods = map[string]bool{
 func CSRF() func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			// Skip CSRF for public routes
 			if publicRoutes[r.URL.Path] || !csrfMethods[r.Method] {
+				next.ServeHTTP(w, r)
+				return
+			}
+
+			// Skip CSRF for task service - session is already validated
+			if strings.HasPrefix(r.URL.Path, "/tasks/") {
 				next.ServeHTTP(w, r)
 				return
 			}
