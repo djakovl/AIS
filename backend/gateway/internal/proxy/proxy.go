@@ -12,7 +12,7 @@ import (
 	"gateway/internal/response"
 )
 
-func New(targetURL string) http.Handler {
+func New(targetURL string, stripPrefix string) http.Handler {
 	target, err := url.Parse(targetURL)
 	if err != nil {
 		panic(fmt.Sprintf("Неверный URL сервиса: %s", targetURL))
@@ -34,11 +34,9 @@ func New(targetURL string) http.Handler {
 	proxy.Director = func(req *http.Request) {
 		originalDirector(req)
 
-		// Strip prefix /tasks ONLY
-		// auth-service expects /auth/*, s3-service expects /files/*
-		if strings.HasPrefix(req.URL.Path, "/tasks") {
-			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/tasks")
-			if req.URL.Path == "" {
+		if stripPrefix != "" && strings.HasPrefix(req.URL.Path, stripPrefix) {
+			req.URL.Path = strings.TrimPrefix(req.URL.Path, stripPrefix)
+			if req.URL.Path == "" || req.URL.Path == "/" {
 				req.URL.Path = "/"
 			}
 		}
