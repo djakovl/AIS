@@ -36,8 +36,11 @@ func New(targetURL string) http.Handler {
 
 		// Strip prefix /tasks ONLY
 		// auth-service expects /auth/*, s3-service expects /files/*
-		if strings.HasPrefix(req.URL.Path, "/tasks/") {
+		if strings.HasPrefix(req.URL.Path, "/tasks") {
 			req.URL.Path = strings.TrimPrefix(req.URL.Path, "/tasks")
+			if req.URL.Path == "" {
+				req.URL.Path = "/"
+			}
 		}
 
 		ctx := req.Context()
