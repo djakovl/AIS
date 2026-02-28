@@ -85,16 +85,14 @@ func main() {
 	// =====================
 	tasks := r.Group("/tasks")
 	{
-		tasks.GET("", taskHandler.List)          // GET /tasks
-		tasks.GET("/:id", taskHandler.Get)       // GET /tasks/:id
-		tasks.POST("", taskHandler.Create)       // POST /tasks
-		tasks.PUT("/:id", taskHandler.Update)    // PUT /tasks/:id
-		tasks.DELETE("/:id", taskHandler.Delete) // DELETE /tasks/:id
+		tasks.GET("", taskHandler.List)
+		tasks.POST("", taskHandler.Create)
+		tasks.GET("/statuses", refHandler.ListStatuses)     // ПЕРЕД /:id !
+		tasks.GET("/priorities", refHandler.ListPriorities) // ПЕРЕД /:id !
+		tasks.GET("/:id", taskHandler.Get)
+		tasks.PUT("/:id", taskHandler.Update)
+		tasks.DELETE("/:id", taskHandler.Delete)
 	}
-
-	// Роуты справочников
-	r.GET("/statuses", refHandler.ListStatuses)
-	r.GET("/priorities", refHandler.ListPriorities)
 
 	// Health check
 	r.GET("/health", func(c *gin.Context) {
