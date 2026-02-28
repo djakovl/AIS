@@ -60,14 +60,12 @@ func main() {
 		response.JSON(w, http.StatusOK, map[string]string{"status": "ok"})
 	})
 
-	// Auth Service — /auth/* (сессия проверяется внутри middleware, login/register — пропускаются)
 	mux.Handle("/auth/", authMW(authProxy))
-
-	// Task Service — /tasks/*
+	mux.Handle("/auth", authMW(authProxy))
 	mux.Handle("/tasks/", authMW(taskProxy))
-
-	// S3 Service — /files/*
+	mux.Handle("/tasks", authMW(taskProxy))
 	mux.Handle("/files/", authMW(s3Proxy))
+	mux.Handle("/files", authMW(s3Proxy))
 
 	// HTTP сервер
 	server := &http.Server{
