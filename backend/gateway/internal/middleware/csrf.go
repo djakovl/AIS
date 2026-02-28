@@ -29,7 +29,17 @@ func CSRF() func(http.Handler) http.Handler {
 				return
 			}
 
+			// Try to get CSRF token from header (mobile)
 			receivedToken := r.Header.Get("X-CSRF-Token")
+
+			// If not in header, try cookie (web)
+			if receivedToken == "" {
+				cookie, err := r.Cookie("csrf_token")
+				if err == nil {
+					receivedToken = cookie.Value
+				}
+			}
+
 			if receivedToken == "" {
 				response.Error(w, http.StatusBadRequest, "VALIDATION_ERROR", "X-CSRF-Token отсутствует")
 				return
