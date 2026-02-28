@@ -69,7 +69,8 @@ func main() {
 	// 3. НАСТРОЙКА GIN
 	// =====================
 	r := gin.Default()
-
+	r.RedirectTrailingSlash = false
+	r.RedirectFixedPath = false
 	// CORS middleware
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
