@@ -11,6 +11,7 @@ s3-service
 go.work
 .env
 .vscode/
+.vs/
 .idea/
 *.swp
 *.swo
