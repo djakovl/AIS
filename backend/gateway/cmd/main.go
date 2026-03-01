@@ -47,6 +47,9 @@ func main() {
 		)
 	}
 
+	// Rate limiter для публичных auth-эндпоинтов: 10 запросов в минуту на IP
+	loginRateLimit := middleware.RateLimit(rdb, 10, time.Minute)
+
 	// Маршрутизация
 	mux := http.NewServeMux()
 
@@ -60,8 +63,13 @@ func main() {
 		response.JSON(w, http.StatusOK, map[string]string{"status": "ok"})
 	})
 
+	// Публичные auth-маршруты с rate limiting (более специфичные — регистрируются первыми)
+	mux.Handle("/auth/login", loginRateLimit(authMW(authProxy)))
+	mux.Handle("/auth/register", loginRateLimit(authMW(authProxy)))
+	// Остальные auth-маршруты без дополнительного rate limiting
 	mux.Handle("/auth/", authMW(authProxy))
 	mux.Handle("/auth", authMW(authProxy))
+
 	mux.Handle("/tasks/", authMW(taskProxy))
 	mux.Handle("/tasks", authMW(taskProxy))
 	mux.Handle("/files/", authMW(s3Proxy))

@@ -7,11 +7,13 @@ import (
 	"errors"
 	"fmt"
 	"log/slog"
+	"net/mail"
 	"strconv"
 	"strings"
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/lib/pq"
 	"github.com/redis/go-redis/v9"
 	"golang.org/x/crypto/bcrypt"
 
@@ -31,13 +33,20 @@ func NewAuthService(repo *repository.UserRepository, rdb *redis.Client, sessionT
 
 func (s *AuthService) Register(req *models.RegisterRequest) (*models.User, error) {
 	if req.Email == "" || req.Password == "" || req.Username == "" {
-		return nil, errors.New("эмайл, password и username обязательны")
+		return nil, errors.New("email, password и username обязательны")
 	}
-	if len(req.Password) < 6 {
-		return nil, errors.New("пароль должен быть не менее 6 символов")
+	if _, err := mail.ParseAddress(req.Email); err != nil {
+		return nil, errors.New("некорректный формат email")
+	}
+	if len(req.Password) < 8 {
+		return nil, errors.New("пароль должен быть не менее 8 символов")
+	}
+	if len(req.Password) > 72 {
+		return nil, errors.New("пароль не должен превышать 72 символа")
 	}
 
-	hash, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
+	// bcrypt cost=12 — оптимальный баланс безопасности и производительности (2024+)
+	hash, err := bcrypt.GenerateFromPassword([]byte(req.Password), 12)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +62,9 @@ func (s *AuthService) Register(req *models.RegisterRequest) (*models.User, error
 	}
 
 	if err = s.userRepo.Create(user); err != nil {
-		if strings.Contains(err.Error(), "duplicate") || strings.Contains(err.Error(), "unique") {
+		// Используем типизированную проверку pq-кода вместо string matching
+		var pgErr *pq.Error
+		if errors.As(err, &pgErr) && pgErr.Code == "23505" {
 			slog.Warn("registration failed: duplicate user", "email", req.Email)
 			return nil, errors.New("пользователь с таким email уже существует")
 		}
@@ -103,17 +114,18 @@ func (s *AuthService) Login(ctx context.Context, req *models.LoginRequest, ip, u
 		return nil, err
 	}
 
-	slog.Info("user logged in", "user_id", user.ID, "ip", ip, "session_id", sessionID)
+	// Логируем только первые 8 символов session_id — не раскрываем полный токен в логах
+	slog.Info("user logged in", "user_id", user.ID, "ip", ip, "session_prefix", sessionID[:8])
 	return &models.LoginResponse{User: user, SessionID: sessionID, CSRFToken: csrfToken}, nil
 }
 
 func (s *AuthService) Logout(ctx context.Context, sessionID string) error {
 	err := s.rdb.Del(ctx, fmt.Sprintf("session:%s", sessionID)).Err()
 	if err != nil {
-		slog.Error("logout failed", "session_id", sessionID, "error", err)
+		slog.Error("logout failed", "session_prefix", sessionID[:8], "error", err)
 		return err
 	}
-	slog.Info("user logged out", "session_id", sessionID)
+	slog.Info("user logged out", "session_prefix", sessionID[:8])
 	return nil
 }
 
