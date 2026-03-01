@@ -9,7 +9,7 @@ services:
       - redis-data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
-      interval: 10s
+      interval: 30s
       timeout: 3s
       retries: 3
     networks:
@@ -28,7 +28,7 @@ services:
       - ./infra/init-db.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-      interval: 10s
+      interval: 30s
       timeout: 3s
       retries: 5
     networks:
@@ -57,7 +57,7 @@ services:
       - network
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:8080/health"]
-      interval: 15s
+      interval: 30s
       timeout: 5s
       retries: 3
 
@@ -88,7 +88,31 @@ services:
       - network
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
-      interval: 15s
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  task-service:
+    build:
+      context: ./backend/task-service
+      dockerfile: Dockerfile
+    container_name: task
+    restart: unless-stopped
+    environment:
+      PORT: 3003
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3003/health"]
+      interval: 30s
       timeout: 5s
       retries: 3
 
@@ -115,7 +139,7 @@ services:
       - network
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3002/health"]
-      interval: 15s
+      interval: 30s
       timeout: 5s
       retries: 3
 
@@ -127,6 +151,15 @@ services:
     restart: unless-stopped
     volumes:
       - ./frontend/auth-service:/usr/share/nginx/html:ro
+    networks:
+      - network
+
+  task-frontend:
+    build:
+      context: ./frontend/task-frontend
+      dockerfile: Dockerfile
+    container_name: task-frontend
+    restart: unless-stopped
     networks:
       - network
 
@@ -154,6 +187,7 @@ services:
     depends_on:
       - gateway
       - auth-frontend
+      - task-frontend
       - s3-frontend
     networks:
       - network

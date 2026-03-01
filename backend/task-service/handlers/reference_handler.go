@@ -3,6 +3,7 @@ package handlers
 
 import (
 	"database/sql"
+	"log"
 	"net/http"
 	"github.com/gin-gonic/gin"
 	"task-service/models"
@@ -18,8 +19,10 @@ func NewReferenceHandler(db *sql.DB) *ReferenceHandler {
 
 // GET /statuses
 func (h *ReferenceHandler) ListStatuses(c *gin.Context) {
-	rows, err := h.DB.Query("SELECT id, name, color, order_index FROM statuses ORDER BY order_index")
+	log.Printf("DEBUG ListStatuses: Path='%s', Headers=%v", c.Request.URL.Path, c.Request.Header)
+	rows, err := h.DB.Query("SELECT id, name FROM tasks.statuses ORDER BY id")
 	if err != nil {
+		log.Printf("ERROR ListStatuses query: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -28,7 +31,7 @@ func (h *ReferenceHandler) ListStatuses(c *gin.Context) {
 	var statuses []models.Status
 	for rows.Next() {
 		var s models.Status
-		if err := rows.Scan(&s.ID, &s.Name, &s.Color, &s.OrderIndex); err != nil {
+		if err := rows.Scan(&s.ID, &s.Name); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
@@ -40,8 +43,10 @@ func (h *ReferenceHandler) ListStatuses(c *gin.Context) {
 
 // GET /priorities
 func (h *ReferenceHandler) ListPriorities(c *gin.Context) {
-	rows, err := h.DB.Query("SELECT id, name, color, eisenhower_quad, order_index FROM priorities ORDER BY order_index")
+	log.Printf("DEBUG ListPriorities: Path='%s', Headers=%v", c.Request.URL.Path, c.Request.Header)
+	rows, err := h.DB.Query("SELECT id, name, level FROM tasks.priorities ORDER BY level")
 	if err != nil {
+		log.Printf("ERROR ListPriorities query: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -50,7 +55,7 @@ func (h *ReferenceHandler) ListPriorities(c *gin.Context) {
 	var priorities []models.Priority
 	for rows.Next() {
 		var p models.Priority
-		if err := rows.Scan(&p.ID, &p.Name, &p.Color, &p.EisenhowerQuad, &p.OrderIndex); err != nil {
+		if err := rows.Scan(&p.ID, &p.Name, &p.Level); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}

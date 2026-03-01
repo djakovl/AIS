@@ -64,12 +64,23 @@ func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// session_id — HttpOnly, JS не читает (защита от XSS)
 	http.SetCookie(w, &http.Cookie{
 		Name:     "session_id",
 		Value:    loginResp.SessionID,
 		Path:     "/",
 		MaxAge:   1800,
 		HttpOnly: true,
+		SameSite: http.SameSiteStrictMode,
+	})
+
+	// csrf_token — не HttpOnly, JS читает и шлёт в X-CSRF-Token (Double Submit Cookie)
+	http.SetCookie(w, &http.Cookie{
+		Name:     "csrf_token",
+		Value:    loginResp.CSRFToken,
+		Path:     "/",
+		MaxAge:   1800,
+		HttpOnly: false,
 		SameSite: http.SameSiteStrictMode,
 	})
 
@@ -93,6 +104,7 @@ func (h *AuthHandler) Logout(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.SetCookie(w, &http.Cookie{Name: "session_id", Value: "", Path: "/", MaxAge: -1})
+	http.SetCookie(w, &http.Cookie{Name: "csrf_token", Value: "", Path: "/", MaxAge: -1})
 	response.JSON(w, http.StatusOK, map[string]string{"message": "Выход выполнен"})
 }
 

@@ -5,13 +5,14 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"strings"
 	"time"
 
 	"gateway/internal/middleware"
 	"gateway/internal/response"
 )
 
-func New(targetURL string) http.Handler {
+func New(targetURL string, stripPrefix string) http.Handler {
 	target, err := url.Parse(targetURL)
 	if err != nil {
 		panic(fmt.Sprintf("Неверный URL сервиса: %s", targetURL))
@@ -32,6 +33,13 @@ func New(targetURL string) http.Handler {
 	originalDirector := proxy.Director
 	proxy.Director = func(req *http.Request) {
 		originalDirector(req)
+
+		if stripPrefix != "" && strings.HasPrefix(req.URL.Path, stripPrefix) {
+			req.URL.Path = strings.TrimPrefix(req.URL.Path, stripPrefix)
+			if req.URL.Path == "" || req.URL.Path == "/" {
+				req.URL.Path = "/"
+			}
+		}
 
 		ctx := req.Context()
 		if userID := middleware.CtxGet(ctx, middleware.CtxUserID); userID != "" {

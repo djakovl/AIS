@@ -2,19 +2,10 @@
 import request from '@/utils/request'
 
 export const referenceApi = {
-  // GET /statuses
   getStatuses() {
-    return request({
-      url: '/statuses',
-      method: 'get'
-    })
+    return request({ url: '/tasks/statuses', method: 'get' })
   },
-  
-  // GET /priorities
   getPriorities() {
-    return request({
-      url: '/priorities',
-      method: 'get'
-    })
+    return request({ url: '/tasks/priorities', method: 'get' })
   }
 }

@@ -35,9 +35,9 @@ func main() {
 	log.Println("Redis: подключение успешно")
 
 	// Инициализация прокси к микросервисам
-	authProxy := proxy.New(cfg.AuthServiceURL)
-	taskProxy := proxy.New(cfg.TaskServiceURL)
-	s3Proxy := proxy.New(cfg.S3ServiceURL)
+	authProxy := proxy.New(cfg.AuthServiceURL, "") // auth-service сам ожидает /auth/*
+	taskProxy := proxy.New(cfg.TaskServiceURL, "") // task-service сам ожидает /tasks/*
+	s3Proxy := proxy.New(cfg.S3ServiceURL, "")     // s3-service сам ожидает /files/*
 
 	// Middleware цепочка: сессия + CSRF
 	authMW := func(h http.Handler) http.Handler {
@@ -60,14 +60,12 @@ func main() {
 		response.JSON(w, http.StatusOK, map[string]string{"status": "ok"})
 	})
 
-	// Auth Service — /auth/* (сессия проверяется внутри middleware, login/register — пропускаются)
 	mux.Handle("/auth/", authMW(authProxy))
-
-	// Task Service — /tasks/*
+	mux.Handle("/auth", authMW(authProxy))
 	mux.Handle("/tasks/", authMW(taskProxy))
-
-	// S3 Service — /files/*
+	mux.Handle("/tasks", authMW(taskProxy))
 	mux.Handle("/files/", authMW(s3Proxy))
+	mux.Handle("/files", authMW(s3Proxy))
 
 	// HTTP сервер
 	server := &http.Server{

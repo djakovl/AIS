@@ -17,6 +17,6 @@ ENV DB_USER=s3user
 ENV DB_PASSWORD=
 ENV STORAGE_BASE_PATH=/opt/storage
 
-EXPOSE 8080
+EXPOSE 3002
 
 CMD sh -c 'envsubst < config.json.template > config.json && exec ./build/s3-storage-service'

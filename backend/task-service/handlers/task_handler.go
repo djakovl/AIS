@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"database/sql"
+	"log"
 	"net/http"
 	"strconv"
 	"time"
@@ -32,6 +33,7 @@ func (h *TaskHandler) Create(c *gin.Context) {
 	}
 
 	userID := c.GetHeader("X-User-Id")
+	log.Printf("DEBUG Create: X-User-Id='%s', Path='%s'", userID, c.Request.URL.Path)
 	if userID == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "X-User-Id header is required"})
 		return
@@ -100,6 +102,7 @@ func (h *TaskHandler) Get(c *gin.Context) {
 // =====================
 func (h *TaskHandler) List(c *gin.Context) {
 	userID := c.GetHeader("X-User-Id")
+	log.Printf("DEBUG List: X-User-Id='%s', Path='%s', AllHeaders=%v", userID, c.Request.URL.Path, c.Request.Header)
 	if userID == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"success": false, "error": "X-User-Id header is required"})
 		return

@@ -23,7 +23,7 @@ func NewTaskRepository(db *sql.DB) *TaskRepository {
 
 func (r *TaskRepository) Create(task *models.Task) error {
 	query := `
-	INSERT INTO tasks (user_id, parent_task_id, title, description, status_id, priority_id, due_date)
+	INSERT INTO tasks.tasks (user_id, parent_task_id, title, description, status_id, priority_id, due_date)
 	VALUES ($1, $2, $3, $4, $5, $6, $7)
 	RETURNING id, created_at, updated_at
 	`
@@ -38,7 +38,7 @@ func (r *TaskRepository) GetByID(id string) (*models.Task, error) {
 	query := `
 	SELECT id, user_id, parent_task_id, title, description, status_id, priority_id, 
            due_date, completed_at, is_completed, order_index, created_at, updated_at
-	FROM tasks WHERE id = $1
+	FROM tasks.tasks WHERE id = $1
 	`
 	row := r.DB.QueryRow(query, id)
 
@@ -65,7 +65,7 @@ func (r *TaskRepository) GetByID(id string) (*models.Task, error) {
 
 func (r *TaskRepository) Update(task *models.Task) error {
 	query := `
-	UPDATE tasks SET
+	UPDATE tasks.tasks SET
 	title = $1, description = $2, status_id = $3, priority_id = $4,
 	due_date = $5, is_completed = $6, completed_at = $7, updated_at = $8
 	WHERE id = $9
@@ -79,7 +79,7 @@ func (r *TaskRepository) Update(task *models.Task) error {
 }
 
 func (r *TaskRepository) Delete(id string) error {
-	_, err := r.DB.Exec("DELETE FROM tasks WHERE id = $1", id)
+	_, err := r.DB.Exec("DELETE FROM tasks.tasks WHERE id = $1", id)
 	return err
 }
 
@@ -91,13 +91,13 @@ func (r *TaskRepository) GetByIDWithRelations(id string) (*dto.TaskResponse, err
 	query := `
 	SELECT 
 		t.id, t.user_id, t.parent_task_id, t.title, t.description,
-		t.status_id, t.priority_id, t.due_date, t.completed_at,
+		t.due_date, t.completed_at,
 		t.is_completed, t.order_index, t.created_at, t.updated_at,
-		s.id, s.name, s.color, s.order_index,
-		p.id, p.name, p.color, p.eisenhower_quad
-	FROM tasks t
-	LEFT JOIN statuses s ON t.status_id = s.id
-	LEFT JOIN priorities p ON t.priority_id = p.id
+		s.id, s.name,
+		p.id, p.name, p.level
+	FROM tasks.tasks t
+	LEFT JOIN tasks.statuses s ON t.status_id = s.id
+	LEFT JOIN tasks.priorities p ON t.priority_id = p.id
 	WHERE t.id = $1
 	`
 	row := r.DB.QueryRow(query, id)
@@ -108,13 +108,13 @@ func (r *TaskRepository) FilterWithRelations(f dto.TaskFilter) ([]dto.TaskRespon
 	query := `
 	SELECT 
 		t.id, t.user_id, t.parent_task_id, t.title, t.description,
-		t.status_id, t.priority_id, t.due_date, t.completed_at,
+		t.due_date, t.completed_at,
 		t.is_completed, t.order_index, t.created_at, t.updated_at,
-		s.id, s.name, s.color, s.order_index,
-		p.id, p.name, p.color, p.eisenhower_quad
-	FROM tasks t
-	LEFT JOIN statuses s ON t.status_id = s.id
-	LEFT JOIN priorities p ON t.priority_id = p.id
+		s.id, s.name,
+		p.id, p.name, p.level
+	FROM tasks.tasks t
+	LEFT JOIN tasks.statuses s ON t.status_id = s.id
+	LEFT JOIN tasks.priorities p ON t.priority_id = p.id
 	WHERE t.user_id = $1
 	`
 
@@ -173,15 +173,14 @@ func (r *TaskRepository) FilterWithRelations(f dto.TaskFilter) ([]dto.TaskRespon
 
 func scanTaskFromRow(row *sql.Row) (*dto.TaskResponse, error) {
 	var t dto.TaskResponse
-	var statusID, priorityID string
 	var parentTaskID, description, dueDate, completedAt sql.NullString
 
 	err := row.Scan(
 		&t.ID, &t.UserID, &parentTaskID, &t.Title, &description,
-		&statusID, &priorityID, &dueDate, &completedAt,
+		&dueDate, &completedAt,
 		&t.IsCompleted, &t.OrderIndex, &t.CreatedAt, &t.UpdatedAt,
-		&t.Status.ID, &t.Status.Name, &t.Status.Color, &t.Status.OrderIndex,
-		&t.Priority.ID, &t.Priority.Name, &t.Priority.Color, &t.Priority.EisenhowerQuad,
+		&t.Status.ID, &t.Status.Name,
+		&t.Priority.ID, &t.Priority.Name, &t.Priority.Level,
 	)
 	if err != nil {
 		return nil, err
@@ -191,24 +190,20 @@ func scanTaskFromRow(row *sql.Row) (*dto.TaskResponse, error) {
 	if description.Valid { t.Description = &description.String }
 	if dueDate.Valid { t.DueDate = &dueDate.String }
 	if completedAt.Valid { t.CompletedAt = &completedAt.String }
-
-	t.Status.ID = statusID
-	t.Priority.ID = priorityID
 
 	return &t, nil
 }
 
 func scanTaskFromRows(rows *sql.Rows) (*dto.TaskResponse, error) {
 	var t dto.TaskResponse
-	var statusID, priorityID string
 	var parentTaskID, description, dueDate, completedAt sql.NullString
 
 	err := rows.Scan(
 		&t.ID, &t.UserID, &parentTaskID, &t.Title, &description,
-		&statusID, &priorityID, &dueDate, &completedAt,
+		&dueDate, &completedAt,
 		&t.IsCompleted, &t.OrderIndex, &t.CreatedAt, &t.UpdatedAt,
-		&t.Status.ID, &t.Status.Name, &t.Status.Color, &t.Status.OrderIndex,
-		&t.Priority.ID, &t.Priority.Name, &t.Priority.Color, &t.Priority.EisenhowerQuad,
+		&t.Status.ID, &t.Status.Name,
+		&t.Priority.ID, &t.Priority.Name, &t.Priority.Level,
 	)
 	if err != nil {
 		return nil, err
@@ -218,9 +213,6 @@ func scanTaskFromRows(rows *sql.Rows) (*dto.TaskResponse, error) {
 	if description.Valid { t.Description = &description.String }
 	if dueDate.Valid { t.DueDate = &dueDate.String }
 	if completedAt.Valid { t.CompletedAt = &completedAt.String }
-
-	t.Status.ID = statusID
-	t.Priority.ID = priorityID
 
 	return &t, nil
 }
