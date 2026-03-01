@@ -23,6 +23,7 @@ func (h *AuthHandler) Register(w http.ResponseWriter, r *http.Request) {
 		response.Error(w, http.StatusMethodNotAllowed, "METHOD_NOT_ALLOWED", "Метод не разрешён")
 		return
 	}
+	r.Body = http.MaxBytesReader(w, r.Body, 1<<20) // 1 MB — защита от DoS
 	var req models.RegisterRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		response.Error(w, http.StatusBadRequest, "VALIDATION_ERROR", "Неверный формат запроса")
@@ -47,6 +48,7 @@ func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 		response.Error(w, http.StatusMethodNotAllowed, "METHOD_NOT_ALLOWED", "Метод не разрешён")
 		return
 	}
+	r.Body = http.MaxBytesReader(w, r.Body, 1<<20) // 1 MB — защита от DoS
 	var req models.LoginRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		response.Error(w, http.StatusBadRequest, "VALIDATION_ERROR", "Неверный формат запроса")
@@ -64,23 +66,25 @@ func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// session_id — HttpOnly, JS не читает (защита от XSS)
+	// session_id — HttpOnly + Secure, JS не читает (защита от XSS)
 	http.SetCookie(w, &http.Cookie{
 		Name:     "session_id",
 		Value:    loginResp.SessionID,
 		Path:     "/",
 		MaxAge:   1800,
 		HttpOnly: true,
+		Secure:   true,
 		SameSite: http.SameSiteStrictMode,
 	})
 
-	// csrf_token — не HttpOnly, JS читает и шлёт в X-CSRF-Token (Double Submit Cookie)
+	// csrf_token — не HttpOnly, Secure, JS читает и шлёт в X-CSRF-Token (Double Submit Cookie)
 	http.SetCookie(w, &http.Cookie{
 		Name:     "csrf_token",
 		Value:    loginResp.CSRFToken,
 		Path:     "/",
 		MaxAge:   1800,
 		HttpOnly: false,
+		Secure:   true,
 		SameSite: http.SameSiteStrictMode,
 	})
 
@@ -103,8 +107,8 @@ func (h *AuthHandler) Logout(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.SetCookie(w, &http.Cookie{Name: "session_id", Value: "", Path: "/", MaxAge: -1})
-	http.SetCookie(w, &http.Cookie{Name: "csrf_token", Value: "", Path: "/", MaxAge: -1})
+	http.SetCookie(w, &http.Cookie{Name: "session_id", Value: "", Path: "/", MaxAge: -1, Secure: true})
+	http.SetCookie(w, &http.Cookie{Name: "csrf_token", Value: "", Path: "/", MaxAge: -1, Secure: true})
 	response.JSON(w, http.StatusOK, map[string]string{"message": "Выход выполнен"})
 }
 
