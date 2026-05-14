@@ -48,7 +48,6 @@ services:
       REDIS_DB: 0
       AUTH_SERVICE_URL: http://auth-service:3000
       TASK_SERVICE_URL: http://task-service:3003
-      S3_SERVICE_URL: http://s3-service:3002
       SESSION_TTL: ${SESSION_TTL:-1800}
     depends_on:
       redis:
@@ -116,33 +115,6 @@ services:
       timeout: 5s
       retries: 3
 
-  s3-service:
-    build:
-      context: ./backend/s3-storage
-      dockerfile: Dockerfile
-    container_name: s3
-    restart: unless-stopped
-    environment:
-      PORT: 3002
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USER: ${POSTGRES_USER}
-      DB_PASSWORD: ${POSTGRES_PASSWORD}
-      DB_NAME: ${POSTGRES_DB}
-      STORAGE_PATH: /opt/storage
-    volumes:
-      - storage-data:/opt/storage
-    depends_on:
-      postgres:
-        condition: service_healthy
-    networks:
-      - network
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:3002/health"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-
   #  FRONTENDS
 
   auth-frontend:
@@ -162,16 +134,6 @@ services:
     restart: unless-stopped
     networks:
       - network
-
-  s3-frontend:
-    build:
-      context: ./frontend/s3-storage
-      dockerfile: Dockerfile
-    container_name: s3-frontend
-    restart: unless-stopped
-    networks:
-      - network
-
   #  NGINX — единая точка входа
 
   nginx:
@@ -188,7 +150,6 @@ services:
       - gateway
       - auth-frontend
       - task-frontend
-      - s3-frontend
     networks:
       - network
 
