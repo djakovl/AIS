@@ -1,0 +1,106 @@
+package main
+
+import (
+	"context"
+	"log"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
+
+	"gateway/internal/config"
+	"gateway/internal/middleware"
+	"gateway/internal/proxy"
+	"gateway/internal/response"
+
+	"github.com/redis/go-redis/v9"
+)
+
+func main() {
+	cfg := config.Load()
+
+	// Подключение к Redis
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     cfg.RedisAddr,
+		Password: cfg.RedisPassword,
+		DB:       cfg.RedisDB,
+	})
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := rdb.Ping(ctx).Err(); err != nil {
+		log.Fatalf("Не удалось подключиться к Redis: %v", err)
+	}
+	log.Println("Redis: подключение успешно")
+
+	// Инициализация прокси к микросервисам
+	authProxy := proxy.New(cfg.AuthServiceURL, "") // auth-service сам ожидает /auth/*
+	taskProxy := proxy.New(cfg.TaskServiceURL, "") // task-service сам ожидает /tasks/*
+	s3Proxy := proxy.New(cfg.S3ServiceURL, "")     // s3-service сам ожидает /files/*
+
+	// Middleware цепочка: сессия + CSRF
+	authMW := func(h http.Handler) http.Handler {
+		return middleware.Chain(h,
+			middleware.Session(rdb, cfg.SessionTTL),
+			middleware.CSRF(),
+		)
+	}
+
+	// Rate limiter для публичных auth-эндпоинтов: 10 запросов в минуту на IP
+	loginRateLimit := middleware.RateLimit(rdb, 10, time.Minute)
+
+	// Маршрутизация
+	mux := http.NewServeMux()
+
+	// Health check
+	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		ping := rdb.Ping(r.Context()).Err()
+		if ping != nil {
+			response.Error(w, http.StatusServiceUnavailable, "REDIS_UNAVAILABLE", "Redis недоступен")
+			return
+		}
+		response.JSON(w, http.StatusOK, map[string]string{"status": "ok"})
+	})
+
+	// Публичные auth-маршруты с rate limiting (более специфичные — регистрируются первыми)
+	mux.Handle("/auth/login", loginRateLimit(authMW(authProxy)))
+	mux.Handle("/auth/register", loginRateLimit(authMW(authProxy)))
+	// Остальные auth-маршруты без дополнительного rate limiting
+	mux.Handle("/auth/", authMW(authProxy))
+	mux.Handle("/auth", authMW(authProxy))
+
+	mux.Handle("/tasks/", authMW(taskProxy))
+	mux.Handle("/tasks", authMW(taskProxy))
+	mux.Handle("/files/", authMW(s3Proxy))
+	mux.Handle("/files", authMW(s3Proxy))
+
+	// HTTP сервер
+	server := &http.Server{
+		Addr:         ":" + cfg.Port,
+		Handler:      middleware.Logger(mux),
+		ReadTimeout:  15 * time.Second,
+		WriteTimeout: 30 * time.Second,
+		IdleTimeout:  60 * time.Second,
+	}
+
+	// Graceful shutdown
+	go func() {
+		log.Printf("Gateway запущен на порту %s", cfg.Port)
+		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("Ошибка сервера: %v", err)
+		}
+	}()
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
+
+	log.Println("Завершение работы Gateway...")
+	shutdownCtx, shutdownCancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer shutdownCancel()
+	if err := server.Shutdown(shutdownCtx); err != nil {
+		log.Fatalf("Принудительное завершение: %v", err)
+	}
+	log.Println("Gateway остановлен")
+}
