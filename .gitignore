@@ -18,5 +18,5 @@ go.work
 .DS_Store
 Thumbs.db
 *.log
-infra/ssl/*.pem
-infra/ssl/*.key
+*.pem
+*.key
