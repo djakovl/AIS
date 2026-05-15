@@ -1,0 +1,61 @@
+.defectdojo:create_engagement:
+  script:
+    - |
+      START_DATE=$(date +%Y-%m-%d)
+      END_DATE=$(date -d "@$(($(date +%s) + 604800))" +%Y-%m-%d)
+    - |
+      RESPONSE=$(curl -sf -X POST "${DEFECTDOJO_URL}/api/v2/engagements/" \
+        -H "Authorization: Token ${DEFECTDOJO_API_KEY}" \
+        -H "Content-Type: application/json" \
+        -d "{
+          \"name\": \"MR !${CI_MERGE_REQUEST_IID:-default} — Pipeline #${CI_PIPELINE_ID}\",
+          \"description\": \"Branch: ${CI_COMMIT_REF_NAME}\nCommit: ${CI_COMMIT_SHORT_SHA}\nProject: ${CI_PROJECT_URL}\",
+          \"target_start\": \"${START_DATE}\",
+          \"target_end\": \"${END_DATE}\",
+          \"engagement_type\": \"CI/CD\",
+          \"build_id\": \"${CI_PIPELINE_ID}\",
+          \"commit_hash\": \"${CI_COMMIT_SHA}\",
+          \"branch_tag\": \"${CI_COMMIT_REF_NAME}\",
+          \"source_code_management_uri\": \"${CI_PROJECT_URL}\",
+          \"product\": ${DEFECTDOJO_PRODUCT_ID}
+        }")
+
+      ENGAGEMENT_ID=$(echo "$RESPONSE" | jq -r '.id')
+      if [ "$ENGAGEMENT_ID" = "null" ] || [ -z "$ENGAGEMENT_ID" ]; then
+        echo "Не удалось создать engagement в DefectDojo"
+        echo "Ответ API: $RESPONSE"
+        exit 1
+      fi
+      echo "Engagement создан: ID = $ENGAGEMENT_ID"
+      echo "DEFECTDOJO_ENGAGEMENT_ID=$ENGAGEMENT_ID" > defectdojo.env
+
+.defectdojo:import_trufflehog:
+  script:
+    - |
+      if [ ! -f trufflehog-report.json ]; then
+        echo "Отчёт trufflehog-report.json не найден"
+        exit 1
+      fi
+    - |
+      RESPONSE=$(curl -sf -X POST "${DEFECTDOJO_URL}/api/v2/import-scan/" \
+        -H "Authorization: Token ${DEFECTDOJO_API_KEY}" \
+        -F "scan_date=$(date +%Y-%m-%d)" \
+        -F "active=true" \
+        -F "verified=true" \
+        -F "file=@trufflehog-report.json" \
+        -F "test_title=Trufflehog Secret Scan" \
+        -F "scan_type=Trufflehog Scan" \
+        -F "engagement=${DEFECTDOJO_ENGAGEMENT_ID}" \
+        -F "build_id=${CI_PIPELINE_ID}" \
+        -F "commit_hash=${CI_COMMIT_SHA}" \
+        -F "branch_tag=${CI_COMMIT_REF_NAME}" \
+        -F "source_code_management_uri=${CI_PROJECT_URL}")
+
+      TEST_ID=$(echo "$RESPONSE" | jq -r '.test')
+      if [ "$TEST_ID" = "null" ] || [ -z "$TEST_ID" ]; then
+        echo "Не удалось импортировать отчёт в DefectDojo"
+        echo "Ответ API: $RESPONSE"
+        exit 1
+      fi
+      echo "Trufflehog отчёт импортирован: Test ID = $TEST_ID"
+      echo "Перейти к находкам: ${DEFECTDOJO_URL}/test/${TEST_ID}"

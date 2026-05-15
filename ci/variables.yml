@@ -1,0 +1,16 @@
+variables:
+  # === DefectDojo ===
+  DEFECTDOJO_URL: "http://10.0.0.20:8080"
+  DEFECTDOJO_PRODUCT_ID: "2"
+  # DEFECTDOJO_API_KEY — задаётся в GitLab CI/CD Variables как защищённая переменная
+  # DEFECTDOJO_PRODUCT_ID — задаётся в GitLab CI/CD Variables (id продукта в DefectDojo)
+
+  # === Registry ===
+  CI_REGISTRY: "10.0.0.11:5000"
+
+  # === Образы инструментов ===
+  TRUFFLEHOG_IMAGE: "trufflesecurity/trufflehog:latest"
+  CURL_JQ_IMAGE: "alpine:3.23"
+
+  # === Глобальные настройки ===
+  GIT_DEPTH: "0"  # trufflehog нужна полная история

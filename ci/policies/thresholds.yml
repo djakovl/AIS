@@ -1,0 +1,5 @@
+variables:
+  # === Secrets policies ===
+  # Найденный секрет всегда блокирует пайплайн
+  SECRETS_FAIL_ON_VERIFIED: "true"      # верифицированный секрет (живой токен) — всегда фейл
+  SECRETS_FAIL_ON_UNVERIFIED: "false"   # учебно: неверифицированные не блокируют

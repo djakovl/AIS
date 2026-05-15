@@ -1,0 +1,5 @@
+secret_scan_trufflehog:
+  extends:
+    - .secrets:trufflehog
+    - .rules:on_mr
+  stage: pre-build

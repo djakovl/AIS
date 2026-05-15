@@ -1,0 +1,14 @@
+include:
+  - local: ci/stages.yml
+  - local: ci/variables.yml
+  - local: ci/rules.yml
+  - local: ci/policies/thresholds.yml
+
+  - local: ci/templates/curl-jq.yml
+
+  - local: ci/stages/pre.yml
+  - local: ci/stages/pre-build.yml
+  - local: ci/stages/post.yml
+
+  - local: ci/security/secrets.yml
+  - local: ci/integrations/defectdojo.yml

@@ -1,0 +1,11 @@
+initialize_defectdojo:
+  extends:
+    - .curl_jq
+    - .rules:on_mr
+  stage: .pre
+  script:
+    - !reference [.defectdojo:create_engagement, script]
+  artifacts:
+    reports:
+      dotenv: defectdojo.env
+    expire_in: 1 week

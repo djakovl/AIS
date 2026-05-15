@@ -1,0 +1,12 @@
+import_into_defectdojo:
+  extends:
+    - .curl_jq
+    - .rules:on_mr
+  stage: .post
+  needs:
+    - job: initialize_defectdojo
+      artifacts: true
+    - job: secret_scan_trufflehog
+      artifacts: true
+  script:
+    - !reference [.defectdojo:import_trufflehog, script]
