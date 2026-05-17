@@ -5,6 +5,9 @@ variables:
   # DEFECTDOJO_API_KEY — задаётся в GitLab CI/CD Variables как защищённая переменная
   # DEFECTDOJO_PRODUCT_ID — задаётся в GitLab CI/CD Variables (id продукта в DefectDojo)
 
+  # === Dependency-Track ===
+  DEPENDENCYTRACK_URL: "http://10.0.0.30:8080/"
+
   # === Registry ===
   CI_REGISTRY: "10.0.0.11:5000"
 
