@@ -1,0 +1,15 @@
+rules:
+  - id: go-sprintf-sql-concat
+    languages: [go]
+    severity: ERROR
+    message: >
+      fmt.Sprintf используется для построения SQL-запроса —
+      возможна SQL-инъекция. Используйте параметризацию ($1, $2).
+    patterns:
+      - pattern: fmt.Sprintf($Q, ...)
+      - metavariable-regex:
+          metavariable: $Q
+          regex: '(?i)(SELECT|INSERT|UPDATE|DELETE|WHERE)'
+    metadata:
+      cwe: "CWE-89"
+      owasp: "A05:2025"

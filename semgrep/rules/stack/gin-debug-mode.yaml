@@ -1,0 +1,9 @@
+rules:
+  - id: gin-debug-mode-hardcoded
+    languages: [go]
+    severity: WARNING
+    message: gin.SetMode("debug") хардкоженно — не должно попадать в prod.
+    pattern: gin.SetMode("debug")
+    metadata:
+      cwe: "CWE-215"
+      owasp: "A05:2025"

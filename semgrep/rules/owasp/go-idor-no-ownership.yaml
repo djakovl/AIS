@@ -1,0 +1,15 @@
+rules:
+  - id: go-idor-task-no-ownership-check
+    languages: [go]
+    severity: WARNING
+    message: >
+      Задача получается по ID из URL без проверки принадлежности
+      текущему пользователю — возможен IDOR (A01).
+    patterns:
+      - pattern: |
+          id := c.Param("id")
+          ...
+          h.Service.Get(id)
+    metadata:
+      cwe: "CWE-284"
+      owasp: "A01:2025"

@@ -1,0 +1,15 @@
+rules:
+  - id: go-bcrypt-cost-below-12
+    languages: [go]
+    severity: WARNING
+    message: >
+      bcrypt cost ниже 12 снижает стойкость к брутфорсу.
+      Рекомендуется cost >= 12 (в коде уже 12 — это правило ловит регрессии).
+    patterns:
+      - pattern: bcrypt.GenerateFromPassword($P, $COST)
+      - metavariable-comparison:
+          metavariable: $COST
+          comparison: $COST < 12
+    metadata:
+      cwe: "CWE-916"
+      owasp: "A04:2025"

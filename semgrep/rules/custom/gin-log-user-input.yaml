@@ -1,0 +1,15 @@
+rules:
+  - id: gin-log-raw-user-input
+    languages: [go]
+    severity: WARNING
+    message: >
+      log.Printf логирует сырой пользовательский ввод (X-User-Id, путь запроса).
+      Это засоряет логи и может раскрыть PII или позволить Log Injection.
+      Используйте slog с явными полями.
+    patterns:
+      - pattern: log.Printf($FMT, ..., c.GetHeader(...), ...)
+      - pattern: log.Printf($FMT, ..., c.Request.URL.Path, ...)
+    metadata:
+      cwe: "CWE-117: Log Injection / CWE-532: Sensitive Data in Logs"
+      owasp: "A09:2025 Security Logging Failures"
+      category: custom

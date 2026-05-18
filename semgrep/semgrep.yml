@@ -1,0 +1,5 @@
+rules:
+  - include: rules/language/*.yaml
+  - include: rules/owasp/*.yaml
+  - include: rules/stack/*.yaml
+  - include: rules/custom/*.yaml

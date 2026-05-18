@@ -1,0 +1,12 @@
+rules:
+  - id: go-sqli-string-concat
+    languages: [go]
+    severity: ERROR
+    message: Конкатенация строк в SQL-запросе — возможна SQL-инъекция.
+    patterns:
+      - pattern: |
+          $Q := "..." + $USER_INPUT + "..."
+      - pattern: db.QueryRow($Q, ...)
+    metadata:
+      cwe: "CWE-89"
+      owasp: "A05:2025"

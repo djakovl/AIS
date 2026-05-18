@@ -1,0 +1,11 @@
+rules:
+  - id: gin-trust-x-user-id-header
+    languages: [go]
+    severity: ERROR
+    message: >
+      X-User-Id берётся из заголовка без верификации подписи/сессии.
+      Внешний клиент может передать произвольный userID — обходя авторизацию.
+    pattern: c.GetHeader("X-User-Id")
+    metadata:
+      cwe: "CWE-290"
+      owasp: "A07:2025"

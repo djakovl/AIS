@@ -1,0 +1,8 @@
+rules:
+  - id: go-error-ignored
+    languages: [go]
+    severity: WARNING
+    message: Ошибка проигнорирована через присвоение в _.
+    pattern: $_, $ERR = $FUNC(...)
+    metadata:
+      cwe: "CWE-390"

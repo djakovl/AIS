@@ -1,0 +1,11 @@
+rules:
+  - id: go-weak-rand
+    languages: [go]
+    severity: WARNING
+    message: math/rand не криптографически безопасен. Используйте crypto/rand.
+    pattern-either:
+      - pattern: rand.Intn(...)
+      - pattern: rand.Int63n(...)
+    metadata:
+      cwe: "CWE-338"
+      owasp: "A04:2025"

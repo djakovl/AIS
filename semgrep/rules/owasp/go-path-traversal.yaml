@@ -1,0 +1,13 @@
+rules:
+  - id: go-path-traversal
+    languages: [go]
+    severity: ERROR
+    message: >
+      Путь к файлу формируется из пользовательского ввода без
+      filepath.Clean и проверки prefix — возможен Path Traversal.
+    pattern-either:
+      - pattern: os.Open($PATH)
+      - pattern: os.ReadFile($PATH)
+    metadata:
+      cwe: "CWE-22"
+      owasp: "A05:2025"

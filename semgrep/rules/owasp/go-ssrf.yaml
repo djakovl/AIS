@@ -1,0 +1,11 @@
+rules:
+  - id: go-ssrf-user-controlled-url
+    languages: [go]
+    severity: ERROR
+    message: URL для HTTP-запроса формируется из пользовательских данных — возможен SSRF.
+    patterns:
+      - pattern: http.Get($URL)
+      - pattern: http.Post($URL, ...)
+    metadata:
+      cwe: "CWE-918"
+      owasp: "A10:2025"

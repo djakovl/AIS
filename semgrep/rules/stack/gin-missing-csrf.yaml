@@ -1,0 +1,17 @@
+rules:
+  - id: gin-post-without-csrf-check
+    languages: [go]
+    severity: WARNING
+    message: POST-обработчик не проверяет CSRF-токен из заголовка.
+    patterns:
+      - pattern: |
+          func $F(c *gin.Context) {
+            ...
+            c.ShouldBindJSON(...)
+            ...
+          }
+    pattern-not:
+      - pattern: c.GetHeader("X-CSRF-Token")
+    metadata:
+      cwe: "CWE-352"
+      owasp: "A01:2025"

@@ -1,0 +1,16 @@
+rules:
+  - id: redis-options-no-tls
+    languages: [go]
+    severity: WARNING
+    message: >
+      redis.Options создаётся без TLSConfig — соединение не зашифровано.
+      В prod установите TLSConfig.
+    patterns:
+      - pattern: |
+          redis.NewClient(&redis.Options{...})
+    pattern-not:
+      - pattern: |
+          redis.NewClient(&redis.Options{..., TLSConfig: ..., ...})
+    metadata:
+      cwe: "CWE-319"
+      owasp: "A02:2025"
