@@ -1,0 +1,21 @@
+rules:
+  - id: go-log-sensitive-data-2
+    languages: [go]
+    severity: WARNING
+    message: >
+      log.Printf/Println может выводить чувствительные данные в stdout.
+      Используйте slog с маскировкой PII.
+    pattern-either:
+      - patterns:
+          - pattern: log.Printf($FMT, ..., $X, ...)
+          - metavariable-regex:
+              metavariable: $X
+              regex: '(?i)(password|passwd|secret|token|email|phone|ssn|credit_card|cvv|pin|auth)'
+      - patterns:
+          - pattern: log.Println(..., $X, ...)
+          - metavariable-regex:
+              metavariable: $X
+              regex: '(?i)(password|passwd|secret|token|email|phone|ssn|credit_card|cvv|pin|auth)'
+    metadata:
+      cwe: "CWE-532"
+      owasp: "A09:2025"
