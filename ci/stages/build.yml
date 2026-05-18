@@ -1,0 +1,15 @@
+generate_sbom:
+  image:
+    name: ghcr.io/cyclonedx/cdxgen:latest
+    entrypoint: [""]
+  tags:
+    - shared
+  stage: build
+  extends:
+    - .rules:on_mr
+  script:
+    - cdxgen -r . -o sbom.cdx.json
+  artifacts:
+    paths:
+      - sbom.cdx.json
+    expire_in: 1 week

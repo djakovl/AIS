@@ -1,4 +1,6 @@
 stages:
   - .pre
   - pre-build
+  - build        # +
+  - post-build   # +
   - .post
