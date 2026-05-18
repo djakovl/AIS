@@ -1,6 +1,7 @@
 generate_sbom:
-  image: aquasec/trivy:latest
-      entrypoint: [""]
+  image:
+    name: aquasec/trivy:latest
+    entrypoint: [""]
   tags:
     - shared
   stage: build
