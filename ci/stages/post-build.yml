@@ -8,7 +8,4 @@ upload_to_dependencytrack:
       artifacts: true
   script:
     - |
-      curl -sf -X POST "${DEPENDENCYTRACK_URL}/api/v1/bom" \
-        -H "X-Api-Key: ${DEPENDENCYTRACK_API_KEY}" \
-        -F "project=${DEPENDENCYTRACK_PROJECT_UUID}" \
-        -F "bom=@sbom.cdx.json"
+      curl -sf -X POST "${DEPENDENCYTRACK_URL}/api/v1/bom" -H "X-Api-Key: ${DEPENDENCYTRACK_API_KEY}" -F "project=${DEPENDENCYTRACK_PROJECT_UUID}" -F "bom=@sbom.cdx.json"
