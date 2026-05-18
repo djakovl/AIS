@@ -1,14 +1,12 @@
 generate_sbom:
-  image:
-    name: ghcr.io/cyclonedx/cdxgen:latest
-    entrypoint: [""]
+  image: aquasec/trivy:latest
   tags:
     - shared
   stage: build
   extends:
     - .rules:on_mr
   script:
-    - cdxgen -r . -o sbom.cdx.json
+    - trivy fs --format cyclonedx --output sbom.cdx.json .
   artifacts:
     paths:
       - sbom.cdx.json
