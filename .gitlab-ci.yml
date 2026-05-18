@@ -8,6 +8,8 @@ include:
 
   - local: ci/stages/pre.yml
   - local: ci/stages/pre-build.yml
+  - local: ci/stages/build.yml
+  - local: ci/stages/post-build.yml
   - local: ci/stages/post.yml
 
   - local: ci/security/secrets.yml
