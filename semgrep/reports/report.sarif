@@ -1,0 +1,2969 @@
+{
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/os/schemas/sarif-schema-2.1.0.json",
+  "runs": [
+    {
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "toolExecutionNotifications": []
+        }
+      ],
+      "results": [
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "eee71cb4d6dd227c198b3003778a3ee1954d9a0e3c0713800e14f0bd3e50030c29a7dfc824ddbc5814670fc09571e47a7fe6209346a74afebe1294efab028951_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 44,
+                  "endLine": 25,
+                  "snippet": {
+                    "text": "\tdb, err := sql.Open(\"postgres\", cfg.DSN())"
+                  },
+                  "startColumn": 2,
+                  "startLine": 25
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "613676be4da0e7abea1497f5ddff38928a0f0de6626b0d17d8662d2a9d79fadcfde0232ec365929ca291e97ab26edccab1a3c585cbe7425a90938e9205dc01fe_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 66,
+                  "endLine": 34,
+                  "snippet": {
+                    "text": "\tlog.Println(\"PostgreSQL: \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435 \u0443\u0441\u043f\u0435\u0448\u043d\u043e\")"
+                  },
+                  "startColumn": 2,
+                  "startLine": 34
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "82240f35ee20c2cbd216382a51cee3603f752f5ba4da31229aa690d36a124601e3e5801963d97cf21a9eb2d2372fdbe732477a2a0d725575e2f5e8924ad4e14c_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 4,
+                  "endLine": 40,
+                  "snippet": {
+                    "text": "\trdb := redis.NewClient(&redis.Options{\n\t\tAddr:     cfg.RedisAddr,\n\t\tPassword: cfg.RedisPassword,\n\t\tDB:       cfg.RedisDB,\n\t})"
+                  },
+                  "startColumn": 9,
+                  "startLine": 36
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "redis.Options \u0441\u043e\u0437\u0434\u0430\u0451\u0442\u0441\u044f \u0431\u0435\u0437 TLSConfig \u2014 \u0441\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u043d\u0435 \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u043e. \u0412 prod \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 TLSConfig.\n"
+          },
+          "properties": {},
+          "ruleId": "redis-options-no-tls"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "516707f505c5bd191544b63b7bb6242f4c9fd4360dd01ff5592496c72610fda58b23967e1c726cb311c3dd8cde6b283da4b94efa0d65e96fd86e05247538046b_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 73,
+                  "endLine": 42,
+                  "snippet": {
+                    "text": "\tctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 42
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "6dfe1d645319e05c481e9ac1e4b9a2e9bbc53eccbd8da4758188c05a316fab4b3de9b821ed745627b99c9bdf12a2cc441b56063f81e455a31851468acae27bec_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 61,
+                  "endLine": 47,
+                  "snippet": {
+                    "text": "\tlog.Println(\"Redis: \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435 \u0443\u0441\u043f\u0435\u0448\u043d\u043e\")"
+                  },
+                  "startColumn": 2,
+                  "startLine": 47
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "bfd932352da88d8c8b1d5385cb1d58fdcb2a2deadcd0aa684fa9bf48a8589beaea452a4e6c12e39b66a0f82e2d5912466902b6d3993d1b63114e668981aae882_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 73,
+                  "endLine": 73,
+                  "snippet": {
+                    "text": "\t\tlog.Printf(\"Auth Service \u0437\u0430\u043f\u0443\u0449\u0435\u043d \u043d\u0430 \u043f\u043e\u0440\u0442\u0443 %s\", cfg.Port)"
+                  },
+                  "startColumn": 3,
+                  "startLine": 73
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "300dd7b3bbce4926e64237d628bcdae8f2e02fbd6089d982aae6f10654a3d21b84d6311ab39fa92d6d4d40028141db65dd3a031a9f43e397b1259d17b4e27243_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 66,
+                  "endLine": 83,
+                  "snippet": {
+                    "text": "\tlog.Println(\"\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u0438\u0435 \u0440\u0430\u0431\u043e\u0442\u044b Auth Service...\")"
+                  },
+                  "startColumn": 2,
+                  "startLine": 83
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "f46e8d5044d0b5b9c09e9cc13591e8876dcb59dded9fe8bc9c2d1f8e3818a1806d1df52ce575c0f0833c1450428cbd879062fcc4635b52efc8f080aaefdf8ea1_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 90,
+                  "endLine": 84,
+                  "snippet": {
+                    "text": "\tshutdownCtx, shutdownCancel := context.WithTimeout(context.Background(), 30*time.Second)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 84
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "2a3cf1efa91cebc5e386311847a40ebe07754ad1db41b088269dc1ca63e6054083b4a481c7e8fb989f267764ddd8c4592b61a694141b1b2ed111e40919c56cca_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 50,
+                  "endLine": 89,
+                  "snippet": {
+                    "text": "\tlog.Println(\"Auth Service \u043e\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\")"
+                  },
+                  "startColumn": 2,
+                  "startLine": 89
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "5b49c837daf1982f2c7ed3a5adc72184a4e3dc67329a77f616a64a5cdd42c4e2f6b70bd40c2e474bf202c1fd2b2390be777681ae1c137e1802f921330d29eac5_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/config/config.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 53,
+                  "endLine": 24,
+                  "snippet": {
+                    "text": "\tredisDB, _ := strconv.Atoi(getEnv(\"REDIS_DB\", \"0\"))"
+                  },
+                  "startColumn": 2,
+                  "startLine": 24
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "5b49c837daf1982f2c7ed3a5adc72184a4e3dc67329a77f616a64a5cdd42c4e2f6b70bd40c2e474bf202c1fd2b2390be777681ae1c137e1802f921330d29eac5_1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/config/config.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 62,
+                  "endLine": 25,
+                  "snippet": {
+                    "text": "\tsessionTTL, _ := strconv.Atoi(getEnv(\"SESSION_TTL\", \"1800\"))"
+                  },
+                  "startColumn": 2,
+                  "startLine": 25
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "808a2a8b4231160aff2509f4b340315dcfe24d402a5ebac7935ffbb191348274558a92755596d1b2fe6e7d6595e5e6f190e77fc0338769b410a8a8e8ec9bfce1_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/handlers/authHandler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 43,
+                  "endLine": 33,
+                  "snippet": {
+                    "text": "\tuser, err := h.authService.Register(&req)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 33
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "7a6c3ac15492799d3ec2c68d952bbc986e2cbcfe2d1e5248f19fd443110bae4f88c165fef810d35c8d449c1b74d2f7887d87687f8c1da0d4e737a8642729e26a_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/handlers/authHandler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 90,
+                  "endLine": 63,
+                  "snippet": {
+                    "text": "\tloginResp, err := h.authService.Login(r.Context(), &req, ip, r.Header.Get(\"User-Agent\"))"
+                  },
+                  "startColumn": 2,
+                  "startLine": 63
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "e452a3ce00fd6cb9ad2cf9096ff02e141514a9b5894c2552d4b5f51774cfae4caadfeef98aea1484faa275502eae2ab9a990e4397dc41499efcdcf0cc43522b6_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/handlers/authHandler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 47,
+                  "endLine": 126,
+                  "snippet": {
+                    "text": "\tuser, err := h.authService.GetProfile(userID)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 126
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "5e129f2ff901811cecfc595f5a4a0ffd0c1bf0e6ea4e0322a04543fa1ef191abec426d740e47384533cf5a3707dd3934375673d803eeaa92e9c2233e05c1f4a2_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/handlers/authHandler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 42,
+                  "endLine": 139,
+                  "snippet": {
+                    "text": "\tif cookie, err := r.Cookie(\"session_id\"); err == nil {"
+                  },
+                  "startColumn": 5,
+                  "startLine": 139
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "d86165206ebc24ca249f3ae6aad15bddbc13484d79f3eba3ac171ca6de39f0435ef6cc2b5b93bf3d4192f8b4ab0d9b1dbe5e0c2e98ce9ff128fa9fbbb93e1b07_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/repository/userRepository.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 3,
+                  "endLine": 23,
+                  "snippet": {
+                    "text": "\tquery := `\n\t\tINSERT INTO auth.users (email, password_hash, username, first_name, last_name, roles, is_active)\n\t\tVALUES ($1, $2, $3, $4, $5, $6, $7)\n\t\tRETURNING id, created_at, updated_at\n\t`"
+                  },
+                  "startColumn": 2,
+                  "startLine": 19
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+          },
+          "properties": {},
+          "ruleId": "go-hardcoded-secret"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "d86165206ebc24ca249f3ae6aad15bddbc13484d79f3eba3ac171ca6de39f0435ef6cc2b5b93bf3d4192f8b4ab0d9b1dbe5e0c2e98ce9ff128fa9fbbb93e1b07_1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/repository/userRepository.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 36,
+                  "endLine": 32,
+                  "snippet": {
+                    "text": "\tquery := `SELECT id, email, password_hash, username, first_name, last_name, roles, is_active, created_at, updated_at\n\t\tFROM auth.users WHERE email = $1`"
+                  },
+                  "startColumn": 2,
+                  "startLine": 31
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+          },
+          "properties": {},
+          "ruleId": "go-hardcoded-secret"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "d86165206ebc24ca249f3ae6aad15bddbc13484d79f3eba3ac171ca6de39f0435ef6cc2b5b93bf3d4192f8b4ab0d9b1dbe5e0c2e98ce9ff128fa9fbbb93e1b07_2"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/repository/userRepository.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 33,
+                  "endLine": 47,
+                  "snippet": {
+                    "text": "\tquery := `SELECT id, email, password_hash, username, first_name, last_name, roles, is_active, created_at, updated_at\n\t\tFROM auth.users WHERE id = $1`"
+                  },
+                  "startColumn": 2,
+                  "startLine": 46
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+          },
+          "properties": {},
+          "ruleId": "go-hardcoded-secret"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "7bc9fbd84c551f2735b2500d072710490fdc3a2a949adb4501ef916aa0e0a0cfa1c37629886122d89119ecf1440600022dfdae0c7a6163f9384d54f791726553_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/service/auth.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 43,
+                  "endLine": 38,
+                  "snippet": {
+                    "text": "\tif _, err := mail.ParseAddress(req.Email); err != nil {"
+                  },
+                  "startColumn": 5,
+                  "startLine": 38
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "b34e79eab5b9b0ad799ad1aa8f11d7ec08413ac710ed9dc843a3279d1cace874e232c4257c0a756c3dafe369e5f1be377881088e8e6696220d5fd6505f026157_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/service/auth.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 68,
+                  "endLine": 49,
+                  "snippet": {
+                    "text": "\thash, err := bcrypt.GenerateFromPassword([]byte(req.Password), 12)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 49
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "af12c8ca03406e75f752b4eff4f650923b7c4824d4b7155646f6a6dd30edab2f63797f08a78e2bb951b203458e1ebc93146e44f5afbca5c64896468acd8de4df_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/service/auth.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 65,
+                  "endLine": 80,
+                  "snippet": {
+                    "text": "\tuser, err := s.userRepo.FindByEmail(strings.ToLower(req.Email))"
+                  },
+                  "startColumn": 2,
+                  "startLine": 80
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "b1ecae42697b5ccda23712d60d621481f60e49b15ccb7c4af5248976b632e86c849392dd249cf890e8829416db59ddfa318859c4777de54dfbbd3f39e96f52dc_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/service/auth.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 37,
+                  "endLine": 95,
+                  "snippet": {
+                    "text": "\tcsrfToken, err := generateToken(32)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 95
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "96dbe26ca8e63670294cb862a76cb7754ac0260a14cd4c2cd07cbe8f67444e12f51191a50e12d0d42161aa1e3c88da503e8992946e257c8e78b5aa73cc81bca9_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/service/auth.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 28,
+                  "endLine": 112,
+                  "snippet": {
+                    "text": "\tif _, err = pipe.Exec(ctx); err != nil {"
+                  },
+                  "startColumn": 5,
+                  "startLine": 112
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "53dfb6fd9244f50e7f176d4a444cf9485ec2b9581c612a8fbcad4058ef5dda3ce32d61c23cda371b6686ab0586a537ac18d2d3f2851c213d0416c89eb9b26921_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/auth-service/internal/service/auth.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 27,
+                  "endLine": 138,
+                  "snippet": {
+                    "text": "\tif _, err := rand.Read(b); err != nil {"
+                  },
+                  "startColumn": 5,
+                  "startLine": 138
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "d67681190963e30f9aff40d0cd9ed60dae0ad4ba2af0d35fcf7926dee44c10b8f3d845453c572a2acde8aef9f1cc9f4c59a73446984f31ed1a7d344b43251b05_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 4,
+                  "endLine": 28,
+                  "snippet": {
+                    "text": "\trdb := redis.NewClient(&redis.Options{\n\t\tAddr:     cfg.RedisAddr,\n\t\tPassword: cfg.RedisPassword,\n\t\tDB:       cfg.RedisDB,\n\t})"
+                  },
+                  "startColumn": 9,
+                  "startLine": 24
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "redis.Options \u0441\u043e\u0437\u0434\u0430\u0451\u0442\u0441\u044f \u0431\u0435\u0437 TLSConfig \u2014 \u0441\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u043d\u0435 \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u043e. \u0412 prod \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 TLSConfig.\n"
+          },
+          "properties": {},
+          "ruleId": "redis-options-no-tls"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "ce70aee0a1273fca41f67b0b2664b4cfebefb47363eb2d80c611ac6bf023da6a2ad6699823c9bb972c3abf8f25b544bdfad404d9a02a6625a6eb7c4d96a46ee5_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 73,
+                  "endLine": 30,
+                  "snippet": {
+                    "text": "\tctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 30
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "f7342b75bbb83dc4408846a1bb63388018ff581dc0666fae2ca30c8ddfe4e8a4137d6b1afe05afdaaad212d830de64903533aca466345f850c619a4d242a22c7_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 61,
+                  "endLine": 35,
+                  "snippet": {
+                    "text": "\tlog.Println(\"Redis: \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435 \u0443\u0441\u043f\u0435\u0448\u043d\u043e\")"
+                  },
+                  "startColumn": 2,
+                  "startLine": 35
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "6b51a90dffb7fe40f77b5318211bb78265f4038b5cc42e7b2f392c194bd6d32584f50c5de59d3af4686826c66df85b88f747c5c25d068a0c3ff18a2a76df7466_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 68,
+                  "endLine": 89,
+                  "snippet": {
+                    "text": "\t\tlog.Printf(\"Gateway \u0437\u0430\u043f\u0443\u0449\u0435\u043d \u043d\u0430 \u043f\u043e\u0440\u0442\u0443 %s\", cfg.Port)"
+                  },
+                  "startColumn": 3,
+                  "startLine": 89
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "aa0926dc2742198d454af214cec26790ced8cbdc7fc25fb7d737dc85951c7cbfb94cbd7c8c9b7f834cd760135d656ff5de3ddfcce5a0db93147e15a934233888_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 61,
+                  "endLine": 99,
+                  "snippet": {
+                    "text": "\tlog.Println(\"\u0417\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u0438\u0435 \u0440\u0430\u0431\u043e\u0442\u044b Gateway...\")"
+                  },
+                  "startColumn": 2,
+                  "startLine": 99
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "dea8874bc86a66f9a02a4f7543ed93f9988008422c1c7901c0083fd0668d080310476e3ee36f66d390b596a1f283feed5d6c97ed030f815d5f5cc54d09e7f98e_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 90,
+                  "endLine": 100,
+                  "snippet": {
+                    "text": "\tshutdownCtx, shutdownCancel := context.WithTimeout(context.Background(), 30*time.Second)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 100
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "20fda930a66267591914c66391da2e598995f5e69ea5c2507701ff356143f30ba99ee44f5d4146ac9d59305ad62234e844d9eee8a1ad46685ec25fe70c0ecfac_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/cmd/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 45,
+                  "endLine": 105,
+                  "snippet": {
+                    "text": "\tlog.Println(\"Gateway \u043e\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\")"
+                  },
+                  "startColumn": 2,
+                  "startLine": 105
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "212692e658528618f2fe0492d2b396a06e023ef4a7ea53e9f0bfbae56f611c4635ed0e447133006eba8aeb226ddcf09259851ee492c7ebb1ed9af462def899ff_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/internal/config/config.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 53,
+                  "endLine": 20,
+                  "snippet": {
+                    "text": "\tredisDB, _ := strconv.Atoi(getEnv(\"REDIS_DB\", \"0\"))"
+                  },
+                  "startColumn": 2,
+                  "startLine": 20
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "212692e658528618f2fe0492d2b396a06e023ef4a7ea53e9f0bfbae56f611c4635ed0e447133006eba8aeb226ddcf09259851ee492c7ebb1ed9af462def899ff_1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/internal/config/config.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 62,
+                  "endLine": 21,
+                  "snippet": {
+                    "text": "\tsessionTTL, _ := strconv.Atoi(getEnv(\"SESSION_TTL\", \"1800\"))"
+                  },
+                  "startColumn": 2,
+                  "startLine": 21
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "2f462d9d58a04c15e55242a9fbb7f5c383d1ae0164205e5e6bda7ac988a60e7a0eaf7601fffb63e3152ee024c0bc6ff9a6b21e83fb4f607066462025b2b94f82_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/internal/middleware/csrf.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 42,
+                  "endLine": 37,
+                  "snippet": {
+                    "text": "\t\t\t\tcookie, err := r.Cookie(\"csrf_token\")"
+                  },
+                  "startColumn": 5,
+                  "startLine": 37
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "017454312ea88f74c051ab8fd2fd504c968e3e3fbe29b6929b073fbc9700f52def57c48b278049e21bd3e4e4d8db1c4aced2cdb568a065a515105c8faffbe574_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/internal/middleware/ratelimit.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 45,
+                  "endLine": 25,
+                  "snippet": {
+                    "text": "\t\t\tcount, err := rdb.Incr(ctx, key).Result()"
+                  },
+                  "startColumn": 4,
+                  "startLine": 25
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "2d7e15a30ecbd76591355f991ddd1b75e961a8dbfeba636e2d1035012b4e472fa6df73d4d00f2ab602683575560756df3a31a778da99bf5575f8da1f3fcbdee7_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/internal/middleware/session.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 49,
+                  "endLine": 37,
+                  "snippet": {
+                    "text": "\t\t\tfields, err := rdb.HGetAll(ctx, key).Result()"
+                  },
+                  "startColumn": 4,
+                  "startLine": 37
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "02b222cd9157e35296b9bf569eb837db071b843f73c7016772a5c7dcc7ce0a3ac202ed988ab2078c985673ec650a2f090e6631ea7c216e1efffb7838081dade0_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/internal/middleware/session.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 25,
+                  "endLine": 47,
+                  "snippet": {
+                    "text": "\t\t\t_, _ = pipe.Exec(ctx)"
+                  },
+                  "startColumn": 4,
+                  "startLine": 47
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "08568527b5b673f7fb7593f958e92f9f8dc55fa424855c47c6d83c403dd7eade081baf9fd48c51159827b995e854320e26d3a6837006e29ccacd52165fd0da7f_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/internal/middleware/session.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 42,
+                  "endLine": 60,
+                  "snippet": {
+                    "text": "\tif cookie, err := r.Cookie(\"session_id\"); err == nil {"
+                  },
+                  "startColumn": 5,
+                  "startLine": 60
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "e16496ab2a866cd74a5b3b589ef39ddbdab1303d9f689f5bcbce0c5140f499bdeb91e2975932794939535dbabb6b05e04c631ff13e7dcc1a12c09becfc20180c_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/gateway/internal/proxy/proxy.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 37,
+                  "endLine": 16,
+                  "snippet": {
+                    "text": "\ttarget, err := url.Parse(targetURL)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 16
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "4e18838950e6a2e8fa14cd9a3488fb94db8ee8eb1ea503ccdc0ae7075c4cd3532ffce19cff54e10b041841de003f8e1a48832e0aa33f44e11030699d696c0d35_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/database/migrate.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 2,
+                  "endLine": 66,
+                  "snippet": {
+                    "text": "\tquery := `\nCREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";\n\n-- =========================\n-- STATUSES\n-- =========================\nCREATE TABLE IF NOT EXISTS statuses (\n    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),\n    name VARCHAR(50) NOT NULL,\n    color VARCHAR(7) NOT NULL,\n    order_index INTEGER NOT NULL,\n    is_default BOOLEAN DEFAULT false,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n\n-- =========================\n-- PRIORITIES\n-- =========================\nCREATE TABLE IF NOT EXISTS priorities (\n    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),\n    name VARCHAR(50) NOT NULL,\n    color VARCHAR(7) NOT NULL,\n    eisenhower_quad INTEGER CHECK (eisenhower_quad BETWEEN 1 AND 4),\n    order_index INTEGER NOT NULL,\n    is_default BOOLEAN DEFAULT false,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n\n-- =========================\n-- TASKS\n-- =========================\nCREATE TABLE IF NOT EXISTS tasks (\n    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),\n    user_id UUID NOT NULL,\n    parent_task_id UUID NULL,\n    title VARCHAR(255) NOT NULL,\n    description TEXT NULL,\n    status_id UUID NOT NULL,\n    priority_id UUID NOT NULL,\n    due_date TIMESTAMP NULL,\n    completed_at TIMESTAMP NULL,\n    is_completed BOOLEAN DEFAULT false,\n    order_index INTEGER DEFAULT 0,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n\n    CONSTRAINT fk_parent_task\n        FOREIGN KEY(parent_task_id)\n        REFERENCES tasks(id)\n        ON DELETE CASCADE,\n\n    CONSTRAINT fk_status\n        FOREIGN KEY(status_id)\n        REFERENCES statuses(id),\n\n    CONSTRAINT fk_priority\n        FOREIGN KEY(priority_id)\n        REFERENCES priorities(id)\n);\n`"
+                  },
+                  "startColumn": 2,
+                  "startLine": 7
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+          },
+          "properties": {},
+          "ruleId": "go-hardcoded-secret"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "40fa5e0544665b030c6a1c7862c45c8349819fead7ee3c8e6a585787004020d454be4b823fc48c87dbf5544179239dd6b11dddfa0f6d52a587615c02dfd39cce_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/database/migrate.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 26,
+                  "endLine": 68,
+                  "snippet": {
+                    "text": "\t_, err := db.Exec(query)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 68
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "56a6e7a558205abf00eb33ab8a99551e237ed85c46f476c49e048697ad3c467c188a36560f78239e40bc0d2cf3e77af67ba8e03b4f0e098a34404f9cab34cf59_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/database/seed.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 3,
+                  "endLine": 23,
+                  "snippet": {
+                    "text": "\t\t_, err := db.Exec(`\nINSERT INTO statuses (name, color, order_index, is_default) VALUES\n('\u041d\u043e\u0432\u0430\u044f', '#3498db', 1, true),\n('\u0412 \u043f\u0440\u043e\u0446\u0435\u0441\u0441\u0435', '#f39c12', 2, false),\n('\u0412\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u0430', '#27ae60', 3, false),\n('\u041d\u0430 \u043f\u0430\u0443\u0437\u0435', '#9b59b6', 4, false),\n('\u041e\u0442\u043c\u0435\u043d\u0435\u043d\u0430', '#e74c3c', 5, false);\n`)"
+                  },
+                  "startColumn": 3,
+                  "startLine": 16
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "56a6e7a558205abf00eb33ab8a99551e237ed85c46f476c49e048697ad3c467c188a36560f78239e40bc0d2cf3e77af67ba8e03b4f0e098a34404f9cab34cf59_1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/database/seed.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 3,
+                  "endLine": 44,
+                  "snippet": {
+                    "text": "\t\t_, err := db.Exec(`\nINSERT INTO priorities (name, color, eisenhower_quad, order_index, is_default) VALUES\n('P1 - \u041a\u0440\u0438\u0442\u0438\u0447\u0435\u0441\u043a\u0438\u0439', '#e74c3c', 1, 1, true),\n('P2 - \u0412\u044b\u0441\u043e\u043a\u0438\u0439', '#f39c12', 1, 2, false),\n('P3 - \u0421\u0440\u0435\u0434\u043d\u0438\u0439', '#f1c40f', 2, 3, false),\n('P4 - \u041d\u0438\u0437\u043a\u0438\u0439', '#2ecc71', 3, 4, false),\n('P5 - \u041e\u043f\u0446\u0438\u043e\u043d\u0430\u043b\u044c\u043d\u043e', '#95a5a6', 4, 5, false);\n`)"
+                  },
+                  "startColumn": 3,
+                  "startLine": 37
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "53eb50c140385e6842d7b1e2e83b690437564ed46fb0a9664c0e1c521a9f637920da66d7fb3bd2cd1765a23b934e803ea9c5f6c581d0c9f2357c347262bc920f_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/reference_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 95,
+                  "endLine": 22,
+                  "snippet": {
+                    "text": "\tlog.Printf(\"DEBUG ListStatuses: Path='%s', Headers=%v\", c.Request.URL.Path, c.Request.Header)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 22
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "ed172cbd6d141be802985428ae3f10efa65cf7ec7658195b2e0f7b57811cb754552070e0b9ee80002dbcf1cc8628ae7dfd747b29b9bef0d589418d20a7094a87_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/reference_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 76,
+                  "endLine": 23,
+                  "snippet": {
+                    "text": "\trows, err := h.DB.Query(\"SELECT id, name FROM tasks.statuses ORDER BY id\")"
+                  },
+                  "startColumn": 2,
+                  "startLine": 23
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "28c293272b5ff0c3a88eca906ab86e51cffdc0b57278ea216c016fcbc836a9eaa853cf54fdeb50522c893010c8ae57f3267694e79e328ce43755caf7cfe50fc8_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/reference_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 50,
+                  "endLine": 25,
+                  "snippet": {
+                    "text": "\t\tlog.Printf(\"ERROR ListStatuses query: %v\", err)"
+                  },
+                  "startColumn": 3,
+                  "startLine": 25
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "fe7ecce5a28eccb5c7610614fef4175bdbc2b609b58417f25c5c601e8812e6cecee9147df74b9c5abe32fa23d893474da571490ee000dbe119ee7786740dd7cd_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/reference_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 97,
+                  "endLine": 46,
+                  "snippet": {
+                    "text": "\tlog.Printf(\"DEBUG ListPriorities: Path='%s', Headers=%v\", c.Request.URL.Path, c.Request.Header)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 46
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "ed172cbd6d141be802985428ae3f10efa65cf7ec7658195b2e0f7b57811cb754552070e0b9ee80002dbcf1cc8628ae7dfd747b29b9bef0d589418d20a7094a87_1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/reference_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 88,
+                  "endLine": 47,
+                  "snippet": {
+                    "text": "\trows, err := h.DB.Query(\"SELECT id, name, level FROM tasks.priorities ORDER BY level\")"
+                  },
+                  "startColumn": 2,
+                  "startLine": 47
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "9b0a235bf66e5458ac3458850ce4546ef1d418a41252b9b8d6006610a3c618771ae369f833a619a6418290c84c43424e18b27da41840753e97931acd9a62cd75_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/reference_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 52,
+                  "endLine": 49,
+                  "snippet": {
+                    "text": "\t\tlog.Printf(\"ERROR ListPriorities query: %v\", err)"
+                  },
+                  "startColumn": 3,
+                  "startLine": 49
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "a8bb1164bff1a9fd9682a60938f58991d6681fd92a9a733a2ac673217330283042d1846e39ba9d10b7fa28cb67882d3b06a70ebac96372272fc6dd7fa06d8879_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 36,
+                  "endLine": 35,
+                  "snippet": {
+                    "text": "\tuserID := c.GetHeader(\"X-User-Id\")"
+                  },
+                  "startColumn": 12,
+                  "startLine": 35
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "X-User-Id \u0431\u0435\u0440\u0451\u0442\u0441\u044f \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 \u0431\u0435\u0437 \u0432\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u0438 \u043f\u043e\u0434\u043f\u0438\u0441\u0438/\u0441\u0435\u0441\u0441\u0438\u0438. \u0412\u043d\u0435\u0448\u043d\u0438\u0439 \u043a\u043b\u0438\u0435\u043d\u0442 \u043c\u043e\u0436\u0435\u0442 \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439 userID \u2014 \u043e\u0431\u0445\u043e\u0434\u044f \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u044e.\n"
+          },
+          "properties": {},
+          "ruleId": "gin-trust-x-user-id-header"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "d2cfde3988d9e22ac9610526f02f673f2ee965fcb85bfc71bf3e77989efaecb30aef3e2e841cadc04564534c4cd615a868c029bffb51874ffe78f820270d275b_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 83,
+                  "endLine": 36,
+                  "snippet": {
+                    "text": "\tlog.Printf(\"DEBUG Create: X-User-Id='%s', Path='%s'\", userID, c.Request.URL.Path)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 36
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "5d827bd6a79465594e5ce8b3b9c305ba20f3f1714c392ab55b0ba3cdd0dcff76da92bb6dce614008a17a6e0be6a75e871999f3477fa4a303d401691851278810_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 56,
+                  "endLine": 45,
+                  "snippet": {
+                    "text": "\t\tparsed, err := time.Parse(time.RFC3339, *req.DueDate)"
+                  },
+                  "startColumn": 3,
+                  "startLine": 45
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "09ade59342bcecc344d2e3a40a3f453e36f1feca32e1bbe1e77063f5c4fb8257f13851d64f54bbad25c1d8c408bf2537bc1fa6188ed879843e8f56e385606f64_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 54,
+                  "endLine": 73,
+                  "snippet": {
+                    "text": "\tfullTask, err := h.Service.GetWithRelations(task.ID)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 73
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "09ade59342bcecc344d2e3a40a3f453e36f1feca32e1bbe1e77063f5c4fb8257f13851d64f54bbad25c1d8c408bf2537bc1fa6188ed879843e8f56e385606f64_1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 45,
+                  "endLine": 87,
+                  "snippet": {
+                    "text": "\ttask, err := h.Service.GetWithRelations(id)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 87
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "a8bb1164bff1a9fd9682a60938f58991d6681fd92a9a733a2ac673217330283042d1846e39ba9d10b7fa28cb67882d3b06a70ebac96372272fc6dd7fa06d8879_1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 36,
+                  "endLine": 104,
+                  "snippet": {
+                    "text": "\tuserID := c.GetHeader(\"X-User-Id\")"
+                  },
+                  "startColumn": 12,
+                  "startLine": 104
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "X-User-Id \u0431\u0435\u0440\u0451\u0442\u0441\u044f \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 \u0431\u0435\u0437 \u0432\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u0438 \u043f\u043e\u0434\u043f\u0438\u0441\u0438/\u0441\u0435\u0441\u0441\u0438\u0438. \u0412\u043d\u0435\u0448\u043d\u0438\u0439 \u043a\u043b\u0438\u0435\u043d\u0442 \u043c\u043e\u0436\u0435\u0442 \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439 userID \u2014 \u043e\u0431\u0445\u043e\u0434\u044f \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u044e.\n"
+          },
+          "properties": {},
+          "ruleId": "gin-trust-x-user-id-header"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "d612d6077b2868b8fc0e89ee1cb934651d7547b6ebb693e159fdf236874ccfc28960b3ca6bfa7c307b231b5491435f88f36f66aa9249206ac8f3c553967d23b9_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 114,
+                  "endLine": 105,
+                  "snippet": {
+                    "text": "\tlog.Printf(\"DEBUG List: X-User-Id='%s', Path='%s', AllHeaders=%v\", userID, c.Request.URL.Path, c.Request.Header)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 105
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "fb908953ca3183325a1846bb40562557250f0f34e1fe1768e0761ec0e508f3b88078421cf276720ee420a809f257f4efee908e5d1d1ffc97ac338310917bd0a8_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 36,
+                  "endLine": 127,
+                  "snippet": {
+                    "text": "\t\tif b, err := strconv.ParseBool(v); err == nil {"
+                  },
+                  "startColumn": 6,
+                  "startLine": 127
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "5d827bd6a79465594e5ce8b3b9c305ba20f3f1714c392ab55b0ba3cdd0dcff76da92bb6dce614008a17a6e0be6a75e871999f3477fa4a303d401691851278810_1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 43,
+                  "endLine": 132,
+                  "snippet": {
+                    "text": "\t\tif t, err := time.Parse(time.RFC3339, v); err == nil {"
+                  },
+                  "startColumn": 6,
+                  "startLine": 132
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "5d827bd6a79465594e5ce8b3b9c305ba20f3f1714c392ab55b0ba3cdd0dcff76da92bb6dce614008a17a6e0be6a75e871999f3477fa4a303d401691851278810_2"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 43,
+                  "endLine": 137,
+                  "snippet": {
+                    "text": "\t\tif t, err := time.Parse(time.RFC3339, v); err == nil {"
+                  },
+                  "startColumn": 6,
+                  "startLine": 137
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "471e86646c32738cebfb1dd5be74d597638f2846ac55b274b245bc33f524c14ee3f1e76a8bbbb20d011708ed1dde66d404748ce913e92fa75e82ece47178d539_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 31,
+                  "endLine": 142,
+                  "snippet": {
+                    "text": "\t\tif p, err := strconv.Atoi(v); err == nil && p > 0 {"
+                  },
+                  "startColumn": 6,
+                  "startLine": 142
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "471e86646c32738cebfb1dd5be74d597638f2846ac55b274b245bc33f524c14ee3f1e76a8bbbb20d011708ed1dde66d404748ce913e92fa75e82ece47178d539_1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 31,
+                  "endLine": 147,
+                  "snippet": {
+                    "text": "\t\tif l, err := strconv.Atoi(v); err == nil && l > 0 {"
+                  },
+                  "startColumn": 6,
+                  "startLine": 147
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "083daef13a99434026fa0184aeca08667ad6af972f830fad4dcd3fff19cc80ffacdeac48cbe3f513a2bd1a48102161318edca9962e1c017a19654ae016a5f8e3_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 53,
+                  "endLine": 152,
+                  "snippet": {
+                    "text": "\ttasks, err := h.Service.FilterWithRelations(filter)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 152
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "b748003a0252e1a1426ff919989865c0a36004e16afe6539fb3c59a6f35d52617bb50966f63a639779414d7bfeeb57ab1c2c5bc918f8eb3c346d5d3e26996aef_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 35,
+                  "endLine": 179,
+                  "snippet": {
+                    "text": "\tid := c.Param(\"id\")\n\n\tvar req dto.UpdateTaskRequest // \ud83d\udc48 \u0411\u0435\u0437 \u0441\u043a\u043e\u0431\u043e\u043a!\n\tif err := c.ShouldBindJSON(&req); err != nil {\n\t\tc.JSON(http.StatusBadRequest, gin.H{\"success\": false, \"error\": \"Invalid request body\"})\n\t\treturn\n\t}\n\n\t// \u041f\u043e\u043b\u0443\u0447\u0430\u0435\u043c \u0442\u0435\u043a\u0443\u0449\u0443\u044e \u0437\u0430\u0434\u0430\u0447\u0443 (\u043f\u0440\u043e\u0441\u0442\u0443\u044e \u043c\u043e\u0434\u0435\u043b\u044c) \u0434\u043b\u044f \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u0438\u044f \u043f\u043e\u043b\u0435\u0439\n\tcurrent, err := h.Service.Get(id)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 170
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u0417\u0430\u0434\u0430\u0447\u0430 \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u0442\u0441\u044f \u043f\u043e ID \u0438\u0437 URL \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u043f\u0440\u0438\u043d\u0430\u0434\u043b\u0435\u0436\u043d\u043e\u0441\u0442\u0438 \u0442\u0435\u043a\u0443\u0449\u0435\u043c\u0443 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044e \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d IDOR (A01).\n"
+          },
+          "properties": {},
+          "ruleId": "go-idor-task-no-ownership-check"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "f54a76f31c745f7a14469d5b26e737c47c8e2bb76c6cc9b8603ee8700b40092d5d129c1716ef7505b1ad17d4545242d1afabad09c9a860020afeb62a17575c65_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 35,
+                  "endLine": 179,
+                  "snippet": {
+                    "text": "\tcurrent, err := h.Service.Get(id)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 179
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "5d827bd6a79465594e5ce8b3b9c305ba20f3f1714c392ab55b0ba3cdd0dcff76da92bb6dce614008a17a6e0be6a75e871999f3477fa4a303d401691851278810_3"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 57,
+                  "endLine": 208,
+                  "snippet": {
+                    "text": "\t\t\tparsed, err := time.Parse(time.RFC3339, *req.DueDate)"
+                  },
+                  "startColumn": 4,
+                  "startLine": 208
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "09ade59342bcecc344d2e3a40a3f453e36f1feca32e1bbe1e77063f5c4fb8257f13851d64f54bbad25c1d8c408bf2537bc1fa6188ed879843e8f56e385606f64_2"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/handlers/task_handler.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 48,
+                  "endLine": 238,
+                  "snippet": {
+                    "text": "\tupdated, err := h.Service.GetWithRelations(id)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 238
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "f2385b57b02201592b1dbcb8066c08b23473c234ac7bcea9b15b6bbe2d5ab369e301396c0e3d29a1692dca7870fe3f2657daf01e35662665db2201b8621df0e4_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 38,
+                  "endLine": 35,
+                  "snippet": {
+                    "text": "\tdb, err := sql.Open(\"postgres\", dsn)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 35
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "e8d9bc3e1d55621d41bf17d747f9c039ff5748c7596a0bdfe00c20802c17ea47014aa70080b14a8e2dc09b39d6c53dff39e6c9170febeee71d3ce0d576036a71_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 41,
+                  "endLine": 43,
+                  "snippet": {
+                    "text": "\t\t\tlog.Println(\"\u2705 Database connected\")"
+                  },
+                  "startColumn": 4,
+                  "startLine": 43
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "4390b9b60d9f71e27534bfe6c1e2f332b8a753d6959c044ddee30493408949546ff04add0e0b9264102ef36c71376b4923eeee643145f909594c19da05b2e649_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 57,
+                  "endLine": 46,
+                  "snippet": {
+                    "text": "\t\tlog.Printf(\"\u23f3 Waiting for database... (%d/30)\", i+1)"
+                  },
+                  "startColumn": 3,
+                  "startLine": 46
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "dd9bfb3f64071f2772771789c6be338ad13fac0ab9e1a2c950a0b02b573907218f6f6682a090c2131697bff06d16878c4aa1436285ba817bbbd446c7a20b2bbd_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/main.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 49,
+                  "endLine": 106,
+                  "snippet": {
+                    "text": "\tlog.Printf(\"\ud83d\ude80 Server starting on :%s\", port)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 106
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "2537a20efa01c868f3180e8922a31a166474d25856b211a5c64010e3b8e26de816aa7e884185b2c603bde95102ed9580f4858cb6b86d439b8ff81089dc24f5b6_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/repository/task_repository.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 3,
+                  "endLine": 29,
+                  "snippet": {
+                    "text": "\tquery := `\n\tINSERT INTO tasks.tasks (user_id, parent_task_id, title, description, status_id, priority_id, due_date)\n\tVALUES ($1, $2, $3, $4, $5, $6, $7)\n\tRETURNING id, created_at, updated_at\n\t`"
+                  },
+                  "startColumn": 2,
+                  "startLine": 25
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+          },
+          "properties": {},
+          "ruleId": "go-hardcoded-secret"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "2537a20efa01c868f3180e8922a31a166474d25856b211a5c64010e3b8e26de816aa7e884185b2c603bde95102ed9580f4858cb6b86d439b8ff81089dc24f5b6_1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/repository/task_repository.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 3,
+                  "endLine": 42,
+                  "snippet": {
+                    "text": "\tquery := `\n\tSELECT id, user_id, parent_task_id, title, description, status_id, priority_id, \n           due_date, completed_at, is_completed, order_index, created_at, updated_at\n\tFROM tasks.tasks WHERE id = $1\n\t`"
+                  },
+                  "startColumn": 2,
+                  "startLine": 38
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+          },
+          "properties": {},
+          "ruleId": "go-hardcoded-secret"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "2537a20efa01c868f3180e8922a31a166474d25856b211a5c64010e3b8e26de816aa7e884185b2c603bde95102ed9580f4858cb6b86d439b8ff81089dc24f5b6_2"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/repository/task_repository.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 3,
+                  "endLine": 72,
+                  "snippet": {
+                    "text": "\tquery := `\n\tUPDATE tasks.tasks SET\n\ttitle = $1, description = $2, status_id = $3, priority_id = $4,\n\tdue_date = $5, is_completed = $6, completed_at = $7, updated_at = $8\n\tWHERE id = $9\n\t`"
+                  },
+                  "startColumn": 2,
+                  "startLine": 67
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+          },
+          "properties": {},
+          "ruleId": "go-hardcoded-secret"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "f86427d44b19f53f2dc248652aa4b6b17bfb7587c721e354d7a8136af6ae532f704b4d3065d11f4bbac76a33846b66ec1b7aef60e65982d93f94c0d601b922f7_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/repository/task_repository.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 3,
+                  "endLine": 77,
+                  "snippet": {
+                    "text": "\t_, err := r.DB.Exec(\n\t\tquery,\n\t\ttask.Title, task.Description, task.StatusID, task.PriorityID,\n\t\ttask.DueDate, task.IsCompleted, task.CompletedAt, task.UpdatedAt, task.ID,\n\t)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 73
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "f86427d44b19f53f2dc248652aa4b6b17bfb7587c721e354d7a8136af6ae532f704b4d3065d11f4bbac76a33846b66ec1b7aef60e65982d93f94c0d601b922f7_1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/repository/task_repository.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 66,
+                  "endLine": 82,
+                  "snippet": {
+                    "text": "\t_, err := r.DB.Exec(\"DELETE FROM tasks.tasks WHERE id = $1\", id)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 82
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "2537a20efa01c868f3180e8922a31a166474d25856b211a5c64010e3b8e26de816aa7e884185b2c603bde95102ed9580f4858cb6b86d439b8ff81089dc24f5b6_3"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/repository/task_repository.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 3,
+                  "endLine": 102,
+                  "snippet": {
+                    "text": "\tquery := `\n\tSELECT \n\t\tt.id, t.user_id, t.parent_task_id, t.title, t.description,\n\t\tt.due_date, t.completed_at,\n\t\tt.is_completed, t.order_index, t.created_at, t.updated_at,\n\t\ts.id, s.name,\n\t\tp.id, p.name, p.level\n\tFROM tasks.tasks t\n\tLEFT JOIN tasks.statuses s ON t.status_id = s.id\n\tLEFT JOIN tasks.priorities p ON t.priority_id = p.id\n\tWHERE t.id = $1\n\t`"
+                  },
+                  "startColumn": 2,
+                  "startLine": 91
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+          },
+          "properties": {},
+          "ruleId": "go-hardcoded-secret"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "2537a20efa01c868f3180e8922a31a166474d25856b211a5c64010e3b8e26de816aa7e884185b2c603bde95102ed9580f4858cb6b86d439b8ff81089dc24f5b6_4"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/repository/task_repository.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 3,
+                  "endLine": 119,
+                  "snippet": {
+                    "text": "\tquery := `\n\tSELECT \n\t\tt.id, t.user_id, t.parent_task_id, t.title, t.description,\n\t\tt.due_date, t.completed_at,\n\t\tt.is_completed, t.order_index, t.created_at, t.updated_at,\n\t\ts.id, s.name,\n\t\tp.id, p.name, p.level\n\tFROM tasks.tasks t\n\tLEFT JOIN tasks.statuses s ON t.status_id = s.id\n\tLEFT JOIN tasks.priorities p ON t.priority_id = p.id\n\tWHERE t.user_id = $1\n\t`"
+                  },
+                  "startColumn": 2,
+                  "startLine": 108
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+          },
+          "properties": {},
+          "ruleId": "go-hardcoded-secret"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "025f9fec52b0b8d8defac2887cf6bb29dd19eb9771347e16b91a50f574001b3b4c9bb34d99011a80fb9d8e40158a47115b60b5c6cea4f103883c8cf8c1ab70a3_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/repository/task_repository.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 41,
+                  "endLine": 152,
+                  "snippet": {
+                    "text": "\trows, err := r.DB.Query(query, args...)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 152
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "3b97f35c60c278c952f042413515228db2c72449cb220850dc34ca11495876634fb3c1e930ece2645db98a92afe483e4e192dde068cbab5fe2fd0d33edffce5e_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/repository/task_repository.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 38,
+                  "endLine": 160,
+                  "snippet": {
+                    "text": "\t\ttask, err := scanTaskFromRows(rows)"
+                  },
+                  "startColumn": 3,
+                  "startLine": 160
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "98176fffccc26eb18e20fd2fef713c6603b8bec305cbd9462319a687d004b4fd137733687087aac8ea26978742a341f9d65309cfafd16d16868e6fcf85619fc5_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/utils/http.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 28,
+                  "endLine": 12,
+                  "snippet": {
+                    "text": "\tlog.Println(\"ERROR:\", err)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 12
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+          },
+          "properties": {},
+          "ruleId": "go-log-sensitive-data"
+        },
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "fe255d522ff10fd08ade2fcef936fd5907f67c6c8b2f9edf0c6c2df610ab75ca3d685558d9569529d76e86384f00dae154d33d5da833b18d4368c02ce57e1e7e_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/backend/task-service/utils/http.go",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 46,
+                  "endLine": 29,
+                  "snippet": {
+                    "text": "\tt, err := time.Parse(time.RFC3339, *dateStr)"
+                  },
+                  "startColumn": 2,
+                  "startLine": 29
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+          },
+          "properties": {},
+          "ruleId": "go-error-ignored"
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "Semgrep OSS",
+          "rules": [
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+              },
+              "help": {
+                "markdown": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n",
+                "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+              },
+              "id": "go-log-sensitive-data",
+              "name": "go-log-sensitive-data",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-532",
+                  "OWASP-A09:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: go-log-sensitive-data"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "Detected SHA1 hash algorithm which is considered insecure. SHA1 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead."
+              },
+              "help": {
+                "markdown": "Detected SHA1 hash algorithm which is considered insecure. SHA1 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead.\n\n<b>References:</b>\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n",
+                "text": "Detected SHA1 hash algorithm which is considered insecure. SHA1 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead."
+              },
+              "id": "use-of-sha1",
+              "name": "use-of-sha1",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-328: Use of Weak Hash",
+                  "MEDIUM CONFIDENCE",
+                  "OWASP-A02:2021 - Cryptographic Failures",
+                  "OWASP-A03:2017 - Sensitive Data Exposure",
+                  "OWASP-A04:2025 - Cryptographic Failures",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: use-of-sha1"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "A session cookie was detected without setting the 'Secure' flag. The 'secure' flag for cookies prevents the client from transmitting the cookie over insecure channels such as HTTP. Set the 'Secure' flag by setting 'Secure' to 'true' in the Options struct."
+              },
+              "help": {
+                "markdown": "A session cookie was detected without setting the 'Secure' flag. The 'secure' flag for cookies prevents the client from transmitting the cookie over insecure channels such as HTTP. Set the 'Secure' flag by setting 'Secure' to 'true' in the Options struct.\n\n<b>References:</b>\n - [https://github.com/0c34/govwa/blob/139693e56406b5684d2a6ae22c0af90717e149b8/util/cookie.go](https://github.com/0c34/govwa/blob/139693e56406b5684d2a6ae22c0af90717e149b8/util/cookie.go)\n - [https://golang.org/src/net/http/cookie.go](https://golang.org/src/net/http/cookie.go)\n",
+                "text": "A session cookie was detected without setting the 'Secure' flag. The 'secure' flag for cookies prevents the client from transmitting the cookie over insecure channels such as HTTP. Set the 'Secure' flag by setting 'Secure' to 'true' in the Options struct."
+              },
+              "id": "cookie-missing-secure",
+              "name": "cookie-missing-secure",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-614: Sensitive Cookie in HTTPS Session Without 'Secure' Attribute",
+                  "MEDIUM CONFIDENCE",
+                  "OWASP-A02:2025 - Security Misconfiguration",
+                  "OWASP-A05:2021 - Security Misconfiguration",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: cookie-missing-secure"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "Detected string concatenation with a non-literal variable in a \"database/sql\" Go SQL statement. This could lead to SQL injection if the variable is user-controlled and not properly sanitized. In order to prevent SQL injection, use parameterized queries or prepared statements instead. You can use prepared statements with the 'Prepare' and 'PrepareContext' calls."
+              },
+              "help": {
+                "markdown": "Detected string concatenation with a non-literal variable in a \"database/sql\" Go SQL statement. This could lead to SQL injection if the variable is user-controlled and not properly sanitized. In order to prevent SQL injection, use parameterized queries or prepared statements instead. You can use prepared statements with the 'Prepare' and 'PrepareContext' calls.\n\n<b>References:</b>\n - [https://golang.org/pkg/database/sql/](https://golang.org/pkg/database/sql/)\n",
+                "text": "Detected string concatenation with a non-literal variable in a \"database/sql\" Go SQL statement. This could lead to SQL injection if the variable is user-controlled and not properly sanitized. In order to prevent SQL injection, use parameterized queries or prepared statements instead. You can use prepared statements with the 'Prepare' and 'PrepareContext' calls."
+              },
+              "id": "gosql-sqli",
+              "name": "gosql-sqli",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+                  "LOW CONFIDENCE",
+                  "OWASP-A01:2017 - Injection",
+                  "OWASP-A03:2021 - Injection",
+                  "OWASP-A05:2025 - Injection",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: gosql-sqli"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "redis.Options \u0441\u043e\u0437\u0434\u0430\u0451\u0442\u0441\u044f \u0431\u0435\u0437 TLSConfig \u2014 \u0441\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u043d\u0435 \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u043e. \u0412 prod \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 TLSConfig.\n"
+              },
+              "help": {
+                "markdown": "redis.Options \u0441\u043e\u0437\u0434\u0430\u0451\u0442\u0441\u044f \u0431\u0435\u0437 TLSConfig \u2014 \u0441\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u043d\u0435 \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u043e. \u0412 prod \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 TLSConfig.\n",
+                "text": "redis.Options \u0441\u043e\u0437\u0434\u0430\u0451\u0442\u0441\u044f \u0431\u0435\u0437 TLSConfig \u2014 \u0441\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u043d\u0435 \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u043e. \u0412 prod \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 TLSConfig.\n"
+              },
+              "id": "redis-options-no-tls",
+              "name": "redis-options-no-tls",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-319",
+                  "OWASP-A02:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: redis-options-no-tls"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "bcrypt cost \u043d\u0438\u0436\u0435 12 \u0441\u043d\u0438\u0436\u0430\u0435\u0442 \u0441\u0442\u043e\u0439\u043a\u043e\u0441\u0442\u044c \u043a \u0431\u0440\u0443\u0442\u0444\u043e\u0440\u0441\u0443. \u0420\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0443\u0435\u0442\u0441\u044f cost >= 12 (\u0432 \u043a\u043e\u0434\u0435 \u0443\u0436\u0435 12 \u2014 \u044d\u0442\u043e \u043f\u0440\u0430\u0432\u0438\u043b\u043e \u043b\u043e\u0432\u0438\u0442 \u0440\u0435\u0433\u0440\u0435\u0441\u0441\u0438\u0438).\n"
+              },
+              "help": {
+                "markdown": "bcrypt cost \u043d\u0438\u0436\u0435 12 \u0441\u043d\u0438\u0436\u0430\u0435\u0442 \u0441\u0442\u043e\u0439\u043a\u043e\u0441\u0442\u044c \u043a \u0431\u0440\u0443\u0442\u0444\u043e\u0440\u0441\u0443. \u0420\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0443\u0435\u0442\u0441\u044f cost >= 12 (\u0432 \u043a\u043e\u0434\u0435 \u0443\u0436\u0435 12 \u2014 \u044d\u0442\u043e \u043f\u0440\u0430\u0432\u0438\u043b\u043e \u043b\u043e\u0432\u0438\u0442 \u0440\u0435\u0433\u0440\u0435\u0441\u0441\u0438\u0438).\n",
+                "text": "bcrypt cost \u043d\u0438\u0436\u0435 12 \u0441\u043d\u0438\u0436\u0430\u0435\u0442 \u0441\u0442\u043e\u0439\u043a\u043e\u0441\u0442\u044c \u043a \u0431\u0440\u0443\u0442\u0444\u043e\u0440\u0441\u0443. \u0420\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0443\u0435\u0442\u0441\u044f cost >= 12 (\u0432 \u043a\u043e\u0434\u0435 \u0443\u0436\u0435 12 \u2014 \u044d\u0442\u043e \u043f\u0440\u0430\u0432\u0438\u043b\u043e \u043b\u043e\u0432\u0438\u0442 \u0440\u0435\u0433\u0440\u0435\u0441\u0441\u0438\u0438).\n"
+              },
+              "id": "go-bcrypt-cost-below-12",
+              "name": "go-bcrypt-cost-below-12",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-916",
+                  "OWASP-A04:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: go-bcrypt-cost-below-12"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "fmt.Sprintf \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442\u0441\u044f \u0434\u043b\u044f \u043f\u043e\u0441\u0442\u0440\u043e\u0435\u043d\u0438\u044f SQL-\u0437\u0430\u043f\u0440\u043e\u0441\u0430 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u043d\u0430 SQL-\u0438\u043d\u044a\u0435\u043a\u0446\u0438\u044f. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0438\u0437\u0430\u0446\u0438\u044e ($1, $2).\n"
+              },
+              "help": {
+                "markdown": "fmt.Sprintf \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442\u0441\u044f \u0434\u043b\u044f \u043f\u043e\u0441\u0442\u0440\u043e\u0435\u043d\u0438\u044f SQL-\u0437\u0430\u043f\u0440\u043e\u0441\u0430 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u043d\u0430 SQL-\u0438\u043d\u044a\u0435\u043a\u0446\u0438\u044f. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0438\u0437\u0430\u0446\u0438\u044e ($1, $2).\n",
+                "text": "fmt.Sprintf \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442\u0441\u044f \u0434\u043b\u044f \u043f\u043e\u0441\u0442\u0440\u043e\u0435\u043d\u0438\u044f SQL-\u0437\u0430\u043f\u0440\u043e\u0441\u0430 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u043d\u0430 SQL-\u0438\u043d\u044a\u0435\u043a\u0446\u0438\u044f. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0438\u0437\u0430\u0446\u0438\u044e ($1, $2).\n"
+              },
+              "id": "go-sprintf-sql-concat",
+              "name": "go-sprintf-sql-concat",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-89",
+                  "OWASP-A05:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: go-sprintf-sql-concat"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "Detected DES cipher algorithm which is insecure. The algorithm is considered weak and has been deprecated. Use AES instead."
+              },
+              "help": {
+                "markdown": "Detected DES cipher algorithm which is insecure. The algorithm is considered weak and has been deprecated. Use AES instead.\n\n<b>References:</b>\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n",
+                "text": "Detected DES cipher algorithm which is insecure. The algorithm is considered weak and has been deprecated. Use AES instead."
+              },
+              "id": "use-of-DES",
+              "name": "use-of-DES",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-327: Use of a Broken or Risky Cryptographic Algorithm",
+                  "MEDIUM CONFIDENCE",
+                  "OWASP-A02:2021 - Cryptographic Failures",
+                  "OWASP-A03:2017 - Sensitive Data Exposure",
+                  "OWASP-A04:2025 - Cryptographic Failures",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: use-of-DES"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "Detected RC4 cipher algorithm which is insecure. The algorithm has many known vulnerabilities. Use AES instead."
+              },
+              "help": {
+                "markdown": "Detected RC4 cipher algorithm which is insecure. The algorithm has many known vulnerabilities. Use AES instead.\n\n<b>References:</b>\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n",
+                "text": "Detected RC4 cipher algorithm which is insecure. The algorithm has many known vulnerabilities. Use AES instead."
+              },
+              "id": "use-of-rc4",
+              "name": "use-of-rc4",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-327: Use of a Broken or Risky Cryptographic Algorithm",
+                  "MEDIUM CONFIDENCE",
+                  "OWASP-A02:2021 - Cryptographic Failures",
+                  "OWASP-A03:2017 - Sensitive Data Exposure",
+                  "OWASP-A04:2025 - Cryptographic Failures",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: use-of-rc4"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "`Clean` is not intended to sanitize against path traversal attacks. This function is for finding the shortest path name equivalent to the given input. Using `Clean` to sanitize file reads may expose this application to path traversal attacks, where an attacker could access arbitrary files on the server. To fix this easily, write this: `filepath.FromSlash(path.Clean(\"/\"+strings.Trim(req.URL.Path, \"/\")))` However, a better solution is using the `SecureJoin` function in the package `filepath-securejoin`. See https://pkg.go.dev/github.com/cyphar/filepath-securejoin#section-readme."
+              },
+              "help": {
+                "markdown": "`Clean` is not intended to sanitize against path traversal attacks. This function is for finding the shortest path name equivalent to the given input. Using `Clean` to sanitize file reads may expose this application to path traversal attacks, where an attacker could access arbitrary files on the server. To fix this easily, write this: `filepath.FromSlash(path.Clean(\"/\"+strings.Trim(req.URL.Path, \"/\")))` However, a better solution is using the `SecureJoin` function in the package `filepath-securejoin`. See https://pkg.go.dev/github.com/cyphar/filepath-securejoin#section-readme.\n\n<b>References:</b>\n - [https://pkg.go.dev/path#Clean](https://pkg.go.dev/path#Clean)\n - [http://technosophos.com/2016/03/31/go-quickly-cleaning-filepaths.html](http://technosophos.com/2016/03/31/go-quickly-cleaning-filepaths.html)\n - [https://labs.detectify.com/2021/12/15/zero-day-path-traversal-grafana/](https://labs.detectify.com/2021/12/15/zero-day-path-traversal-grafana/)\n - [https://dzx.cz/2021/04/02/go_path_traversal/](https://dzx.cz/2021/04/02/go_path_traversal/)\n - [https://pkg.go.dev/github.com/cyphar/filepath-securejoin#section-readme](https://pkg.go.dev/github.com/cyphar/filepath-securejoin#section-readme)\n",
+                "text": "`Clean` is not intended to sanitize against path traversal attacks. This function is for finding the shortest path name equivalent to the given input. Using `Clean` to sanitize file reads may expose this application to path traversal attacks, where an attacker could access arbitrary files on the server. To fix this easily, write this: `filepath.FromSlash(path.Clean(\"/\"+strings.Trim(req.URL.Path, \"/\")))` However, a better solution is using the `SecureJoin` function in the package `filepath-securejoin`. See https://pkg.go.dev/github.com/cyphar/filepath-securejoin#section-readme."
+              },
+              "id": "filepath-clean-misuse",
+              "name": "filepath-clean-misuse",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+                  "MEDIUM CONFIDENCE",
+                  "OWASP-A01:2021 - Broken Access Control",
+                  "OWASP-A01:2025 - Broken Access Control",
+                  "OWASP-A05:2017 - Broken Access Control",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: filepath-clean-misuse"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+              },
+              "help": {
+                "markdown": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _.",
+                "text": "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u0440\u043e\u0438\u0433\u043d\u043e\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0440\u0438\u0441\u0432\u043e\u0435\u043d\u0438\u0435 \u0432 _."
+              },
+              "id": "go-error-ignored",
+              "name": "go-error-ignored",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-390",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: go-error-ignored"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+              },
+              "help": {
+                "markdown": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n",
+                "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+              },
+              "id": "go-log-sensitive-data-2",
+              "name": "go-log-sensitive-data-2",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-532",
+                  "OWASP-A09:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: go-log-sensitive-data-2"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "\u0417\u0430\u0434\u0430\u0447\u0430 \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u0442\u0441\u044f \u043f\u043e ID \u0438\u0437 URL \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u043f\u0440\u0438\u043d\u0430\u0434\u043b\u0435\u0436\u043d\u043e\u0441\u0442\u0438 \u0442\u0435\u043a\u0443\u0449\u0435\u043c\u0443 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044e \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d IDOR (A01).\n"
+              },
+              "help": {
+                "markdown": "\u0417\u0430\u0434\u0430\u0447\u0430 \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u0442\u0441\u044f \u043f\u043e ID \u0438\u0437 URL \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u043f\u0440\u0438\u043d\u0430\u0434\u043b\u0435\u0436\u043d\u043e\u0441\u0442\u0438 \u0442\u0435\u043a\u0443\u0449\u0435\u043c\u0443 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044e \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d IDOR (A01).\n",
+                "text": "\u0417\u0430\u0434\u0430\u0447\u0430 \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u0442\u0441\u044f \u043f\u043e ID \u0438\u0437 URL \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u043f\u0440\u0438\u043d\u0430\u0434\u043b\u0435\u0436\u043d\u043e\u0441\u0442\u0438 \u0442\u0435\u043a\u0443\u0449\u0435\u043c\u0443 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044e \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d IDOR (A01).\n"
+              },
+              "id": "go-idor-task-no-ownership-check",
+              "name": "go-idor-task-no-ownership-check",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-284",
+                  "OWASP-A01:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: go-idor-task-no-ownership-check"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+              },
+              "help": {
+                "markdown": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f.",
+                "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+              },
+              "id": "go-hardcoded-secret-2",
+              "name": "go-hardcoded-secret-2",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-798",
+                  "OWASP-A02:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: go-hardcoded-secret-2"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "log.Printf \u043b\u043e\u0433\u0438\u0440\u0443\u0435\u0442 \u0441\u044b\u0440\u043e\u0439 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0432\u0432\u043e\u0434 (X-User-Id, \u043f\u0443\u0442\u044c \u0437\u0430\u043f\u0440\u043e\u0441\u0430). \u042d\u0442\u043e \u0437\u0430\u0441\u043e\u0440\u044f\u0435\u0442 \u043b\u043e\u0433\u0438 \u0438 \u043c\u043e\u0436\u0435\u0442 \u0440\u0430\u0441\u043a\u0440\u044b\u0442\u044c PII \u0438\u043b\u0438 \u043f\u043e\u0437\u0432\u043e\u043b\u0438\u0442\u044c Log Injection. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u044f\u0432\u043d\u044b\u043c\u0438 \u043f\u043e\u043b\u044f\u043c\u0438.\n"
+              },
+              "help": {
+                "markdown": "log.Printf \u043b\u043e\u0433\u0438\u0440\u0443\u0435\u0442 \u0441\u044b\u0440\u043e\u0439 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0432\u0432\u043e\u0434 (X-User-Id, \u043f\u0443\u0442\u044c \u0437\u0430\u043f\u0440\u043e\u0441\u0430). \u042d\u0442\u043e \u0437\u0430\u0441\u043e\u0440\u044f\u0435\u0442 \u043b\u043e\u0433\u0438 \u0438 \u043c\u043e\u0436\u0435\u0442 \u0440\u0430\u0441\u043a\u0440\u044b\u0442\u044c PII \u0438\u043b\u0438 \u043f\u043e\u0437\u0432\u043e\u043b\u0438\u0442\u044c Log Injection. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u044f\u0432\u043d\u044b\u043c\u0438 \u043f\u043e\u043b\u044f\u043c\u0438.\n",
+                "text": "log.Printf \u043b\u043e\u0433\u0438\u0440\u0443\u0435\u0442 \u0441\u044b\u0440\u043e\u0439 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0432\u0432\u043e\u0434 (X-User-Id, \u043f\u0443\u0442\u044c \u0437\u0430\u043f\u0440\u043e\u0441\u0430). \u042d\u0442\u043e \u0437\u0430\u0441\u043e\u0440\u044f\u0435\u0442 \u043b\u043e\u0433\u0438 \u0438 \u043c\u043e\u0436\u0435\u0442 \u0440\u0430\u0441\u043a\u0440\u044b\u0442\u044c PII \u0438\u043b\u0438 \u043f\u043e\u0437\u0432\u043e\u043b\u0438\u0442\u044c Log Injection. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u044f\u0432\u043d\u044b\u043c\u0438 \u043f\u043e\u043b\u044f\u043c\u0438.\n"
+              },
+              "id": "gin-log-raw-user-input",
+              "name": "gin-log-raw-user-input",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-117: Log Injection / CWE-532: Sensitive Data in Logs",
+                  "OWASP-A09:2025 Security Logging Failures",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: gin-log-raw-user-input"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "gin.SetMode(\"debug\") \u0445\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u043e \u2014 \u043d\u0435 \u0434\u043e\u043b\u0436\u043d\u043e \u043f\u043e\u043f\u0430\u0434\u0430\u0442\u044c \u0432 prod."
+              },
+              "help": {
+                "markdown": "gin.SetMode(\"debug\") \u0445\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u043e \u2014 \u043d\u0435 \u0434\u043e\u043b\u0436\u043d\u043e \u043f\u043e\u043f\u0430\u0434\u0430\u0442\u044c \u0432 prod.",
+                "text": "gin.SetMode(\"debug\") \u0445\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u043e \u2014 \u043d\u0435 \u0434\u043e\u043b\u0436\u043d\u043e \u043f\u043e\u043f\u0430\u0434\u0430\u0442\u044c \u0432 prod."
+              },
+              "id": "gin-debug-mode-hardcoded",
+              "name": "gin-debug-mode-hardcoded",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-215",
+                  "OWASP-A05:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: gin-debug-mode-hardcoded"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "POST-\u043e\u0431\u0440\u0430\u0431\u043e\u0442\u0447\u0438\u043a \u043d\u0435 \u043f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u0442 CSRF-\u0442\u043e\u043a\u0435\u043d \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430."
+              },
+              "help": {
+                "markdown": "POST-\u043e\u0431\u0440\u0430\u0431\u043e\u0442\u0447\u0438\u043a \u043d\u0435 \u043f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u0442 CSRF-\u0442\u043e\u043a\u0435\u043d \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430.",
+                "text": "POST-\u043e\u0431\u0440\u0430\u0431\u043e\u0442\u0447\u0438\u043a \u043d\u0435 \u043f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u0442 CSRF-\u0442\u043e\u043a\u0435\u043d \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430."
+              },
+              "id": "gin-post-without-csrf-check",
+              "name": "gin-post-without-csrf-check",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-352",
+                  "OWASP-A01:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: gin-post-without-csrf-check"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "URL \u0434\u043b\u044f HTTP-\u0437\u0430\u043f\u0440\u043e\u0441\u0430 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0438\u0437 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0445 \u0434\u0430\u043d\u043d\u044b\u0445 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d SSRF."
+              },
+              "help": {
+                "markdown": "URL \u0434\u043b\u044f HTTP-\u0437\u0430\u043f\u0440\u043e\u0441\u0430 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0438\u0437 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0445 \u0434\u0430\u043d\u043d\u044b\u0445 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d SSRF.",
+                "text": "URL \u0434\u043b\u044f HTTP-\u0437\u0430\u043f\u0440\u043e\u0441\u0430 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0438\u0437 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0445 \u0434\u0430\u043d\u043d\u044b\u0445 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d SSRF."
+              },
+              "id": "go-ssrf-user-controlled-url",
+              "name": "go-ssrf-user-controlled-url",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-918",
+                  "OWASP-A10:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: go-ssrf-user-controlled-url"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "X-User-Id \u0431\u0435\u0440\u0451\u0442\u0441\u044f \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 \u0431\u0435\u0437 \u0432\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u0438 \u043f\u043e\u0434\u043f\u0438\u0441\u0438/\u0441\u0435\u0441\u0441\u0438\u0438. \u0412\u043d\u0435\u0448\u043d\u0438\u0439 \u043a\u043b\u0438\u0435\u043d\u0442 \u043c\u043e\u0436\u0435\u0442 \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439 userID \u2014 \u043e\u0431\u0445\u043e\u0434\u044f \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u044e.\n"
+              },
+              "help": {
+                "markdown": "X-User-Id \u0431\u0435\u0440\u0451\u0442\u0441\u044f \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 \u0431\u0435\u0437 \u0432\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u0438 \u043f\u043e\u0434\u043f\u0438\u0441\u0438/\u0441\u0435\u0441\u0441\u0438\u0438. \u0412\u043d\u0435\u0448\u043d\u0438\u0439 \u043a\u043b\u0438\u0435\u043d\u0442 \u043c\u043e\u0436\u0435\u0442 \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439 userID \u2014 \u043e\u0431\u0445\u043e\u0434\u044f \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u044e.\n",
+                "text": "X-User-Id \u0431\u0435\u0440\u0451\u0442\u0441\u044f \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 \u0431\u0435\u0437 \u0432\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u0438 \u043f\u043e\u0434\u043f\u0438\u0441\u0438/\u0441\u0435\u0441\u0441\u0438\u0438. \u0412\u043d\u0435\u0448\u043d\u0438\u0439 \u043a\u043b\u0438\u0435\u043d\u0442 \u043c\u043e\u0436\u0435\u0442 \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439 userID \u2014 \u043e\u0431\u0445\u043e\u0434\u044f \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u044e.\n"
+              },
+              "id": "gin-trust-x-user-id-header",
+              "name": "gin-trust-x-user-id-header",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-290",
+                  "OWASP-A07:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: gin-trust-x-user-id-header"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "Detected MD5 hash algorithm which is considered insecure. MD5 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead."
+              },
+              "help": {
+                "markdown": "Detected MD5 hash algorithm which is considered insecure. MD5 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead.\n\n<b>References:</b>\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n",
+                "text": "Detected MD5 hash algorithm which is considered insecure. MD5 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead."
+              },
+              "id": "use-of-md5",
+              "name": "use-of-md5",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-328: Use of Weak Hash",
+                  "MEDIUM CONFIDENCE",
+                  "OWASP-A02:2021 - Cryptographic Failures",
+                  "OWASP-A03:2017 - Sensitive Data Exposure",
+                  "OWASP-A04:2025 - Cryptographic Failures",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: use-of-md5"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "Do not use `math/rand`. Use `crypto/rand` instead."
+              },
+              "help": {
+                "markdown": "Do not use `math/rand`. Use `crypto/rand` instead.\n\n<b>References:</b>\n - [https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html#secure-random-number-generation](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html#secure-random-number-generation)\n",
+                "text": "Do not use `math/rand`. Use `crypto/rand` instead."
+              },
+              "id": "math-random-used",
+              "name": "math-random-used",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-338: Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG)",
+                  "MEDIUM CONFIDENCE",
+                  "OWASP-A02:2021 - Cryptographic Failures",
+                  "OWASP-A04:2025 - Cryptographic Failures",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: math-random-used"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+              },
+              "help": {
+                "markdown": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f.",
+                "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+              },
+              "id": "go-hardcoded-secret",
+              "name": "go-hardcoded-secret",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-798",
+                  "OWASP-A02:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: go-hardcoded-secret"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "Using the unsafe package in Go gives you low-level memory management and many of the strengths of the C language, but also steps around the type safety of Go and can lead to buffer overflows and possible arbitrary code execution by an attacker. Only use this package if you absolutely know what you're doing."
+              },
+              "help": {
+                "markdown": "Using the unsafe package in Go gives you low-level memory management and many of the strengths of the C language, but also steps around the type safety of Go and can lead to buffer overflows and possible arbitrary code execution by an attacker. Only use this package if you absolutely know what you're doing.\n\n<b>References:</b>\n - [https://cwe.mitre.org/data/definitions/242.html](https://cwe.mitre.org/data/definitions/242.html)\n",
+                "text": "Using the unsafe package in Go gives you low-level memory management and many of the strengths of the C language, but also steps around the type safety of Go and can lead to buffer overflows and possible arbitrary code execution by an attacker. Only use this package if you absolutely know what you're doing."
+              },
+              "id": "use-of-unsafe-block",
+              "name": "use-of-unsafe-block",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-242: Use of Inherently Dangerous Function",
+                  "LOW CONFIDENCE",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: use-of-unsafe-block"
+              }
+            }
+          ],
+          "semanticVersion": "1.95.0"
+        }
+      }
+    }
+  ],
+  "version": "2.1.0"
+}
