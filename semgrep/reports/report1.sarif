@@ -678,93 +678,6 @@
         },
         {
           "fingerprints": {
-            "matchBasedId/v1": "4c245cd7e5702055d9fdb090bb9c9f24c0ef180fb8ac0fe29700e05274edac958255768df611545796bf2232656f8e349dc01f7bac13d01d01ee79c59702d3c0_0"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "src/backend/auth-service/internal/service/auth.go",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "endColumn": 91,
-                  "endLine": 118,
-                  "snippet": {
-                    "text": "\tslog.Info(\"user logged in\", \"user_id\", user.ID, \"ip\", ip, \"session_prefix\", sessionID[:8])"
-                  },
-                  "startColumn": 78,
-                  "startLine": 118
-                }
-              }
-            }
-          ],
-          "message": {
-            "text": "\u041e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u043a \u0441\u0440\u0435\u0437\u0443 \u0441\u0442\u0440\u043e\u043a\u0438 sessionID[:8] \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u0434\u043b\u0438\u043d\u044b \u2014 \u043f\u0430\u043d\u0438\u043a\u0430 \u043f\u0440\u0438 len < 8.\n"
-          },
-          "properties": {},
-          "ruleId": "go-nil-pointer-sessionid"
-        },
-        {
-          "fingerprints": {
-            "matchBasedId/v1": "4c245cd7e5702055d9fdb090bb9c9f24c0ef180fb8ac0fe29700e05274edac958255768df611545796bf2232656f8e349dc01f7bac13d01d01ee79c59702d3c0_1"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "src/backend/auth-service/internal/service/auth.go",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "endColumn": 62,
-                  "endLine": 125,
-                  "snippet": {
-                    "text": "\t\tslog.Error(\"logout failed\", \"session_prefix\", sessionID[:8], \"error\", err)"
-                  },
-                  "startColumn": 49,
-                  "startLine": 125
-                }
-              }
-            }
-          ],
-          "message": {
-            "text": "\u041e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u043a \u0441\u0440\u0435\u0437\u0443 \u0441\u0442\u0440\u043e\u043a\u0438 sessionID[:8] \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u0434\u043b\u0438\u043d\u044b \u2014 \u043f\u0430\u043d\u0438\u043a\u0430 \u043f\u0440\u0438 len < 8.\n"
-          },
-          "properties": {},
-          "ruleId": "go-nil-pointer-sessionid"
-        },
-        {
-          "fingerprints": {
-            "matchBasedId/v1": "4c245cd7e5702055d9fdb090bb9c9f24c0ef180fb8ac0fe29700e05274edac958255768df611545796bf2232656f8e349dc01f7bac13d01d01ee79c59702d3c0_2"
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "src/backend/auth-service/internal/service/auth.go",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "endColumn": 62,
-                  "endLine": 128,
-                  "snippet": {
-                    "text": "\tslog.Info(\"user logged out\", \"session_prefix\", sessionID[:8])"
-                  },
-                  "startColumn": 49,
-                  "startLine": 128
-                }
-              }
-            }
-          ],
-          "message": {
-            "text": "\u041e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u043a \u0441\u0440\u0435\u0437\u0443 \u0441\u0442\u0440\u043e\u043a\u0438 sessionID[:8] \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u0434\u043b\u0438\u043d\u044b \u2014 \u043f\u0430\u043d\u0438\u043a\u0430 \u043f\u0440\u0438 len < 8.\n"
-          },
-          "properties": {},
-          "ruleId": "go-nil-pointer-sessionid"
-        },
-        {
-          "fingerprints": {
             "matchBasedId/v1": "53dfb6fd9244f50e7f176d4a444cf9485ec2b9581c612a8fbcad4058ef5dda3ce32d61c23cda371b6686ab0586a537ac18d2d3f2851c213d0416c89eb9b26921_0"
           },
           "locations": [
@@ -2455,81 +2368,6 @@
                 "level": "warning"
               },
               "fullDescription": {
-                "text": "redis.Options \u0441\u043e\u0437\u0434\u0430\u0451\u0442\u0441\u044f \u0431\u0435\u0437 TLSConfig \u2014 \u0441\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u043d\u0435 \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u043e. \u0412 prod \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 TLSConfig.\n"
-              },
-              "help": {
-                "markdown": "redis.Options \u0441\u043e\u0437\u0434\u0430\u0451\u0442\u0441\u044f \u0431\u0435\u0437 TLSConfig \u2014 \u0441\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u043d\u0435 \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u043e. \u0412 prod \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 TLSConfig.\n",
-                "text": "redis.Options \u0441\u043e\u0437\u0434\u0430\u0451\u0442\u0441\u044f \u0431\u0435\u0437 TLSConfig \u2014 \u0441\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u043d\u0435 \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u043e. \u0412 prod \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 TLSConfig.\n"
-              },
-              "id": "redis-options-no-tls",
-              "name": "redis-options-no-tls",
-              "properties": {
-                "precision": "very-high",
-                "tags": [
-                  "CWE-319",
-                  "OWASP-A02:2025",
-                  "security"
-                ]
-              },
-              "shortDescription": {
-                "text": "Semgrep Finding: redis-options-no-tls"
-              }
-            },
-            {
-              "defaultConfiguration": {
-                "level": "error"
-              },
-              "fullDescription": {
-                "text": "\u041f\u0443\u0442\u044c \u043a \u0444\u0430\u0439\u043b\u0443 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0438\u0437 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u043e\u0433\u043e \u0432\u0432\u043e\u0434\u0430 \u0431\u0435\u0437 filepath.Clean \u0438 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 prefix \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d Path Traversal.\n"
-              },
-              "help": {
-                "markdown": "\u041f\u0443\u0442\u044c \u043a \u0444\u0430\u0439\u043b\u0443 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0438\u0437 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u043e\u0433\u043e \u0432\u0432\u043e\u0434\u0430 \u0431\u0435\u0437 filepath.Clean \u0438 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 prefix \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d Path Traversal.\n",
-                "text": "\u041f\u0443\u0442\u044c \u043a \u0444\u0430\u0439\u043b\u0443 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0438\u0437 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u043e\u0433\u043e \u0432\u0432\u043e\u0434\u0430 \u0431\u0435\u0437 filepath.Clean \u0438 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 prefix \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d Path Traversal.\n"
-              },
-              "id": "go-path-traversal",
-              "name": "go-path-traversal",
-              "properties": {
-                "precision": "very-high",
-                "tags": [
-                  "CWE-22",
-                  "OWASP-A05:2025",
-                  "security"
-                ]
-              },
-              "shortDescription": {
-                "text": "Semgrep Finding: go-path-traversal"
-              }
-            },
-            {
-              "defaultConfiguration": {
-                "level": "warning"
-              },
-              "fullDescription": {
-                "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
-              },
-              "help": {
-                "markdown": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n",
-                "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
-              },
-              "id": "go-log-sensitive-data-2",
-              "name": "go-log-sensitive-data-2",
-              "properties": {
-                "precision": "very-high",
-                "tags": [
-                  "CWE-532",
-                  "OWASP-A09:2025",
-                  "security"
-                ]
-              },
-              "shortDescription": {
-                "text": "Semgrep Finding: go-log-sensitive-data-2"
-              }
-            },
-            {
-              "defaultConfiguration": {
-                "level": "warning"
-              },
-              "fullDescription": {
                 "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
               },
               "help": {
@@ -2555,23 +2393,107 @@
                 "level": "warning"
               },
               "fullDescription": {
-                "text": "\u041e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u043a \u0441\u0440\u0435\u0437\u0443 \u0441\u0442\u0440\u043e\u043a\u0438 sessionID[:8] \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u0434\u043b\u0438\u043d\u044b \u2014 \u043f\u0430\u043d\u0438\u043a\u0430 \u043f\u0440\u0438 len < 8.\n"
+                "text": "Detected SHA1 hash algorithm which is considered insecure. SHA1 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead."
               },
               "help": {
-                "markdown": "\u041e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u043a \u0441\u0440\u0435\u0437\u0443 \u0441\u0442\u0440\u043e\u043a\u0438 sessionID[:8] \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u0434\u043b\u0438\u043d\u044b \u2014 \u043f\u0430\u043d\u0438\u043a\u0430 \u043f\u0440\u0438 len < 8.\n",
-                "text": "\u041e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u043a \u0441\u0440\u0435\u0437\u0443 \u0441\u0442\u0440\u043e\u043a\u0438 sessionID[:8] \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u0434\u043b\u0438\u043d\u044b \u2014 \u043f\u0430\u043d\u0438\u043a\u0430 \u043f\u0440\u0438 len < 8.\n"
+                "markdown": "Detected SHA1 hash algorithm which is considered insecure. SHA1 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead.\n\n<b>References:</b>\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n",
+                "text": "Detected SHA1 hash algorithm which is considered insecure. SHA1 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead."
               },
-              "id": "go-nil-pointer-sessionid",
-              "name": "go-nil-pointer-sessionid",
+              "id": "use-of-sha1",
+              "name": "use-of-sha1",
               "properties": {
                 "precision": "very-high",
                 "tags": [
-                  "CWE-476",
+                  "CWE-328: Use of Weak Hash",
+                  "MEDIUM CONFIDENCE",
+                  "OWASP-A02:2021 - Cryptographic Failures",
+                  "OWASP-A03:2017 - Sensitive Data Exposure",
+                  "OWASP-A04:2025 - Cryptographic Failures",
                   "security"
                 ]
               },
               "shortDescription": {
-                "text": "Semgrep Finding: go-nil-pointer-sessionid"
+                "text": "Semgrep Finding: use-of-sha1"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "A session cookie was detected without setting the 'Secure' flag. The 'secure' flag for cookies prevents the client from transmitting the cookie over insecure channels such as HTTP. Set the 'Secure' flag by setting 'Secure' to 'true' in the Options struct."
+              },
+              "help": {
+                "markdown": "A session cookie was detected without setting the 'Secure' flag. The 'secure' flag for cookies prevents the client from transmitting the cookie over insecure channels such as HTTP. Set the 'Secure' flag by setting 'Secure' to 'true' in the Options struct.\n\n<b>References:</b>\n - [https://github.com/0c34/govwa/blob/139693e56406b5684d2a6ae22c0af90717e149b8/util/cookie.go](https://github.com/0c34/govwa/blob/139693e56406b5684d2a6ae22c0af90717e149b8/util/cookie.go)\n - [https://golang.org/src/net/http/cookie.go](https://golang.org/src/net/http/cookie.go)\n",
+                "text": "A session cookie was detected without setting the 'Secure' flag. The 'secure' flag for cookies prevents the client from transmitting the cookie over insecure channels such as HTTP. Set the 'Secure' flag by setting 'Secure' to 'true' in the Options struct."
+              },
+              "id": "cookie-missing-secure",
+              "name": "cookie-missing-secure",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-614: Sensitive Cookie in HTTPS Session Without 'Secure' Attribute",
+                  "MEDIUM CONFIDENCE",
+                  "OWASP-A02:2025 - Security Misconfiguration",
+                  "OWASP-A05:2021 - Security Misconfiguration",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: cookie-missing-secure"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "Detected string concatenation with a non-literal variable in a \"database/sql\" Go SQL statement. This could lead to SQL injection if the variable is user-controlled and not properly sanitized. In order to prevent SQL injection, use parameterized queries or prepared statements instead. You can use prepared statements with the 'Prepare' and 'PrepareContext' calls."
+              },
+              "help": {
+                "markdown": "Detected string concatenation with a non-literal variable in a \"database/sql\" Go SQL statement. This could lead to SQL injection if the variable is user-controlled and not properly sanitized. In order to prevent SQL injection, use parameterized queries or prepared statements instead. You can use prepared statements with the 'Prepare' and 'PrepareContext' calls.\n\n<b>References:</b>\n - [https://golang.org/pkg/database/sql/](https://golang.org/pkg/database/sql/)\n",
+                "text": "Detected string concatenation with a non-literal variable in a \"database/sql\" Go SQL statement. This could lead to SQL injection if the variable is user-controlled and not properly sanitized. In order to prevent SQL injection, use parameterized queries or prepared statements instead. You can use prepared statements with the 'Prepare' and 'PrepareContext' calls."
+              },
+              "id": "gosql-sqli",
+              "name": "gosql-sqli",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+                  "LOW CONFIDENCE",
+                  "OWASP-A01:2017 - Injection",
+                  "OWASP-A03:2021 - Injection",
+                  "OWASP-A05:2025 - Injection",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: gosql-sqli"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "redis.Options \u0441\u043e\u0437\u0434\u0430\u0451\u0442\u0441\u044f \u0431\u0435\u0437 TLSConfig \u2014 \u0441\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u043d\u0435 \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u043e. \u0412 prod \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 TLSConfig.\n"
+              },
+              "help": {
+                "markdown": "redis.Options \u0441\u043e\u0437\u0434\u0430\u0451\u0442\u0441\u044f \u0431\u0435\u0437 TLSConfig \u2014 \u0441\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u043d\u0435 \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u043e. \u0412 prod \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 TLSConfig.\n",
+                "text": "redis.Options \u0441\u043e\u0437\u0434\u0430\u0451\u0442\u0441\u044f \u0431\u0435\u0437 TLSConfig \u2014 \u0441\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u043d\u0435 \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u043e. \u0412 prod \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 TLSConfig.\n"
+              },
+              "id": "redis-options-no-tls",
+              "name": "redis-options-no-tls",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-319",
+                  "OWASP-A02:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: redis-options-no-tls"
               }
             },
             {
@@ -2597,131 +2519,6 @@
               },
               "shortDescription": {
                 "text": "Semgrep Finding: go-bcrypt-cost-below-12"
-              }
-            },
-            {
-              "defaultConfiguration": {
-                "level": "warning"
-              },
-              "fullDescription": {
-                "text": "\u0417\u0430\u0434\u0430\u0447\u0430 \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u0442\u0441\u044f \u043f\u043e ID \u0438\u0437 URL \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u043f\u0440\u0438\u043d\u0430\u0434\u043b\u0435\u0436\u043d\u043e\u0441\u0442\u0438 \u0442\u0435\u043a\u0443\u0449\u0435\u043c\u0443 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044e \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d IDOR (A01).\n"
-              },
-              "help": {
-                "markdown": "\u0417\u0430\u0434\u0430\u0447\u0430 \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u0442\u0441\u044f \u043f\u043e ID \u0438\u0437 URL \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u043f\u0440\u0438\u043d\u0430\u0434\u043b\u0435\u0436\u043d\u043e\u0441\u0442\u0438 \u0442\u0435\u043a\u0443\u0449\u0435\u043c\u0443 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044e \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d IDOR (A01).\n",
-                "text": "\u0417\u0430\u0434\u0430\u0447\u0430 \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u0442\u0441\u044f \u043f\u043e ID \u0438\u0437 URL \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u043f\u0440\u0438\u043d\u0430\u0434\u043b\u0435\u0436\u043d\u043e\u0441\u0442\u0438 \u0442\u0435\u043a\u0443\u0449\u0435\u043c\u0443 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044e \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d IDOR (A01).\n"
-              },
-              "id": "go-idor-task-no-ownership-check",
-              "name": "go-idor-task-no-ownership-check",
-              "properties": {
-                "precision": "very-high",
-                "tags": [
-                  "CWE-284",
-                  "OWASP-A01:2025",
-                  "security"
-                ]
-              },
-              "shortDescription": {
-                "text": "Semgrep Finding: go-idor-task-no-ownership-check"
-              }
-            },
-            {
-              "defaultConfiguration": {
-                "level": "warning"
-              },
-              "fullDescription": {
-                "text": "gin.SetMode(\"debug\") \u0445\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u043e \u2014 \u043d\u0435 \u0434\u043e\u043b\u0436\u043d\u043e \u043f\u043e\u043f\u0430\u0434\u0430\u0442\u044c \u0432 prod."
-              },
-              "help": {
-                "markdown": "gin.SetMode(\"debug\") \u0445\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u043e \u2014 \u043d\u0435 \u0434\u043e\u043b\u0436\u043d\u043e \u043f\u043e\u043f\u0430\u0434\u0430\u0442\u044c \u0432 prod.",
-                "text": "gin.SetMode(\"debug\") \u0445\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u043e \u2014 \u043d\u0435 \u0434\u043e\u043b\u0436\u043d\u043e \u043f\u043e\u043f\u0430\u0434\u0430\u0442\u044c \u0432 prod."
-              },
-              "id": "gin-debug-mode-hardcoded",
-              "name": "gin-debug-mode-hardcoded",
-              "properties": {
-                "precision": "very-high",
-                "tags": [
-                  "CWE-215",
-                  "OWASP-A05:2025",
-                  "security"
-                ]
-              },
-              "shortDescription": {
-                "text": "Semgrep Finding: gin-debug-mode-hardcoded"
-              }
-            },
-            {
-              "defaultConfiguration": {
-                "level": "error"
-              },
-              "fullDescription": {
-                "text": "URL \u0434\u043b\u044f HTTP-\u0437\u0430\u043f\u0440\u043e\u0441\u0430 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0438\u0437 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0445 \u0434\u0430\u043d\u043d\u044b\u0445 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d SSRF."
-              },
-              "help": {
-                "markdown": "URL \u0434\u043b\u044f HTTP-\u0437\u0430\u043f\u0440\u043e\u0441\u0430 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0438\u0437 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0445 \u0434\u0430\u043d\u043d\u044b\u0445 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d SSRF.",
-                "text": "URL \u0434\u043b\u044f HTTP-\u0437\u0430\u043f\u0440\u043e\u0441\u0430 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0438\u0437 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0445 \u0434\u0430\u043d\u043d\u044b\u0445 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d SSRF."
-              },
-              "id": "go-ssrf-user-controlled-url",
-              "name": "go-ssrf-user-controlled-url",
-              "properties": {
-                "precision": "very-high",
-                "tags": [
-                  "CWE-918",
-                  "OWASP-A10:2025",
-                  "security"
-                ]
-              },
-              "shortDescription": {
-                "text": "Semgrep Finding: go-ssrf-user-controlled-url"
-              }
-            },
-            {
-              "defaultConfiguration": {
-                "level": "warning"
-              },
-              "fullDescription": {
-                "text": "log.Printf \u043b\u043e\u0433\u0438\u0440\u0443\u0435\u0442 \u0441\u044b\u0440\u043e\u0439 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0432\u0432\u043e\u0434 (X-User-Id, \u043f\u0443\u0442\u044c \u0437\u0430\u043f\u0440\u043e\u0441\u0430). \u042d\u0442\u043e \u0437\u0430\u0441\u043e\u0440\u044f\u0435\u0442 \u043b\u043e\u0433\u0438 \u0438 \u043c\u043e\u0436\u0435\u0442 \u0440\u0430\u0441\u043a\u0440\u044b\u0442\u044c PII \u0438\u043b\u0438 \u043f\u043e\u0437\u0432\u043e\u043b\u0438\u0442\u044c Log Injection. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u044f\u0432\u043d\u044b\u043c\u0438 \u043f\u043e\u043b\u044f\u043c\u0438.\n"
-              },
-              "help": {
-                "markdown": "log.Printf \u043b\u043e\u0433\u0438\u0440\u0443\u0435\u0442 \u0441\u044b\u0440\u043e\u0439 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0432\u0432\u043e\u0434 (X-User-Id, \u043f\u0443\u0442\u044c \u0437\u0430\u043f\u0440\u043e\u0441\u0430). \u042d\u0442\u043e \u0437\u0430\u0441\u043e\u0440\u044f\u0435\u0442 \u043b\u043e\u0433\u0438 \u0438 \u043c\u043e\u0436\u0435\u0442 \u0440\u0430\u0441\u043a\u0440\u044b\u0442\u044c PII \u0438\u043b\u0438 \u043f\u043e\u0437\u0432\u043e\u043b\u0438\u0442\u044c Log Injection. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u044f\u0432\u043d\u044b\u043c\u0438 \u043f\u043e\u043b\u044f\u043c\u0438.\n",
-                "text": "log.Printf \u043b\u043e\u0433\u0438\u0440\u0443\u0435\u0442 \u0441\u044b\u0440\u043e\u0439 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0432\u0432\u043e\u0434 (X-User-Id, \u043f\u0443\u0442\u044c \u0437\u0430\u043f\u0440\u043e\u0441\u0430). \u042d\u0442\u043e \u0437\u0430\u0441\u043e\u0440\u044f\u0435\u0442 \u043b\u043e\u0433\u0438 \u0438 \u043c\u043e\u0436\u0435\u0442 \u0440\u0430\u0441\u043a\u0440\u044b\u0442\u044c PII \u0438\u043b\u0438 \u043f\u043e\u0437\u0432\u043e\u043b\u0438\u0442\u044c Log Injection. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u044f\u0432\u043d\u044b\u043c\u0438 \u043f\u043e\u043b\u044f\u043c\u0438.\n"
-              },
-              "id": "gin-log-raw-user-input",
-              "name": "gin-log-raw-user-input",
-              "properties": {
-                "precision": "very-high",
-                "tags": [
-                  "CWE-117: Log Injection / CWE-532: Sensitive Data in Logs",
-                  "OWASP-A09:2025 Security Logging Failures",
-                  "security"
-                ]
-              },
-              "shortDescription": {
-                "text": "Semgrep Finding: gin-log-raw-user-input"
-              }
-            },
-            {
-              "defaultConfiguration": {
-                "level": "error"
-              },
-              "fullDescription": {
-                "text": "X-User-Id \u0431\u0435\u0440\u0451\u0442\u0441\u044f \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 \u0431\u0435\u0437 \u0432\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u0438 \u043f\u043e\u0434\u043f\u0438\u0441\u0438/\u0441\u0435\u0441\u0441\u0438\u0438. \u0412\u043d\u0435\u0448\u043d\u0438\u0439 \u043a\u043b\u0438\u0435\u043d\u0442 \u043c\u043e\u0436\u0435\u0442 \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439 userID \u2014 \u043e\u0431\u0445\u043e\u0434\u044f \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u044e.\n"
-              },
-              "help": {
-                "markdown": "X-User-Id \u0431\u0435\u0440\u0451\u0442\u0441\u044f \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 \u0431\u0435\u0437 \u0432\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u0438 \u043f\u043e\u0434\u043f\u0438\u0441\u0438/\u0441\u0435\u0441\u0441\u0438\u0438. \u0412\u043d\u0435\u0448\u043d\u0438\u0439 \u043a\u043b\u0438\u0435\u043d\u0442 \u043c\u043e\u0436\u0435\u0442 \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439 userID \u2014 \u043e\u0431\u0445\u043e\u0434\u044f \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u044e.\n",
-                "text": "X-User-Id \u0431\u0435\u0440\u0451\u0442\u0441\u044f \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 \u0431\u0435\u0437 \u0432\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u0438 \u043f\u043e\u0434\u043f\u0438\u0441\u0438/\u0441\u0435\u0441\u0441\u0438\u0438. \u0412\u043d\u0435\u0448\u043d\u0438\u0439 \u043a\u043b\u0438\u0435\u043d\u0442 \u043c\u043e\u0436\u0435\u0442 \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439 userID \u2014 \u043e\u0431\u0445\u043e\u0434\u044f \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u044e.\n"
-              },
-              "id": "gin-trust-x-user-id-header",
-              "name": "gin-trust-x-user-id-header",
-              "properties": {
-                "precision": "very-high",
-                "tags": [
-                  "CWE-290",
-                  "OWASP-A07:2025",
-                  "security"
-                ]
-              },
-              "shortDescription": {
-                "text": "Semgrep Finding: gin-trust-x-user-id-header"
               }
             },
             {
@@ -2754,24 +2551,55 @@
                 "level": "warning"
               },
               "fullDescription": {
-                "text": "math/rand \u043d\u0435 \u043a\u0440\u0438\u043f\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0447\u0435\u0441\u043a\u0438 \u0431\u0435\u0437\u043e\u043f\u0430\u0441\u0435\u043d. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 crypto/rand."
+                "text": "Detected DES cipher algorithm which is insecure. The algorithm is considered weak and has been deprecated. Use AES instead."
               },
               "help": {
-                "markdown": "math/rand \u043d\u0435 \u043a\u0440\u0438\u043f\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0447\u0435\u0441\u043a\u0438 \u0431\u0435\u0437\u043e\u043f\u0430\u0441\u0435\u043d. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 crypto/rand.",
-                "text": "math/rand \u043d\u0435 \u043a\u0440\u0438\u043f\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0447\u0435\u0441\u043a\u0438 \u0431\u0435\u0437\u043e\u043f\u0430\u0441\u0435\u043d. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 crypto/rand."
+                "markdown": "Detected DES cipher algorithm which is insecure. The algorithm is considered weak and has been deprecated. Use AES instead.\n\n<b>References:</b>\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n",
+                "text": "Detected DES cipher algorithm which is insecure. The algorithm is considered weak and has been deprecated. Use AES instead."
               },
-              "id": "go-weak-rand",
-              "name": "go-weak-rand",
+              "id": "use-of-DES",
+              "name": "use-of-DES",
               "properties": {
                 "precision": "very-high",
                 "tags": [
-                  "CWE-338",
-                  "OWASP-A04:2025",
+                  "CWE-327: Use of a Broken or Risky Cryptographic Algorithm",
+                  "MEDIUM CONFIDENCE",
+                  "OWASP-A02:2021 - Cryptographic Failures",
+                  "OWASP-A03:2017 - Sensitive Data Exposure",
+                  "OWASP-A04:2025 - Cryptographic Failures",
                   "security"
                 ]
               },
               "shortDescription": {
-                "text": "Semgrep Finding: go-weak-rand"
+                "text": "Semgrep Finding: use-of-DES"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "Detected RC4 cipher algorithm which is insecure. The algorithm has many known vulnerabilities. Use AES instead."
+              },
+              "help": {
+                "markdown": "Detected RC4 cipher algorithm which is insecure. The algorithm has many known vulnerabilities. Use AES instead.\n\n<b>References:</b>\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n",
+                "text": "Detected RC4 cipher algorithm which is insecure. The algorithm has many known vulnerabilities. Use AES instead."
+              },
+              "id": "use-of-rc4",
+              "name": "use-of-rc4",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-327: Use of a Broken or Risky Cryptographic Algorithm",
+                  "MEDIUM CONFIDENCE",
+                  "OWASP-A02:2021 - Cryptographic Failures",
+                  "OWASP-A03:2017 - Sensitive Data Exposure",
+                  "OWASP-A04:2025 - Cryptographic Failures",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: use-of-rc4"
               }
             },
             {
@@ -2779,74 +2607,27 @@
                 "level": "error"
               },
               "fullDescription": {
-                "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+                "text": "`Clean` is not intended to sanitize against path traversal attacks. This function is for finding the shortest path name equivalent to the given input. Using `Clean` to sanitize file reads may expose this application to path traversal attacks, where an attacker could access arbitrary files on the server. To fix this easily, write this: `filepath.FromSlash(path.Clean(\"/\"+strings.Trim(req.URL.Path, \"/\")))` However, a better solution is using the `SecureJoin` function in the package `filepath-securejoin`. See https://pkg.go.dev/github.com/cyphar/filepath-securejoin#section-readme."
               },
               "help": {
-                "markdown": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f.",
-                "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+                "markdown": "`Clean` is not intended to sanitize against path traversal attacks. This function is for finding the shortest path name equivalent to the given input. Using `Clean` to sanitize file reads may expose this application to path traversal attacks, where an attacker could access arbitrary files on the server. To fix this easily, write this: `filepath.FromSlash(path.Clean(\"/\"+strings.Trim(req.URL.Path, \"/\")))` However, a better solution is using the `SecureJoin` function in the package `filepath-securejoin`. See https://pkg.go.dev/github.com/cyphar/filepath-securejoin#section-readme.\n\n<b>References:</b>\n - [https://pkg.go.dev/path#Clean](https://pkg.go.dev/path#Clean)\n - [http://technosophos.com/2016/03/31/go-quickly-cleaning-filepaths.html](http://technosophos.com/2016/03/31/go-quickly-cleaning-filepaths.html)\n - [https://labs.detectify.com/2021/12/15/zero-day-path-traversal-grafana/](https://labs.detectify.com/2021/12/15/zero-day-path-traversal-grafana/)\n - [https://dzx.cz/2021/04/02/go_path_traversal/](https://dzx.cz/2021/04/02/go_path_traversal/)\n - [https://pkg.go.dev/github.com/cyphar/filepath-securejoin#section-readme](https://pkg.go.dev/github.com/cyphar/filepath-securejoin#section-readme)\n",
+                "text": "`Clean` is not intended to sanitize against path traversal attacks. This function is for finding the shortest path name equivalent to the given input. Using `Clean` to sanitize file reads may expose this application to path traversal attacks, where an attacker could access arbitrary files on the server. To fix this easily, write this: `filepath.FromSlash(path.Clean(\"/\"+strings.Trim(req.URL.Path, \"/\")))` However, a better solution is using the `SecureJoin` function in the package `filepath-securejoin`. See https://pkg.go.dev/github.com/cyphar/filepath-securejoin#section-readme."
               },
-              "id": "go-hardcoded-secret",
-              "name": "go-hardcoded-secret",
+              "id": "filepath-clean-misuse",
+              "name": "filepath-clean-misuse",
               "properties": {
                 "precision": "very-high",
                 "tags": [
-                  "CWE-798",
-                  "OWASP-A02:2025",
+                  "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+                  "MEDIUM CONFIDENCE",
+                  "OWASP-A01:2021 - Broken Access Control",
+                  "OWASP-A01:2025 - Broken Access Control",
+                  "OWASP-A05:2017 - Broken Access Control",
                   "security"
                 ]
               },
               "shortDescription": {
-                "text": "Semgrep Finding: go-hardcoded-secret"
-              }
-            },
-            {
-              "defaultConfiguration": {
-                "level": "error"
-              },
-              "fullDescription": {
-                "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
-              },
-              "help": {
-                "markdown": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f.",
-                "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
-              },
-              "id": "go-hardcoded-secret-2",
-              "name": "go-hardcoded-secret-2",
-              "properties": {
-                "precision": "very-high",
-                "tags": [
-                  "CWE-798",
-                  "OWASP-A02:2025",
-                  "security"
-                ]
-              },
-              "shortDescription": {
-                "text": "Semgrep Finding: go-hardcoded-secret-2"
-              }
-            },
-            {
-              "defaultConfiguration": {
-                "level": "error"
-              },
-              "fullDescription": {
-                "text": "\u041a\u043e\u043d\u043a\u0430\u0442\u0435\u043d\u0430\u0446\u0438\u044f \u0441\u0442\u0440\u043e\u043a \u0432 SQL-\u0437\u0430\u043f\u0440\u043e\u0441\u0435 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u043d\u0430 SQL-\u0438\u043d\u044a\u0435\u043a\u0446\u0438\u044f."
-              },
-              "help": {
-                "markdown": "\u041a\u043e\u043d\u043a\u0430\u0442\u0435\u043d\u0430\u0446\u0438\u044f \u0441\u0442\u0440\u043e\u043a \u0432 SQL-\u0437\u0430\u043f\u0440\u043e\u0441\u0435 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u043d\u0430 SQL-\u0438\u043d\u044a\u0435\u043a\u0446\u0438\u044f.",
-                "text": "\u041a\u043e\u043d\u043a\u0430\u0442\u0435\u043d\u0430\u0446\u0438\u044f \u0441\u0442\u0440\u043e\u043a \u0432 SQL-\u0437\u0430\u043f\u0440\u043e\u0441\u0435 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u043d\u0430 SQL-\u0438\u043d\u044a\u0435\u043a\u0446\u0438\u044f."
-              },
-              "id": "go-sqli-string-concat",
-              "name": "go-sqli-string-concat",
-              "properties": {
-                "precision": "very-high",
-                "tags": [
-                  "CWE-89",
-                  "OWASP-A05:2025",
-                  "security"
-                ]
-              },
-              "shortDescription": {
-                "text": "Semgrep Finding: go-sqli-string-concat"
+                "text": "Semgrep Finding: filepath-clean-misuse"
               }
             },
             {
@@ -2878,6 +2659,131 @@
                 "level": "warning"
               },
               "fullDescription": {
+                "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+              },
+              "help": {
+                "markdown": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n",
+                "text": "log.Printf/Println \u043c\u043e\u0436\u0435\u0442 \u0432\u044b\u0432\u043e\u0434\u0438\u0442\u044c \u0447\u0443\u0432\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 stdout. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u043c\u0430\u0441\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 PII.\n"
+              },
+              "id": "go-log-sensitive-data-2",
+              "name": "go-log-sensitive-data-2",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-532",
+                  "OWASP-A09:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: go-log-sensitive-data-2"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "\u0417\u0430\u0434\u0430\u0447\u0430 \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u0442\u0441\u044f \u043f\u043e ID \u0438\u0437 URL \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u043f\u0440\u0438\u043d\u0430\u0434\u043b\u0435\u0436\u043d\u043e\u0441\u0442\u0438 \u0442\u0435\u043a\u0443\u0449\u0435\u043c\u0443 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044e \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d IDOR (A01).\n"
+              },
+              "help": {
+                "markdown": "\u0417\u0430\u0434\u0430\u0447\u0430 \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u0442\u0441\u044f \u043f\u043e ID \u0438\u0437 URL \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u043f\u0440\u0438\u043d\u0430\u0434\u043b\u0435\u0436\u043d\u043e\u0441\u0442\u0438 \u0442\u0435\u043a\u0443\u0449\u0435\u043c\u0443 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044e \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d IDOR (A01).\n",
+                "text": "\u0417\u0430\u0434\u0430\u0447\u0430 \u043f\u043e\u043b\u0443\u0447\u0430\u0435\u0442\u0441\u044f \u043f\u043e ID \u0438\u0437 URL \u0431\u0435\u0437 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0438 \u043f\u0440\u0438\u043d\u0430\u0434\u043b\u0435\u0436\u043d\u043e\u0441\u0442\u0438 \u0442\u0435\u043a\u0443\u0449\u0435\u043c\u0443 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044e \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d IDOR (A01).\n"
+              },
+              "id": "go-idor-task-no-ownership-check",
+              "name": "go-idor-task-no-ownership-check",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-284",
+                  "OWASP-A01:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: go-idor-task-no-ownership-check"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+              },
+              "help": {
+                "markdown": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f.",
+                "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+              },
+              "id": "go-hardcoded-secret-2",
+              "name": "go-hardcoded-secret-2",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-798",
+                  "OWASP-A02:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: go-hardcoded-secret-2"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "log.Printf \u043b\u043e\u0433\u0438\u0440\u0443\u0435\u0442 \u0441\u044b\u0440\u043e\u0439 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0432\u0432\u043e\u0434 (X-User-Id, \u043f\u0443\u0442\u044c \u0437\u0430\u043f\u0440\u043e\u0441\u0430). \u042d\u0442\u043e \u0437\u0430\u0441\u043e\u0440\u044f\u0435\u0442 \u043b\u043e\u0433\u0438 \u0438 \u043c\u043e\u0436\u0435\u0442 \u0440\u0430\u0441\u043a\u0440\u044b\u0442\u044c PII \u0438\u043b\u0438 \u043f\u043e\u0437\u0432\u043e\u043b\u0438\u0442\u044c Log Injection. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u044f\u0432\u043d\u044b\u043c\u0438 \u043f\u043e\u043b\u044f\u043c\u0438.\n"
+              },
+              "help": {
+                "markdown": "log.Printf \u043b\u043e\u0433\u0438\u0440\u0443\u0435\u0442 \u0441\u044b\u0440\u043e\u0439 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0432\u0432\u043e\u0434 (X-User-Id, \u043f\u0443\u0442\u044c \u0437\u0430\u043f\u0440\u043e\u0441\u0430). \u042d\u0442\u043e \u0437\u0430\u0441\u043e\u0440\u044f\u0435\u0442 \u043b\u043e\u0433\u0438 \u0438 \u043c\u043e\u0436\u0435\u0442 \u0440\u0430\u0441\u043a\u0440\u044b\u0442\u044c PII \u0438\u043b\u0438 \u043f\u043e\u0437\u0432\u043e\u043b\u0438\u0442\u044c Log Injection. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u044f\u0432\u043d\u044b\u043c\u0438 \u043f\u043e\u043b\u044f\u043c\u0438.\n",
+                "text": "log.Printf \u043b\u043e\u0433\u0438\u0440\u0443\u0435\u0442 \u0441\u044b\u0440\u043e\u0439 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u0432\u0432\u043e\u0434 (X-User-Id, \u043f\u0443\u0442\u044c \u0437\u0430\u043f\u0440\u043e\u0441\u0430). \u042d\u0442\u043e \u0437\u0430\u0441\u043e\u0440\u044f\u0435\u0442 \u043b\u043e\u0433\u0438 \u0438 \u043c\u043e\u0436\u0435\u0442 \u0440\u0430\u0441\u043a\u0440\u044b\u0442\u044c PII \u0438\u043b\u0438 \u043f\u043e\u0437\u0432\u043e\u043b\u0438\u0442\u044c Log Injection. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 slog \u0441 \u044f\u0432\u043d\u044b\u043c\u0438 \u043f\u043e\u043b\u044f\u043c\u0438.\n"
+              },
+              "id": "gin-log-raw-user-input",
+              "name": "gin-log-raw-user-input",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-117: Log Injection / CWE-532: Sensitive Data in Logs",
+                  "OWASP-A09:2025 Security Logging Failures",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: gin-log-raw-user-input"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "gin.SetMode(\"debug\") \u0445\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u043e \u2014 \u043d\u0435 \u0434\u043e\u043b\u0436\u043d\u043e \u043f\u043e\u043f\u0430\u0434\u0430\u0442\u044c \u0432 prod."
+              },
+              "help": {
+                "markdown": "gin.SetMode(\"debug\") \u0445\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u043e \u2014 \u043d\u0435 \u0434\u043e\u043b\u0436\u043d\u043e \u043f\u043e\u043f\u0430\u0434\u0430\u0442\u044c \u0432 prod.",
+                "text": "gin.SetMode(\"debug\") \u0445\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u043e \u2014 \u043d\u0435 \u0434\u043e\u043b\u0436\u043d\u043e \u043f\u043e\u043f\u0430\u0434\u0430\u0442\u044c \u0432 prod."
+              },
+              "id": "gin-debug-mode-hardcoded",
+              "name": "gin-debug-mode-hardcoded",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-215",
+                  "OWASP-A05:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: gin-debug-mode-hardcoded"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
                 "text": "POST-\u043e\u0431\u0440\u0430\u0431\u043e\u0442\u0447\u0438\u043a \u043d\u0435 \u043f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u0442 CSRF-\u0442\u043e\u043a\u0435\u043d \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430."
               },
               "help": {
@@ -2896,6 +2802,161 @@
               },
               "shortDescription": {
                 "text": "Semgrep Finding: gin-post-without-csrf-check"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "URL \u0434\u043b\u044f HTTP-\u0437\u0430\u043f\u0440\u043e\u0441\u0430 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0438\u0437 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0445 \u0434\u0430\u043d\u043d\u044b\u0445 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d SSRF."
+              },
+              "help": {
+                "markdown": "URL \u0434\u043b\u044f HTTP-\u0437\u0430\u043f\u0440\u043e\u0441\u0430 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0438\u0437 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0445 \u0434\u0430\u043d\u043d\u044b\u0445 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d SSRF.",
+                "text": "URL \u0434\u043b\u044f HTTP-\u0437\u0430\u043f\u0440\u043e\u0441\u0430 \u0444\u043e\u0440\u043c\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0438\u0437 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0445 \u0434\u0430\u043d\u043d\u044b\u0445 \u2014 \u0432\u043e\u0437\u043c\u043e\u0436\u0435\u043d SSRF."
+              },
+              "id": "go-ssrf-user-controlled-url",
+              "name": "go-ssrf-user-controlled-url",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-918",
+                  "OWASP-A10:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: go-ssrf-user-controlled-url"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "X-User-Id \u0431\u0435\u0440\u0451\u0442\u0441\u044f \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 \u0431\u0435\u0437 \u0432\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u0438 \u043f\u043e\u0434\u043f\u0438\u0441\u0438/\u0441\u0435\u0441\u0441\u0438\u0438. \u0412\u043d\u0435\u0448\u043d\u0438\u0439 \u043a\u043b\u0438\u0435\u043d\u0442 \u043c\u043e\u0436\u0435\u0442 \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439 userID \u2014 \u043e\u0431\u0445\u043e\u0434\u044f \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u044e.\n"
+              },
+              "help": {
+                "markdown": "X-User-Id \u0431\u0435\u0440\u0451\u0442\u0441\u044f \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 \u0431\u0435\u0437 \u0432\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u0438 \u043f\u043e\u0434\u043f\u0438\u0441\u0438/\u0441\u0435\u0441\u0441\u0438\u0438. \u0412\u043d\u0435\u0448\u043d\u0438\u0439 \u043a\u043b\u0438\u0435\u043d\u0442 \u043c\u043e\u0436\u0435\u0442 \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439 userID \u2014 \u043e\u0431\u0445\u043e\u0434\u044f \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u044e.\n",
+                "text": "X-User-Id \u0431\u0435\u0440\u0451\u0442\u0441\u044f \u0438\u0437 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430 \u0431\u0435\u0437 \u0432\u0435\u0440\u0438\u0444\u0438\u043a\u0430\u0446\u0438\u0438 \u043f\u043e\u0434\u043f\u0438\u0441\u0438/\u0441\u0435\u0441\u0441\u0438\u0438. \u0412\u043d\u0435\u0448\u043d\u0438\u0439 \u043a\u043b\u0438\u0435\u043d\u0442 \u043c\u043e\u0436\u0435\u0442 \u043f\u0435\u0440\u0435\u0434\u0430\u0442\u044c \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439 userID \u2014 \u043e\u0431\u0445\u043e\u0434\u044f \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u044e.\n"
+              },
+              "id": "gin-trust-x-user-id-header",
+              "name": "gin-trust-x-user-id-header",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-290",
+                  "OWASP-A07:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: gin-trust-x-user-id-header"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "Detected MD5 hash algorithm which is considered insecure. MD5 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead."
+              },
+              "help": {
+                "markdown": "Detected MD5 hash algorithm which is considered insecure. MD5 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead.\n\n<b>References:</b>\n - [https://owasp.org/Top10/A02_2021-Cryptographic_Failures](https://owasp.org/Top10/A02_2021-Cryptographic_Failures)\n",
+                "text": "Detected MD5 hash algorithm which is considered insecure. MD5 is not collision resistant and is therefore not suitable as a cryptographic signature. Use SHA256 or SHA3 instead."
+              },
+              "id": "use-of-md5",
+              "name": "use-of-md5",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-328: Use of Weak Hash",
+                  "MEDIUM CONFIDENCE",
+                  "OWASP-A02:2021 - Cryptographic Failures",
+                  "OWASP-A03:2017 - Sensitive Data Exposure",
+                  "OWASP-A04:2025 - Cryptographic Failures",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: use-of-md5"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "Do not use `math/rand`. Use `crypto/rand` instead."
+              },
+              "help": {
+                "markdown": "Do not use `math/rand`. Use `crypto/rand` instead.\n\n<b>References:</b>\n - [https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html#secure-random-number-generation](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html#secure-random-number-generation)\n",
+                "text": "Do not use `math/rand`. Use `crypto/rand` instead."
+              },
+              "id": "math-random-used",
+              "name": "math-random-used",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-338: Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG)",
+                  "MEDIUM CONFIDENCE",
+                  "OWASP-A02:2021 - Cryptographic Failures",
+                  "OWASP-A04:2025 - Cryptographic Failures",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: math-random-used"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "fullDescription": {
+                "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+              },
+              "help": {
+                "markdown": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f.",
+                "text": "\u0425\u0430\u0440\u0434\u043a\u043e\u0436\u0435\u043d\u043d\u044b\u0439 \u0441\u0435\u043a\u0440\u0435\u0442/\u043a\u043b\u044e\u0447 \u0432 \u043a\u043e\u0434\u0435. \u0412\u044b\u043d\u043e\u0441\u0438\u0442\u0435 \u0432 \u043f\u0435\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0435 \u043e\u043a\u0440\u0443\u0436\u0435\u043d\u0438\u044f."
+              },
+              "id": "go-hardcoded-secret",
+              "name": "go-hardcoded-secret",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-798",
+                  "OWASP-A02:2025",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: go-hardcoded-secret"
+              }
+            },
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "Using the unsafe package in Go gives you low-level memory management and many of the strengths of the C language, but also steps around the type safety of Go and can lead to buffer overflows and possible arbitrary code execution by an attacker. Only use this package if you absolutely know what you're doing."
+              },
+              "help": {
+                "markdown": "Using the unsafe package in Go gives you low-level memory management and many of the strengths of the C language, but also steps around the type safety of Go and can lead to buffer overflows and possible arbitrary code execution by an attacker. Only use this package if you absolutely know what you're doing.\n\n<b>References:</b>\n - [https://cwe.mitre.org/data/definitions/242.html](https://cwe.mitre.org/data/definitions/242.html)\n",
+                "text": "Using the unsafe package in Go gives you low-level memory management and many of the strengths of the C language, but also steps around the type safety of Go and can lead to buffer overflows and possible arbitrary code execution by an attacker. Only use this package if you absolutely know what you're doing."
+              },
+              "id": "use-of-unsafe-block",
+              "name": "use-of-unsafe-block",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "CWE-242: Use of Inherently Dangerous Function",
+                  "LOW CONFIDENCE",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: use-of-unsafe-block"
               }
             }
           ],

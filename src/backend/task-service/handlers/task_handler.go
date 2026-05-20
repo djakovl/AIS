@@ -93,6 +93,11 @@ func (h *TaskHandler) Get(c *gin.Context) {
 		utils.Error(c, http.StatusInternalServerError, err)
 		return
 	}
+	
+	if task.UserID != userID {
+        c.JSON(http.StatusForbidden, gin.H{"success": false, "error": "Access denied"})
+        return
+    }
 
 	c.JSON(http.StatusOK, gin.H{"success": true, "data": task})
 }
