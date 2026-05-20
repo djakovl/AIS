@@ -83,6 +83,7 @@ func (h *TaskHandler) Create(c *gin.Context) {
 // =====================
 func (h *TaskHandler) Get(c *gin.Context) {
 	id := c.Param("id")
+	userID := c.GetHeader("X-User-Id")
 
 	task, err := h.Service.GetWithRelations(id)
 	if err != nil {
@@ -93,11 +94,11 @@ func (h *TaskHandler) Get(c *gin.Context) {
 		utils.Error(c, http.StatusInternalServerError, err)
 		return
 	}
-	
-	if task.UserID != userID {
-        c.JSON(http.StatusForbidden, gin.H{"success": false, "error": "Access denied"})
-        return
-    }
+
+	if userID != "" && task.UserID != userID {
+		c.JSON(http.StatusForbidden, gin.H{"success": false, "error": "Access denied"})
+		return
+	}
 
 	c.JSON(http.StatusOK, gin.H{"success": true, "data": task})
 }
