@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 const request = axios.create({
-  baseURL: 'https://185.135.82.161:8037',
+  baseURL: 'https://localhost:8037',
   timeout: 10000,
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true
