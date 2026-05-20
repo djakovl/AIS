@@ -151,6 +151,9 @@ func (h *TaskHandler) List(c *gin.Context) {
 	}
 	if v := c.Query("limit"); v != "" {
 		if l, err := strconv.Atoi(v); err == nil && l > 0 {
+			if l > 100 {
+				l = 100
+			}
 			filter.Limit = l
 		}
 	}

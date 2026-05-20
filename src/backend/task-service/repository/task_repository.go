@@ -147,7 +147,8 @@ func (r *TaskRepository) FilterWithRelations(f dto.TaskFilter) ([]dto.TaskRespon
 	if f.Limit <= 0 { f.Limit = 20 }
 	if f.Page <= 0 { f.Page = 1 }
 	offset := (f.Page - 1) * f.Limit
-	query += fmt.Sprintf(" LIMIT %d OFFSET %d", f.Limit, offset)
+	query += fmt.Sprintf(" LIMIT $%d OFFSET $%d", argIndex, argIndex+1)
+	args = append(args, f.Limit, offset)
 
 	rows, err := r.DB.Query(query, args...)
 	if err != nil {
